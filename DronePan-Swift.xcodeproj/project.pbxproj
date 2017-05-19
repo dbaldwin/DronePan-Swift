@@ -1,0 +1,421 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		237001AA1ECF95DB003EC4A0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 237001A91ECF95DB003EC4A0 /* AppDelegate.swift */; };
+		237001AC1ECF95DB003EC4A0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 237001AB1ECF95DB003EC4A0 /* ViewController.swift */; };
+		237001AF1ECF95DB003EC4A0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 237001AD1ECF95DB003EC4A0 /* Main.storyboard */; };
+		237001B11ECF95DB003EC4A0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 237001B01ECF95DB003EC4A0 /* Assets.xcassets */; };
+		237001B41ECF95DB003EC4A0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 237001B21ECF95DB003EC4A0 /* LaunchScreen.storyboard */; };
+		237001BF1ECF95DB003EC4A0 /* DronePan_SwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 237001BE1ECF95DB003EC4A0 /* DronePan_SwiftTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		237001BB1ECF95DB003EC4A0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2370019E1ECF95DA003EC4A0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 237001A51ECF95DB003EC4A0;
+			remoteInfo = "DronePan-Swift";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		237001A61ECF95DB003EC4A0 /* DronePan-Swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "DronePan-Swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		237001A91ECF95DB003EC4A0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		237001AB1ECF95DB003EC4A0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		237001AE1ECF95DB003EC4A0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		237001B01ECF95DB003EC4A0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		237001B31ECF95DB003EC4A0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		237001B51ECF95DB003EC4A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		237001BA1ECF95DB003EC4A0 /* DronePan-SwiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "DronePan-SwiftTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		237001BE1ECF95DB003EC4A0 /* DronePan_SwiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DronePan_SwiftTests.swift; sourceTree = "<group>"; };
+		237001C01ECF95DB003EC4A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		237001A31ECF95DB003EC4A0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		237001B71ECF95DB003EC4A0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2370019D1ECF95DA003EC4A0 = {
+			isa = PBXGroup;
+			children = (
+				237001A81ECF95DB003EC4A0 /* DronePan-Swift */,
+				237001BD1ECF95DB003EC4A0 /* DronePan-SwiftTests */,
+				237001A71ECF95DB003EC4A0 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		237001A71ECF95DB003EC4A0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				237001A61ECF95DB003EC4A0 /* DronePan-Swift.app */,
+				237001BA1ECF95DB003EC4A0 /* DronePan-SwiftTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		237001A81ECF95DB003EC4A0 /* DronePan-Swift */ = {
+			isa = PBXGroup;
+			children = (
+				237001A91ECF95DB003EC4A0 /* AppDelegate.swift */,
+				237001AB1ECF95DB003EC4A0 /* ViewController.swift */,
+				237001AD1ECF95DB003EC4A0 /* Main.storyboard */,
+				237001B01ECF95DB003EC4A0 /* Assets.xcassets */,
+				237001B21ECF95DB003EC4A0 /* LaunchScreen.storyboard */,
+				237001B51ECF95DB003EC4A0 /* Info.plist */,
+			);
+			path = "DronePan-Swift";
+			sourceTree = "<group>";
+		};
+		237001BD1ECF95DB003EC4A0 /* DronePan-SwiftTests */ = {
+			isa = PBXGroup;
+			children = (
+				237001BE1ECF95DB003EC4A0 /* DronePan_SwiftTests.swift */,
+				237001C01ECF95DB003EC4A0 /* Info.plist */,
+			);
+			path = "DronePan-SwiftTests";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		237001A51ECF95DB003EC4A0 /* DronePan-Swift */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 237001C31ECF95DB003EC4A0 /* Build configuration list for PBXNativeTarget "DronePan-Swift" */;
+			buildPhases = (
+				237001A21ECF95DB003EC4A0 /* Sources */,
+				237001A31ECF95DB003EC4A0 /* Frameworks */,
+				237001A41ECF95DB003EC4A0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "DronePan-Swift";
+			productName = "DronePan-Swift";
+			productReference = 237001A61ECF95DB003EC4A0 /* DronePan-Swift.app */;
+			productType = "com.apple.product-type.application";
+		};
+		237001B91ECF95DB003EC4A0 /* DronePan-SwiftTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 237001C61ECF95DB003EC4A0 /* Build configuration list for PBXNativeTarget "DronePan-SwiftTests" */;
+			buildPhases = (
+				237001B61ECF95DB003EC4A0 /* Sources */,
+				237001B71ECF95DB003EC4A0 /* Frameworks */,
+				237001B81ECF95DB003EC4A0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				237001BC1ECF95DB003EC4A0 /* PBXTargetDependency */,
+			);
+			name = "DronePan-SwiftTests";
+			productName = "DronePan-SwiftTests";
+			productReference = 237001BA1ECF95DB003EC4A0 /* DronePan-SwiftTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		2370019E1ECF95DA003EC4A0 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0820;
+				LastUpgradeCheck = 0820;
+				ORGANIZATIONNAME = "Unmanned Airlines, LLC";
+				TargetAttributes = {
+					237001A51ECF95DB003EC4A0 = {
+						CreatedOnToolsVersion = 8.2;
+						ProvisioningStyle = Automatic;
+					};
+					237001B91ECF95DB003EC4A0 = {
+						CreatedOnToolsVersion = 8.2;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 237001A51ECF95DB003EC4A0;
+					};
+				};
+			};
+			buildConfigurationList = 237001A11ECF95DA003EC4A0 /* Build configuration list for PBXProject "DronePan-Swift" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 2370019D1ECF95DA003EC4A0;
+			productRefGroup = 237001A71ECF95DB003EC4A0 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				237001A51ECF95DB003EC4A0 /* DronePan-Swift */,
+				237001B91ECF95DB003EC4A0 /* DronePan-SwiftTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		237001A41ECF95DB003EC4A0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				237001B41ECF95DB003EC4A0 /* LaunchScreen.storyboard in Resources */,
+				237001B11ECF95DB003EC4A0 /* Assets.xcassets in Resources */,
+				237001AF1ECF95DB003EC4A0 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		237001B81ECF95DB003EC4A0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		237001A21ECF95DB003EC4A0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				237001AC1ECF95DB003EC4A0 /* ViewController.swift in Sources */,
+				237001AA1ECF95DB003EC4A0 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		237001B61ECF95DB003EC4A0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				237001BF1ECF95DB003EC4A0 /* DronePan_SwiftTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		237001BC1ECF95DB003EC4A0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 237001A51ECF95DB003EC4A0 /* DronePan-Swift */;
+			targetProxy = 237001BB1ECF95DB003EC4A0 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		237001AD1ECF95DB003EC4A0 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				237001AE1ECF95DB003EC4A0 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		237001B21ECF95DB003EC4A0 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				237001B31ECF95DB003EC4A0 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		237001C11ECF95DB003EC4A0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		237001C21ECF95DB003EC4A0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		237001C41ECF95DB003EC4A0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = "DronePan-Swift/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.unmannedairlines.DronePan-Swift";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		237001C51ECF95DB003EC4A0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = "DronePan-Swift/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.unmannedairlines.DronePan-Swift";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		237001C71ECF95DB003EC4A0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = "DronePan-SwiftTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.unmannedairlines.DronePan-SwiftTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DronePan-Swift.app/DronePan-Swift";
+			};
+			name = Debug;
+		};
+		237001C81ECF95DB003EC4A0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = "DronePan-SwiftTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.unmannedairlines.DronePan-SwiftTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DronePan-Swift.app/DronePan-Swift";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		237001A11ECF95DA003EC4A0 /* Build configuration list for PBXProject "DronePan-Swift" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				237001C11ECF95DB003EC4A0 /* Debug */,
+				237001C21ECF95DB003EC4A0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		237001C31ECF95DB003EC4A0 /* Build configuration list for PBXNativeTarget "DronePan-Swift" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				237001C41ECF95DB003EC4A0 /* Debug */,
+				237001C51ECF95DB003EC4A0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		237001C61ECF95DB003EC4A0 /* Build configuration list for PBXNativeTarget "DronePan-SwiftTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				237001C71ECF95DB003EC4A0 /* Debug */,
+				237001C81ECF95DB003EC4A0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 2370019E1ECF95DA003EC4A0 /* Project object */;
+}
