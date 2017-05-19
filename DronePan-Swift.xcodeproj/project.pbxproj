@@ -13,6 +13,7 @@
 		237001B11ECF95DB003EC4A0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 237001B01ECF95DB003EC4A0 /* Assets.xcassets */; };
 		237001B41ECF95DB003EC4A0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 237001B21ECF95DB003EC4A0 /* LaunchScreen.storyboard */; };
 		237001BF1ECF95DB003EC4A0 /* DronePan_SwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 237001BE1ECF95DB003EC4A0 /* DronePan_SwiftTests.swift */; };
+		59475AB5098B05AD9C573040 /* libPods-DronePan-Swift.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DE2229174AB73A9811664AB /* libPods-DronePan-Swift.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +37,9 @@
 		237001BA1ECF95DB003EC4A0 /* DronePan-SwiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "DronePan-SwiftTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		237001BE1ECF95DB003EC4A0 /* DronePan_SwiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DronePan_SwiftTests.swift; sourceTree = "<group>"; };
 		237001C01ECF95DB003EC4A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4DE2229174AB73A9811664AB /* libPods-DronePan-Swift.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DronePan-Swift.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C0E4DE63C3EB7CE31AC87982 /* Pods-DronePan-Swift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DronePan-Swift.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DronePan-Swift/Pods-DronePan-Swift.debug.xcconfig"; sourceTree = "<group>"; };
+		DA2814FB54BCDA38011E9F19 /* Pods-DronePan-Swift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DronePan-Swift.release.xcconfig"; path = "Pods/Target Support Files/Pods-DronePan-Swift/Pods-DronePan-Swift.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +47,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				59475AB5098B05AD9C573040 /* libPods-DronePan-Swift.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -62,6 +67,8 @@
 				237001A81ECF95DB003EC4A0 /* DronePan-Swift */,
 				237001BD1ECF95DB003EC4A0 /* DronePan-SwiftTests */,
 				237001A71ECF95DB003EC4A0 /* Products */,
+				AFFEB57108021FAB16C54418 /* Pods */,
+				479F519DDD84103488D5BC0A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -96,6 +103,23 @@
 			path = "DronePan-SwiftTests";
 			sourceTree = "<group>";
 		};
+		479F519DDD84103488D5BC0A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4DE2229174AB73A9811664AB /* libPods-DronePan-Swift.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		AFFEB57108021FAB16C54418 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C0E4DE63C3EB7CE31AC87982 /* Pods-DronePan-Swift.debug.xcconfig */,
+				DA2814FB54BCDA38011E9F19 /* Pods-DronePan-Swift.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -103,9 +127,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 237001C31ECF95DB003EC4A0 /* Build configuration list for PBXNativeTarget "DronePan-Swift" */;
 			buildPhases = (
+				8EE563B96C4D4A5E276382CC /* [CP] Check Pods Manifest.lock */,
 				237001A21ECF95DB003EC4A0 /* Sources */,
 				237001A31ECF95DB003EC4A0 /* Frameworks */,
 				237001A41ECF95DB003EC4A0 /* Resources */,
+				78011ECD0FB39518AFCA835A /* [CP] Embed Pods Frameworks */,
+				44D813E969172381AE764F9F /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -193,6 +220,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		44D813E969172381AE764F9F /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DronePan-Swift/Pods-DronePan-Swift-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		78011ECD0FB39518AFCA835A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DronePan-Swift/Pods-DronePan-Swift-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8EE563B96C4D4A5E276382CC /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		237001A21ECF95DB003EC4A0 /* Sources */ = {
@@ -337,6 +412,7 @@
 		};
 		237001C41ECF95DB003EC4A0 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C0E4DE63C3EB7CE31AC87982 /* Pods-DronePan-Swift.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "DronePan-Swift/Info.plist";
@@ -349,6 +425,7 @@
 		};
 		237001C51ECF95DB003EC4A0 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DA2814FB54BCDA38011E9F19 /* Pods-DronePan-Swift.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "DronePan-Swift/Info.plist";
