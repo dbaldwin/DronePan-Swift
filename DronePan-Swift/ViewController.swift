@@ -11,10 +11,13 @@ import DJISDK
 
 class ViewController: UIViewController {
     
+    let enableBridgeMode = false
+    let bridgeAppIP = "10.0.1.19"
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        
+        DJISDKManager.registerApp(with: self)
     }
 
     override func viewDidLoad() {
@@ -30,3 +33,34 @@ class ViewController: UIViewController {
 
 }
 
+extension ViewController: DJISDKManagerDelegate {
+    
+    func appRegisteredWithError(_ error: Error?) {
+        
+        NSLog("SDK Registered with error \(String(describing: error?.localizedDescription))")
+        
+        if enableBridgeMode {
+            
+            DJISDKManager.enableBridgeMode(withBridgeAppIP: bridgeAppIP)
+            
+        } else {
+            
+            DJISDKManager.startConnectionToProduct()
+            
+        }
+        
+    }
+    
+    func productConnected(_ product: DJIBaseProduct?) {
+        
+    }
+    
+    func productDisconnected() {
+    }
+    
+    func componentConnected(withKey key: String?, andIndex index: Int) {
+    }
+    
+    func componentDisconnected(withKey key: String?, andIndex index: Int) {
+    }
+}
