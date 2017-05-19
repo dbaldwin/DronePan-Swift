@@ -13,6 +13,8 @@
 		237001B11ECF95DB003EC4A0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 237001B01ECF95DB003EC4A0 /* Assets.xcassets */; };
 		237001B41ECF95DB003EC4A0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 237001B21ECF95DB003EC4A0 /* LaunchScreen.storyboard */; };
 		237001BF1ECF95DB003EC4A0 /* DronePan_SwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 237001BE1ECF95DB003EC4A0 /* DronePan_SwiftTests.swift */; };
+		237001D01ECFA12A003EC4A0 /* VideoPreviewer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 237001CF1ECFA109003EC4A0 /* VideoPreviewer.framework */; };
+		237001D11ECFA12A003EC4A0 /* VideoPreviewer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 237001CF1ECFA109003EC4A0 /* VideoPreviewer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		59475AB5098B05AD9C573040 /* libPods-DronePan-Swift.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DE2229174AB73A9811664AB /* libPods-DronePan-Swift.a */; };
 /* End PBXBuildFile section */
 
@@ -24,7 +26,35 @@
 			remoteGlobalIDString = 237001A51ECF95DB003EC4A0;
 			remoteInfo = "DronePan-Swift";
 		};
+		237001CE1ECFA109003EC4A0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 237001CA1ECFA109003EC4A0 /* VideoPreviewer.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 02A543FD1C3C51CB0083C11B;
+			remoteInfo = VideoPreviewer;
+		};
+		237001D21ECFA12A003EC4A0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 237001CA1ECFA109003EC4A0 /* VideoPreviewer.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 02A543FC1C3C51CB0083C11B;
+			remoteInfo = VideoPreviewer;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		237001D41ECFA12A003EC4A0 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				237001D11ECFA12A003EC4A0 /* VideoPreviewer.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		237001A61ECF95DB003EC4A0 /* DronePan-Swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "DronePan-Swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -37,6 +67,7 @@
 		237001BA1ECF95DB003EC4A0 /* DronePan-SwiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "DronePan-SwiftTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		237001BE1ECF95DB003EC4A0 /* DronePan_SwiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DronePan_SwiftTests.swift; sourceTree = "<group>"; };
 		237001C01ECF95DB003EC4A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		237001CA1ECFA109003EC4A0 /* VideoPreviewer.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = VideoPreviewer.xcodeproj; path = VideoPreviewer/VideoPreviewer.xcodeproj; sourceTree = "<group>"; };
 		4DE2229174AB73A9811664AB /* libPods-DronePan-Swift.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DronePan-Swift.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0E4DE63C3EB7CE31AC87982 /* Pods-DronePan-Swift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DronePan-Swift.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DronePan-Swift/Pods-DronePan-Swift.debug.xcconfig"; sourceTree = "<group>"; };
 		DA2814FB54BCDA38011E9F19 /* Pods-DronePan-Swift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DronePan-Swift.release.xcconfig"; path = "Pods/Target Support Files/Pods-DronePan-Swift/Pods-DronePan-Swift.release.xcconfig"; sourceTree = "<group>"; };
@@ -47,6 +78,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				237001D01ECFA12A003EC4A0 /* VideoPreviewer.framework in Frameworks */,
 				59475AB5098B05AD9C573040 /* libPods-DronePan-Swift.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -103,9 +135,18 @@
 			path = "DronePan-SwiftTests";
 			sourceTree = "<group>";
 		};
+		237001CB1ECFA109003EC4A0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				237001CF1ECFA109003EC4A0 /* VideoPreviewer.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		479F519DDD84103488D5BC0A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				237001CA1ECFA109003EC4A0 /* VideoPreviewer.xcodeproj */,
 				4DE2229174AB73A9811664AB /* libPods-DronePan-Swift.a */,
 			);
 			name = Frameworks;
@@ -133,10 +174,12 @@
 				237001A41ECF95DB003EC4A0 /* Resources */,
 				78011ECD0FB39518AFCA835A /* [CP] Embed Pods Frameworks */,
 				44D813E969172381AE764F9F /* [CP] Copy Pods Resources */,
+				237001D41ECFA12A003EC4A0 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				237001D31ECFA12A003EC4A0 /* PBXTargetDependency */,
 			);
 			name = "DronePan-Swift";
 			productName = "DronePan-Swift";
@@ -173,6 +216,7 @@
 				TargetAttributes = {
 					237001A51ECF95DB003EC4A0 = {
 						CreatedOnToolsVersion = 8.2;
+						DevelopmentTeam = TP7ZU94CZV;
 						ProvisioningStyle = Automatic;
 					};
 					237001B91ECF95DB003EC4A0 = {
@@ -193,6 +237,12 @@
 			mainGroup = 2370019D1ECF95DA003EC4A0;
 			productRefGroup = 237001A71ECF95DB003EC4A0 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 237001CB1ECFA109003EC4A0 /* Products */;
+					ProjectRef = 237001CA1ECFA109003EC4A0 /* VideoPreviewer.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				237001A51ECF95DB003EC4A0 /* DronePan-Swift */,
@@ -200,6 +250,16 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		237001CF1ECFA109003EC4A0 /* VideoPreviewer.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = VideoPreviewer.framework;
+			remoteRef = 237001CE1ECFA109003EC4A0 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		237001A41ECF95DB003EC4A0 /* Resources */ = {
@@ -294,6 +354,11 @@
 			isa = PBXTargetDependency;
 			target = 237001A51ECF95DB003EC4A0 /* DronePan-Swift */;
 			targetProxy = 237001BB1ECF95DB003EC4A0 /* PBXContainerItemProxy */;
+		};
+		237001D31ECFA12A003EC4A0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = VideoPreviewer;
+			targetProxy = 237001D21ECFA12A003EC4A0 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -415,6 +480,7 @@
 			baseConfigurationReference = C0E4DE63C3EB7CE31AC87982 /* Pods-DronePan-Swift.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = TP7ZU94CZV;
 				INFOPLIST_FILE = "DronePan-Swift/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.unmannedairlines.DronePan-Swift";
@@ -428,6 +494,7 @@
 			baseConfigurationReference = DA2814FB54BCDA38011E9F19 /* Pods-DronePan-Swift.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = TP7ZU94CZV;
 				INFOPLIST_FILE = "DronePan-Swift/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.unmannedairlines.DronePan-Swift";
@@ -483,6 +550,7 @@
 				237001C51ECF95DB003EC4A0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		237001C61ECF95DB003EC4A0 /* Build configuration list for PBXNativeTarget "DronePan-SwiftTests" */ = {
 			isa = XCConfigurationList;
@@ -491,6 +559,7 @@
 				237001C81ECF95DB003EC4A0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
