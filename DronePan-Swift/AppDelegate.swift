@@ -12,9 +12,17 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    
+    let productCommunicationManager = ProductCommunicationManager()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        
+        // Register DJI SDK
+        productCommunicationManager.registerWithSDK()
+        
+        // Hide the status bar
+        application.isStatusBarHidden = true
+        
         // Override point for customization after application launch.
         return true
     }
