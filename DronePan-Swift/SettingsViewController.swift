@@ -16,4 +16,7 @@ class SettingsViewController: UIViewController {
         print("Settings view loaded")
     }
     
+    @IBAction func closeButtonClicked(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
 }
