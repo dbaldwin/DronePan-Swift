@@ -15,6 +15,7 @@
 		237001BF1ECF95DB003EC4A0 /* DronePan_SwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 237001BE1ECF95DB003EC4A0 /* DronePan_SwiftTests.swift */; };
 		237001D01ECFA12A003EC4A0 /* VideoPreviewer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 237001CF1ECFA109003EC4A0 /* VideoPreviewer.framework */; };
 		237001D11ECFA12A003EC4A0 /* VideoPreviewer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 237001CF1ECFA109003EC4A0 /* VideoPreviewer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		23B1FADF1ECFC81D00EFC857 /* ProductCommunicationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23B1FADE1ECFC81D00EFC857 /* ProductCommunicationManager.swift */; };
 		59475AB5098B05AD9C573040 /* libPods-DronePan-Swift.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DE2229174AB73A9811664AB /* libPods-DronePan-Swift.a */; };
 /* End PBXBuildFile section */
 
@@ -68,6 +69,7 @@
 		237001BE1ECF95DB003EC4A0 /* DronePan_SwiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DronePan_SwiftTests.swift; sourceTree = "<group>"; };
 		237001C01ECF95DB003EC4A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		237001CA1ECFA109003EC4A0 /* VideoPreviewer.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = VideoPreviewer.xcodeproj; path = VideoPreviewer/VideoPreviewer.xcodeproj; sourceTree = "<group>"; };
+		23B1FADE1ECFC81D00EFC857 /* ProductCommunicationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductCommunicationManager.swift; sourceTree = "<group>"; };
 		4DE2229174AB73A9811664AB /* libPods-DronePan-Swift.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DronePan-Swift.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0E4DE63C3EB7CE31AC87982 /* Pods-DronePan-Swift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DronePan-Swift.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DronePan-Swift/Pods-DronePan-Swift.debug.xcconfig"; sourceTree = "<group>"; };
 		DA2814FB54BCDA38011E9F19 /* Pods-DronePan-Swift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DronePan-Swift.release.xcconfig"; path = "Pods/Target Support Files/Pods-DronePan-Swift/Pods-DronePan-Swift.release.xcconfig"; sourceTree = "<group>"; };
@@ -122,6 +124,7 @@
 				237001B01ECF95DB003EC4A0 /* Assets.xcassets */,
 				237001B21ECF95DB003EC4A0 /* LaunchScreen.storyboard */,
 				237001B51ECF95DB003EC4A0 /* Info.plist */,
+				23B1FADE1ECFC81D00EFC857 /* ProductCommunicationManager.swift */,
 			);
 			path = "DronePan-Swift";
 			sourceTree = "<group>";
@@ -324,7 +327,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -334,6 +337,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				23B1FADF1ECFC81D00EFC857 /* ProductCommunicationManager.swift in Sources */,
 				237001AC1ECF95DB003EC4A0 /* ViewController.swift in Sources */,
 				237001AA1ECF95DB003EC4A0 /* AppDelegate.swift in Sources */,
 			);
