@@ -1,11 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1212" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="ipad9_7" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -28,12 +29,40 @@
                                     <constraint firstAttribute="height" constant="500" id="6D1-B3-bou"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vgp-Pu-vJ2">
+                                <rect key="frame" x="950" y="20" width="54" height="30"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="Gdw-Gl-orZ"/>
+                                    <constraint firstAttribute="width" constant="54" id="WNO-LK-B8o"/>
+                                </constraints>
+                                <state key="normal" title="Map"/>
+                                <connections>
+                                    <segue destination="V9v-qI-rKa" kind="show" id="brZ-K1-JCr"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aEb-dZ-Hzh">
+                                <rect key="frame" x="847" y="20" width="85" height="30"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="85" id="MT5-Cn-iQe"/>
+                                    <constraint firstAttribute="height" constant="30" id="Zw2-RP-zMK"/>
+                                </constraints>
+                                <state key="normal" title="Settings"/>
+                                <connections>
+                                    <segue destination="ruh-iu-v8E" kind="show" id="px1-x8-ccp"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="vgp-Pu-vJ2" firstAttribute="leading" secondItem="aEb-dZ-Hzh" secondAttribute="trailing" constant="18" id="0bA-hA-ezX"/>
+                            <constraint firstItem="vgp-Pu-vJ2" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="9mH-bW-EYT"/>
                             <constraint firstAttribute="trailing" secondItem="lbf-Gc-gqu" secondAttribute="trailing" id="Cne-oM-8GP"/>
+                            <constraint firstItem="aEb-dZ-Hzh" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="URa-r7-jWY"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="lbf-Gc-gqu" secondAttribute="bottom" id="aDT-sK-exj"/>
                             <constraint firstItem="lbf-Gc-gqu" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="sIQ-ku-uxK"/>
+                            <constraint firstItem="vgp-Pu-vJ2" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="sTh-7K-idX"/>
                         </constraints>
                     </view>
                     <connections>
@@ -43,6 +72,59 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="137.6953125" y="137.5"/>
+        </scene>
+        <!--Settings View Controller-->
+        <scene sceneID="jtD-ru-mU6">
+            <objects>
+                <viewController id="ruh-iu-v8E" customClass="SettingsViewController" customModule="DronePan_Swift" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="aPi-c9-3Ks"/>
+                        <viewControllerLayoutGuide type="bottom" id="GOa-EA-BcH"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Avm-F0-fH0">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Bhe-C9-7vZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="138" y="828"/>
+        </scene>
+        <!--Map View Controller-->
+        <scene sceneID="MqR-DW-hza">
+            <objects>
+                <viewController id="V9v-qI-rKa" customClass="MapViewController" customModule="DronePan_Swift" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Epp-IE-Ful"/>
+                        <viewControllerLayoutGuide type="bottom" id="f2Y-iE-j7g"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="lTm-NZ-qR6">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JZN-p4-7WK" userLabel="Google Map View" customClass="GMSMapView">
+                                <rect key="frame" x="0.0" y="268" width="1024" height="500"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="500" id="9ye-RW-NT8"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="f2Y-iE-j7g" firstAttribute="top" secondItem="JZN-p4-7WK" secondAttribute="bottom" id="LEq-Mc-PI6"/>
+                            <constraint firstAttribute="trailing" secondItem="JZN-p4-7WK" secondAttribute="trailing" id="RHv-Xu-54a"/>
+                            <constraint firstItem="JZN-p4-7WK" firstAttribute="leading" secondItem="lTm-NZ-qR6" secondAttribute="leading" id="bNt-0h-KRY"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="googleMapView" destination="JZN-p4-7WK" id="KCs-Xb-JjV"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9wQ-rK-gvU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="809.765625" y="137.5"/>
         </scene>
     </scenes>
 </document>

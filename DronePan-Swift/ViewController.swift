@@ -115,7 +115,7 @@ class ViewController: UIViewController {
 }
 
 // Get the video feed update
-extension ViewController : DJIVideoFeedListener {
+extension ViewController: DJIVideoFeedListener {
     
     func videoFeed(_ videoFeed: DJIVideoFeed, didUpdateVideoData videoData: Data) {
         
