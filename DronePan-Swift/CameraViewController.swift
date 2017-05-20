@@ -10,7 +10,7 @@ import UIKit
 import DJISDK
 import VideoPreviewer
 
-class ViewController: UIViewController {
+class CameraViewController: UIViewController {
     
     @IBOutlet weak var cameraView: UIView!
     
@@ -68,6 +68,10 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func startPano(_ sender: Any) {
+    }
+    
+    
     func productConnected() {
         
         guard let newProduct = DJISDKManager.product() else {
@@ -115,7 +119,7 @@ class ViewController: UIViewController {
 }
 
 // Get the video feed update
-extension ViewController: DJIVideoFeedListener {
+extension CameraViewController: DJIVideoFeedListener {
     
     func videoFeed(_ videoFeed: DJIVideoFeed, didUpdateVideoData videoData: Data) {
         
@@ -130,7 +134,7 @@ extension ViewController: DJIVideoFeedListener {
     
 }
 
-extension ViewController: DJICameraDelegate {
+extension CameraViewController: DJICameraDelegate {
     
     // This code does not work in SDK 4.0.1
     func camera(_ camera: DJICamera, didGenerateNewMediaFile newMedia: DJIMediaFile) {

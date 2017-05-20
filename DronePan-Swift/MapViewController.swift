@@ -26,6 +26,11 @@ class MapViewController: UIViewController {
         googleMapView.settings.myLocationButton = true
     }
 
+    @IBAction func cameraButtonClicked(_ sender: Any) {
+        
+        dismiss(animated: true, completion: nil)
+        
+    }
 }
 
 extension MapViewController: GMSMapViewDelegate {

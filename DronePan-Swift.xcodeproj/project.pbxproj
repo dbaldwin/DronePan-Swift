@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		237001AA1ECF95DB003EC4A0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 237001A91ECF95DB003EC4A0 /* AppDelegate.swift */; };
-		237001AC1ECF95DB003EC4A0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 237001AB1ECF95DB003EC4A0 /* ViewController.swift */; };
+		237001AC1ECF95DB003EC4A0 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 237001AB1ECF95DB003EC4A0 /* CameraViewController.swift */; };
 		237001AF1ECF95DB003EC4A0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 237001AD1ECF95DB003EC4A0 /* Main.storyboard */; };
 		237001B11ECF95DB003EC4A0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 237001B01ECF95DB003EC4A0 /* Assets.xcassets */; };
 		237001B41ECF95DB003EC4A0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 237001B21ECF95DB003EC4A0 /* LaunchScreen.storyboard */; };
@@ -62,7 +62,7 @@
 /* Begin PBXFileReference section */
 		237001A61ECF95DB003EC4A0 /* DronePan-Swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "DronePan-Swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		237001A91ECF95DB003EC4A0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		237001AB1ECF95DB003EC4A0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		237001AB1ECF95DB003EC4A0 /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		237001AE1ECF95DB003EC4A0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		237001B01ECF95DB003EC4A0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		237001B31ECF95DB003EC4A0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -123,7 +123,7 @@
 			isa = PBXGroup;
 			children = (
 				237001A91ECF95DB003EC4A0 /* AppDelegate.swift */,
-				237001AB1ECF95DB003EC4A0 /* ViewController.swift */,
+				237001AB1ECF95DB003EC4A0 /* CameraViewController.swift */,
 				237001AD1ECF95DB003EC4A0 /* Main.storyboard */,
 				237001B01ECF95DB003EC4A0 /* Assets.xcassets */,
 				237001B21ECF95DB003EC4A0 /* LaunchScreen.storyboard */,
@@ -344,7 +344,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				23B1FADF1ECFC81D00EFC857 /* ProductCommunicationManager.swift in Sources */,
-				237001AC1ECF95DB003EC4A0 /* ViewController.swift in Sources */,
+				237001AC1ECF95DB003EC4A0 /* CameraViewController.swift in Sources */,
 				237001AA1ECF95DB003EC4A0 /* AppDelegate.swift in Sources */,
 				23DDA41C1ED0B54100378B75 /* SettingsViewController.swift in Sources */,
 				23CD573B1ED0AC7200D62F06 /* MapViewController.swift in Sources */,

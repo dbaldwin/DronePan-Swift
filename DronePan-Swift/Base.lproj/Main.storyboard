@@ -6,14 +6,15 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Camera View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="DronePan_Swift" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="CameraViewController" customModule="DronePan_Swift" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -29,6 +30,25 @@
                                     <constraint firstAttribute="height" constant="500" id="6D1-B3-bou"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zhh-xe-z3j" customClass="DULDashboardWidget">
+                                <rect key="frame" x="20" y="680.5" width="400" height="67.5"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="400" id="Vcr-Sn-H1C"/>
+                                    <constraint firstAttribute="width" secondItem="Zhh-xe-z3j" secondAttribute="height" multiplier="541:91" id="Wr6-b0-kqb"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yZv-EF-lgt">
+                                <rect key="frame" x="438.5" y="708" width="147" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="jEy-fc-vhO"/>
+                                    <constraint firstAttribute="width" constant="147" id="lHG-QA-VUQ"/>
+                                </constraints>
+                                <state key="normal" title="Start Pano"/>
+                                <connections>
+                                    <action selector="startPano:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6N1-Kg-tdW"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vgp-Pu-vJ2">
                                 <rect key="frame" x="950" y="20" width="54" height="30"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -61,6 +81,10 @@
                             <constraint firstAttribute="trailing" secondItem="lbf-Gc-gqu" secondAttribute="trailing" id="Cne-oM-8GP"/>
                             <constraint firstItem="aEb-dZ-Hzh" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="URa-r7-jWY"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="lbf-Gc-gqu" secondAttribute="bottom" id="aDT-sK-exj"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="yZv-EF-lgt" secondAttribute="bottom" constant="30" id="bXD-ix-AsE"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Zhh-xe-z3j" secondAttribute="bottom" constant="20" id="dIw-Zt-wq3"/>
+                            <constraint firstItem="yZv-EF-lgt" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="eq3-We-3qB"/>
+                            <constraint firstItem="Zhh-xe-z3j" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="jWs-M8-IYs"/>
                             <constraint firstItem="lbf-Gc-gqu" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="sIQ-ku-uxK"/>
                             <constraint firstItem="vgp-Pu-vJ2" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="sTh-7K-idX"/>
                         </constraints>
@@ -123,17 +147,41 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JZN-p4-7WK" userLabel="Google Map View" customClass="GMSMapView">
                                 <rect key="frame" x="0.0" y="268" width="1024" height="500"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="500" id="9ye-RW-NT8"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WN7-21-Gr5" userLabel="Dashboard Widget" customClass="DULDashboardWidget">
+                                <rect key="frame" x="20" y="675.5" width="400" height="67.5"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="400" id="PR4-bx-6jr"/>
+                                    <constraint firstAttribute="width" secondItem="WN7-21-Gr5" secondAttribute="height" multiplier="541:91" id="R0z-ZG-W8f"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HAh-KL-RK3">
+                                <rect key="frame" x="927" y="20" width="77" height="30"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="THt-7z-UBX"/>
+                                    <constraint firstAttribute="width" constant="77" id="nPx-CJ-3H9"/>
+                                </constraints>
+                                <state key="normal" title="Camera"/>
+                                <connections>
+                                    <action selector="cameraButtonClicked:" destination="V9v-qI-rKa" eventType="touchUpInside" id="BpB-C5-cB7"/>
+                                </connections>
+                            </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="HAh-KL-RK3" secondAttribute="trailing" constant="20" id="0jV-DS-0bO"/>
                             <constraint firstItem="f2Y-iE-j7g" firstAttribute="top" secondItem="JZN-p4-7WK" secondAttribute="bottom" id="LEq-Mc-PI6"/>
                             <constraint firstAttribute="trailing" secondItem="JZN-p4-7WK" secondAttribute="trailing" id="RHv-Xu-54a"/>
+                            <constraint firstItem="WN7-21-Gr5" firstAttribute="leading" secondItem="lTm-NZ-qR6" secondAttribute="leadingMargin" id="Rhq-As-lv3"/>
+                            <constraint firstItem="f2Y-iE-j7g" firstAttribute="top" secondItem="WN7-21-Gr5" secondAttribute="bottom" constant="25" id="Ved-mc-yRN"/>
                             <constraint firstItem="JZN-p4-7WK" firstAttribute="leading" secondItem="lTm-NZ-qR6" secondAttribute="leading" id="bNt-0h-KRY"/>
+                            <constraint firstItem="HAh-KL-RK3" firstAttribute="top" secondItem="Epp-IE-Ful" secondAttribute="bottom" id="ycw-M3-jzN"/>
                         </constraints>
                     </view>
                     <connections>
