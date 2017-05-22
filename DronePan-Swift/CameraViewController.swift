@@ -73,6 +73,9 @@ class CameraViewController: UIViewController {
     }
     
     @IBAction func startPano(_ sender: Any) {
+        
+        let pano = PanoramaController()
+        pano.startPanoAtCurrentLocation()
     }
     
     @IBAction func showButtonNav(_ sender: Any) {
