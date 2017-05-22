@@ -238,29 +238,136 @@
                         <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1kA-UM-0HY">
-                                <rect key="frame" x="20" y="20" width="105" height="30"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Number of rows:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bVE-og-a7t">
+                                <rect key="frame" x="20" y="60" width="115" height="21"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="IVw-Us-DQ8"/>
-                                    <constraint firstAttribute="width" constant="105" id="V3r-DQ-veT"/>
+                                    <constraint firstAttribute="height" constant="21" id="rfk-Zy-v74"/>
+                                    <constraint firstAttribute="width" constant="115" id="vTC-Z8-heV"/>
                                 </constraints>
-                                <state key="normal" title="Close"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Number of photos per row (colums):" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="19G-CK-YXr">
+                                <rect key="frame" x="20" y="189" width="250" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="X9P-cU-vqV"/>
+                                    <constraint firstAttribute="width" constant="250" id="k62-Hj-1dI"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="4" minValue="1" maxValue="15" translatesAutoresizingMaskIntoConstraints="NO" id="x1u-SL-kLM" userLabel="Photos per row slider">
+                                <rect key="frame" x="23" y="133" width="626" height="31"/>
+                            </slider>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="4" minValue="1" maxValue="15" translatesAutoresizingMaskIntoConstraints="NO" id="VUG-ex-x0x" userLabel="Column slider">
+                                <rect key="frame" x="23" y="262" width="626" height="31"/>
+                            </slider>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FqC-PL-46D">
+                                <rect key="frame" x="10" y="173" width="647" height="1"/>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="lKf-fK-r0n"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YjI-nf-1Zb">
+                                <rect key="frame" x="623" y="20" width="24" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="24" id="PN1-xE-L1o"/>
+                                    <constraint firstAttribute="height" constant="24" id="kCb-uU-QEO"/>
+                                </constraints>
+                                <state key="normal" image="close_button"/>
                                 <connections>
-                                    <action selector="closeButtonClicked:" destination="ruh-iu-v8E" eventType="touchUpInside" id="niU-vv-HBm"/>
+                                    <action selector="closeButtonClicked:" destination="ruh-iu-v8E" eventType="touchUpInside" id="6T3-jO-QGW"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Model Settings" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="igX-GC-pwo">
+                                <rect key="frame" x="209" y="20" width="250" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="Ihr-G4-rc3"/>
+                                    <constraint firstAttribute="width" constant="250" id="q57-e8-RIe"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Emd-bu-ZUQ">
+                                <rect key="frame" x="140" y="60" width="20" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="5cR-H8-iBg"/>
+                                    <constraint firstAttribute="width" constant="20" id="K6J-8f-om1"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" red="0.0" green="0.54004506890000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="7" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z2L-GB-gey">
+                                <rect key="frame" x="275" y="189" width="20" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="20" id="Duh-R1-CUQ"/>
+                                    <constraint firstAttribute="height" constant="21" id="voO-AZ-9w2"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" red="0.0" green="0.54004506890000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="224-Ox-IYZ">
+                                <rect key="frame" x="20" y="86" width="628" height="42"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="42" id="b3C-bD-6cr"/>
+                                    <constraint firstAttribute="width" constant="628" id="bYh-Yr-YNq"/>
+                                </constraints>
+                                <string key="text">The number of rows that you'd like to configure for the panorama. The gimbal pitch will automatically be calculated based on the number of rows you specify. This does not include the nadir shot.</string>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BGY-5a-du7">
+                                <rect key="frame" x="20" y="215" width="628" height="42"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="42" id="tKN-cW-mMN"/>
+                                    <constraint firstAttribute="width" constant="628" id="w4R-VL-pjF"/>
+                                </constraints>
+                                <string key="text">The number of rows that you'd like to configure for the panorama. The gimbal pitch will automatically be calculated based on the number of rows you specify. This does not include the nadir shot.</string>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="1kA-UM-0HY" firstAttribute="top" secondItem="aPi-c9-3Ks" secondAttribute="bottom" id="bvz-Uc-hef"/>
-                            <constraint firstItem="1kA-UM-0HY" firstAttribute="leading" secondItem="Avm-F0-fH0" secondAttribute="leadingMargin" id="qkG-dp-SXg"/>
+                            <constraint firstItem="bVE-og-a7t" firstAttribute="top" secondItem="Avm-F0-fH0" secondAttribute="topMargin" constant="60" id="6gH-ik-Hvz"/>
+                            <constraint firstItem="BGY-5a-du7" firstAttribute="top" secondItem="19G-CK-YXr" secondAttribute="bottom" constant="5" id="BFv-4b-6En"/>
+                            <constraint firstItem="VUG-ex-x0x" firstAttribute="leading" secondItem="Avm-F0-fH0" secondAttribute="leadingMargin" constant="5" id="CDq-i5-bBp"/>
+                            <constraint firstItem="igX-GC-pwo" firstAttribute="centerX" secondItem="Avm-F0-fH0" secondAttribute="centerX" id="D6A-mz-D3s"/>
+                            <constraint firstItem="Z2L-GB-gey" firstAttribute="leading" secondItem="19G-CK-YXr" secondAttribute="trailing" constant="5" id="HcE-YR-d0x"/>
+                            <constraint firstItem="FqC-PL-46D" firstAttribute="top" secondItem="x1u-SL-kLM" secondAttribute="bottom" constant="10" id="K9p-9o-EwX"/>
+                            <constraint firstItem="FqC-PL-46D" firstAttribute="leading" secondItem="Avm-F0-fH0" secondAttribute="leading" constant="10" id="KUO-NJ-dt4"/>
+                            <constraint firstItem="224-Ox-IYZ" firstAttribute="top" secondItem="Emd-bu-ZUQ" secondAttribute="bottom" constant="5" id="Omg-39-1vU"/>
+                            <constraint firstItem="x1u-SL-kLM" firstAttribute="leading" secondItem="Avm-F0-fH0" secondAttribute="leadingMargin" constant="5" id="SpQ-r0-ywu"/>
+                            <constraint firstItem="bVE-og-a7t" firstAttribute="leading" secondItem="Avm-F0-fH0" secondAttribute="leadingMargin" id="UWi-ga-HLS"/>
+                            <constraint firstItem="igX-GC-pwo" firstAttribute="top" secondItem="Avm-F0-fH0" secondAttribute="topMargin" constant="20" id="VLw-Rl-aRW"/>
+                            <constraint firstItem="Z2L-GB-gey" firstAttribute="top" secondItem="19G-CK-YXr" secondAttribute="top" id="X2T-fX-ucH"/>
+                            <constraint firstItem="YjI-nf-1Zb" firstAttribute="top" secondItem="Avm-F0-fH0" secondAttribute="top" constant="20" id="czW-uw-DUx"/>
+                            <constraint firstItem="19G-CK-YXr" firstAttribute="top" secondItem="FqC-PL-46D" secondAttribute="bottom" constant="15" id="e4H-49-tSe"/>
+                            <constraint firstAttribute="trailing" secondItem="YjI-nf-1Zb" secondAttribute="trailing" constant="20" id="f4N-va-buC"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="x1u-SL-kLM" secondAttribute="trailing" id="fM9-Ze-uDW"/>
+                            <constraint firstItem="x1u-SL-kLM" firstAttribute="top" secondItem="224-Ox-IYZ" secondAttribute="bottom" constant="5" id="hOI-Hx-O7m"/>
+                            <constraint firstItem="VUG-ex-x0x" firstAttribute="top" secondItem="BGY-5a-du7" secondAttribute="bottom" constant="5" id="j6o-nO-oRC"/>
+                            <constraint firstItem="Emd-bu-ZUQ" firstAttribute="leading" secondItem="bVE-og-a7t" secondAttribute="trailing" constant="5" id="jAa-uR-3X2"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="VUG-ex-x0x" secondAttribute="trailing" id="ohQ-h6-iml"/>
+                            <constraint firstItem="19G-CK-YXr" firstAttribute="leading" secondItem="Avm-F0-fH0" secondAttribute="leadingMargin" id="s4S-Yc-U1x"/>
+                            <constraint firstItem="BGY-5a-du7" firstAttribute="leading" secondItem="19G-CK-YXr" secondAttribute="leading" id="vX6-Rl-G24"/>
+                            <constraint firstItem="224-Ox-IYZ" firstAttribute="leading" secondItem="bVE-og-a7t" secondAttribute="leading" id="vbC-3a-G7q"/>
+                            <constraint firstAttribute="trailing" secondItem="FqC-PL-46D" secondAttribute="trailing" constant="10" id="yEb-K2-cH9"/>
+                            <constraint firstItem="Emd-bu-ZUQ" firstAttribute="top" secondItem="bVE-og-a7t" secondAttribute="top" id="zBf-r4-Q63"/>
                         </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bhe-C9-7vZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="137" y="1129"/>
+            <point key="canvasLocation" x="136.28185907046478" y="1128.8"/>
         </scene>
         <!--Exposure Settings View Controller-->
         <scene sceneID="ZLM-ia-eLx">
