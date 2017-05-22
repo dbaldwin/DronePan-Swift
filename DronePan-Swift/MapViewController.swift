@@ -36,7 +36,19 @@ class MapViewController: UIViewController {
         
         
     }
+    
+    // Dismiss the view to get back to camera view
+    @IBAction func cameraViewButtonClicked(_ sender: Any) {
 
+        dismiss(animated: true, completion: nil)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        buttonNavView.isHidden = true
+        
+    }
+    
 }
 
 extension MapViewController: GMSMapViewDelegate {

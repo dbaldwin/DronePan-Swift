@@ -109,6 +109,9 @@
                                             <constraint firstAttribute="height" constant="35" id="2pA-CS-btl"/>
                                             <constraint firstAttribute="width" constant="187" id="bnj-JS-biZ"/>
                                         </constraints>
+                                        <connections>
+                                            <segue destination="ruh-iu-v8E" kind="show" id="m2E-ua-4Ir"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Map View" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ojn-kj-fUC">
                                         <rect key="frame" x="10" y="8" width="79" height="21"/>
@@ -194,25 +197,12 @@
                                     <action selector="startPano:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6N1-Kg-tdW"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aEb-dZ-Hzh">
-                                <rect key="frame" x="370" y="20" width="85" height="30"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="85" id="MT5-Cn-iQe"/>
-                                    <constraint firstAttribute="height" constant="30" id="Zw2-RP-zMK"/>
-                                </constraints>
-                                <state key="normal" title="Settings"/>
-                                <connections>
-                                    <segue destination="ruh-iu-v8E" kind="show" id="px1-x8-ccp"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="lbf-Gc-gqu" secondAttribute="trailing" id="Cne-oM-8GP"/>
                             <constraint firstItem="Jlh-yu-yMr" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="GGq-V2-vYG"/>
                             <constraint firstItem="737-Ks-zjo" firstAttribute="top" secondItem="BYt-TT-eoJ" secondAttribute="bottom" constant="10" id="MNc-9H-WDe"/>
-                            <constraint firstItem="aEb-dZ-Hzh" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="URa-r7-jWY"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="lbf-Gc-gqu" secondAttribute="bottom" id="aDT-sK-exj"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="yZv-EF-lgt" secondAttribute="bottom" constant="75" id="bXD-ix-AsE"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Zhh-xe-z3j" secondAttribute="bottom" constant="20" id="dIw-Zt-wq3"/>
@@ -270,7 +260,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bhe-C9-7vZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="137.6953125" y="827.34375"/>
+            <point key="canvasLocation" x="137" y="1129"/>
         </scene>
         <!--Exposure Settings View Controller-->
         <scene sceneID="ZLM-ia-eLx">
@@ -343,6 +333,9 @@
                                             <constraint firstAttribute="width" constant="187" id="jmX-Ax-pHd"/>
                                             <constraint firstAttribute="height" constant="35" id="juj-m8-p5u"/>
                                         </constraints>
+                                        <connections>
+                                            <action selector="cameraViewButtonClicked:" destination="V9v-qI-rKa" eventType="touchUpInside" id="Eze-TO-cCi"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sfX-IR-jHw">
                                         <rect key="frame" x="1" y="73" width="187" height="35"/>
@@ -351,6 +344,9 @@
                                             <constraint firstAttribute="width" constant="187" id="S56-Gy-gHt"/>
                                             <constraint firstAttribute="height" constant="35" id="sLu-jw-dIM"/>
                                         </constraints>
+                                        <connections>
+                                            <segue destination="YMA-rc-62W" kind="show" id="JsW-mp-782"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rRd-m0-C62" userLabel="Pre-flight checklist button">
                                         <rect key="frame" x="1" y="109" width="187" height="35"/>
@@ -359,6 +355,9 @@
                                             <constraint firstAttribute="width" constant="187" id="B9N-7Y-c2S"/>
                                             <constraint firstAttribute="height" constant="35" id="C6Q-Sc-WoE"/>
                                         </constraints>
+                                        <connections>
+                                            <segue destination="gMO-jP-nui" kind="show" id="VOk-MN-cdM"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5ao-bA-oKI">
                                         <rect key="frame" x="1" y="37" width="187" height="35"/>
@@ -367,6 +366,9 @@
                                             <constraint firstAttribute="width" constant="187" id="64R-Ld-AF3"/>
                                             <constraint firstAttribute="height" constant="35" id="cf4-BN-K6R"/>
                                         </constraints>
+                                        <connections>
+                                            <segue destination="ruh-iu-v8E" kind="show" id="Ss2-Me-3kO"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Camera View" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zgw-dF-3gt">
                                         <rect key="frame" x="10" y="8" width="100" height="21"/>
@@ -472,7 +474,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9wQ-rK-gvU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="809.14542728635683" y="136.80000000000001"/>
+            <point key="canvasLocation" x="863" y="308"/>
         </scene>
         <!--Exposure Settings Controller-->
         <scene sceneID="bAf-PX-hEP">
@@ -499,4 +501,9 @@
         <image name="photo_button" width="75" height="75"/>
         <image name="photo_button_pressed" width="75" height="75"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="JsW-mp-782"/>
+        <segue reference="VOk-MN-cdM"/>
+        <segue reference="Ss2-Me-3kO"/>
+    </inferredMetricsTieBreakers>
 </document>
