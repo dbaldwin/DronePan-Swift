@@ -18,7 +18,8 @@
 		23B1FADF1ECFC81D00EFC857 /* ProductCommunicationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23B1FADE1ECFC81D00EFC857 /* ProductCommunicationManager.swift */; };
 		23CD573B1ED0AC7200D62F06 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23CD573A1ED0AC7200D62F06 /* MapViewController.swift */; };
 		23DDA41C1ED0B54100378B75 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DDA41B1ED0B54100378B75 /* SettingsViewController.swift */; };
-		59475AB5098B05AD9C573040 /* libPods-DronePan-Swift.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DE2229174AB73A9811664AB /* libPods-DronePan-Swift.a */; };
+		23F174721ED2809C00AC109B /* ExposureSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F174711ED2809C00AC109B /* ExposureSettingsViewController.swift */; };
+		F9D4D0A6C0565E4DD46993D9 /* libPods-DronePan-Swift.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 731CE9B33BEF3B431CA5F1E0 /* libPods-DronePan-Swift.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,7 +75,8 @@
 		23B1FADE1ECFC81D00EFC857 /* ProductCommunicationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductCommunicationManager.swift; sourceTree = "<group>"; };
 		23CD573A1ED0AC7200D62F06 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		23DDA41B1ED0B54100378B75 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
-		4DE2229174AB73A9811664AB /* libPods-DronePan-Swift.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DronePan-Swift.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		23F174711ED2809C00AC109B /* ExposureSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExposureSettingsViewController.swift; sourceTree = "<group>"; };
+		731CE9B33BEF3B431CA5F1E0 /* libPods-DronePan-Swift.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DronePan-Swift.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0E4DE63C3EB7CE31AC87982 /* Pods-DronePan-Swift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DronePan-Swift.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DronePan-Swift/Pods-DronePan-Swift.debug.xcconfig"; sourceTree = "<group>"; };
 		DA2814FB54BCDA38011E9F19 /* Pods-DronePan-Swift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DronePan-Swift.release.xcconfig"; path = "Pods/Target Support Files/Pods-DronePan-Swift/Pods-DronePan-Swift.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -85,7 +87,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				237001D01ECFA12A003EC4A0 /* VideoPreviewer.framework in Frameworks */,
-				59475AB5098B05AD9C573040 /* libPods-DronePan-Swift.a in Frameworks */,
+				F9D4D0A6C0565E4DD46993D9 /* libPods-DronePan-Swift.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -131,6 +133,7 @@
 				23B1FADE1ECFC81D00EFC857 /* ProductCommunicationManager.swift */,
 				23CD573A1ED0AC7200D62F06 /* MapViewController.swift */,
 				23DDA41B1ED0B54100378B75 /* SettingsViewController.swift */,
+				23F174711ED2809C00AC109B /* ExposureSettingsViewController.swift */,
 			);
 			path = "DronePan-Swift";
 			sourceTree = "<group>";
@@ -156,7 +159,7 @@
 			isa = PBXGroup;
 			children = (
 				237001CA1ECFA109003EC4A0 /* VideoPreviewer.xcodeproj */,
-				4DE2229174AB73A9811664AB /* libPods-DronePan-Swift.a */,
+				731CE9B33BEF3B431CA5F1E0 /* libPods-DronePan-Swift.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -333,7 +336,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -343,6 +346,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				23F174721ED2809C00AC109B /* ExposureSettingsViewController.swift in Sources */,
 				23B1FADF1ECFC81D00EFC857 /* ProductCommunicationManager.swift in Sources */,
 				237001AC1ECF95DB003EC4A0 /* CameraViewController.swift in Sources */,
 				237001AA1ECF95DB003EC4A0 /* AppDelegate.swift in Sources */,

@@ -14,6 +14,10 @@ class CameraViewController: UIViewController {
     
     @IBOutlet weak var cameraView: UIView!
     
+    @IBOutlet weak var hamburgerButton: UIButton!
+    
+    @IBOutlet weak var buttonNavView: UIView!
+    
     // Following this approach from the DJI SDK example
     override func viewWillAppear(_ animated: Bool) {
         
@@ -71,6 +75,17 @@ class CameraViewController: UIViewController {
     @IBAction func startPano(_ sender: Any) {
     }
     
+    @IBAction func showButtonNav(_ sender: Any) {
+        
+        buttonNavView.isHidden = !buttonNavView.isHidden
+        
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        buttonNavView.isHidden = true
+        
+    }
     
     func productConnected() {
         
