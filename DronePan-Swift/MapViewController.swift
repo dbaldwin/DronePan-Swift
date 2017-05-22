@@ -13,6 +13,8 @@ class MapViewController: UIViewController {
     
     @IBOutlet weak var googleMapView: GMSMapView!
     
+    @IBOutlet weak var buttonNavView: UIView!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -25,12 +27,16 @@ class MapViewController: UIViewController {
         googleMapView.settings.tiltGestures = false
         googleMapView.settings.myLocationButton = true
     }
-
-    @IBAction func cameraButtonClicked(_ sender: Any) {
+    
+    @IBAction func toggleNavButtonView(_ sender: Any) {
         
-        dismiss(animated: true, completion: nil)
+        buttonNavView.isHidden = !buttonNavView.isHidden
+        
+        print(buttonNavView.isHidden)
+        
         
     }
+
 }
 
 extension MapViewController: GMSMapViewDelegate {
