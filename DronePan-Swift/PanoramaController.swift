@@ -10,7 +10,7 @@ import DJISDK
 
 class PanoramaController {
     
-    
+    var isGimbalYaw = false
     
     func startPanoAtCurrentLocation() {
         
@@ -23,15 +23,20 @@ class PanoramaController {
         
         for _ in 0..<cols {
             
+            var gimbalPitch: Float = 0
+            
             for row in 0..<rows {
                 
                 // Set the gimbal pitch
-                let pitch: Float = Float(90/rows) * Float(row)
+                gimbalPitch = Float(90/rows) * Float(row)
                 
-                print("Pitching gimbal to \(pitch)")
+                print("Pitching gimbal to \(gimbalPitch)")
                 
-                let attitude = DJIGimbalAttitude(pitch: pitch, roll: 0.0, yaw: 0.0)
+                var elements = [DJIMissionControlTimelineElement]()
+                
+                let attitude = DJIGimbalAttitude(pitch: gimbalPitch, roll: 0.0, yaw: 0.0)
                 let pitchAction: DJIGimbalAttitudeAction = DJIGimbalAttitudeAction(attitude: attitude)!
+                elements.append(pitchAction)
                 
                 var error = DJISDKManager.missionControl()?.scheduleElement(pitchAction)
                 
@@ -51,16 +56,29 @@ class PanoramaController {
                 
             }
             
-            let yaw: Double = Double(360/cols)
+            let yaw: Float = Float(360/cols)
             
-            print("Yawing aircraft \(yaw) degrees")
+            // Let's do gimbal yaw for I1/I2 users
+            if isGimbalYaw {
+                
+                print("Yawing gimbal \(yaw) degrees")
+                
+                let attitude = DJIGimbalAttitude(pitch: gimbalPitch, roll: 0.0, yaw: yaw)
+                
+            
+            // Let's do aircraft yaw
+            } else {
+            
+                print("Yawing aircraft \(yaw) degrees")
         
-            let yawAction: DJIAircraftYawAction = DJIAircraftYawAction(relativeAngle: yaw, andAngularVelocity: 30)!
-            let error = DJISDKManager.missionControl()?.scheduleElement(yawAction)
-            
-            if error != nil {
-                print("Error scheduling element \(error)")
-                return;
+                let yawAction: DJIAircraftYawAction = DJIAircraftYawAction(relativeAngle: Double(yaw), andAngularVelocity: 30)!
+                let error = DJISDKManager.missionControl()?.scheduleElement(yawAction)
+                
+                if error != nil {
+                    print("Error scheduling element \(error)")
+                    return;
+                }
+                
             }
         }
         

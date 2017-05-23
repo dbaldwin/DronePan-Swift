@@ -76,6 +76,16 @@ class CameraViewController: UIViewController {
         
         let pano = PanoramaController()
         pano.startPanoAtCurrentLocation()
+        
+        
+        DJISDKManager.missionControl()?.scheduleElements(<#T##[DJIMissionControlTimelineElement]#>)
+        
+        /*let attitude = DJIGimbalAttitude(pitch: 0.0, roll: 0.0, yaw: 0.0)
+        let pitchAction: DJIGimbalAttitudeAction = DJIGimbalAttitudeAction(attitude: attitude)!
+        var error = DJISDKManager.missionControl()?.scheduleElement(pitchAction)
+        
+        let photoAction = DJIShootPhotoAction(singleShootPhoto:())!
+        error = DJISDKManager.missionControl()?.scheduleElement(photoAction)*/
     }
     
     @IBAction func showButtonNav(_ sender: Any) {
