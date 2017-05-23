@@ -74,18 +74,19 @@ class CameraViewController: UIViewController {
     
     @IBAction func startPano(_ sender: Any) {
         
+        // Clear out previous missions
+        DJISDKManager.missionControl()?.stopTimeline()
+        DJISDKManager.missionControl()?.unscheduleEverything()
+        
         let pano = PanoramaController()
-        pano.startPanoAtCurrentLocation()
+        let error = DJISDKManager.missionControl()?.scheduleElements(pano.buildPanoAtCurrentLocation())
         
+        if error != nil {
+            print("Error scheduling elements \(String(describing: error))")
+            return;
+        }
         
-        DJISDKManager.missionControl()?.scheduleElements(<#T##[DJIMissionControlTimelineElement]#>)
-        
-        /*let attitude = DJIGimbalAttitude(pitch: 0.0, roll: 0.0, yaw: 0.0)
-        let pitchAction: DJIGimbalAttitudeAction = DJIGimbalAttitudeAction(attitude: attitude)!
-        var error = DJISDKManager.missionControl()?.scheduleElement(pitchAction)
-        
-        let photoAction = DJIShootPhotoAction(singleShootPhoto:())!
-        error = DJISDKManager.missionControl()?.scheduleElement(photoAction)*/
+        DJISDKManager.missionControl()?.startTimeline()
     }
     
     @IBAction func showButtonNav(_ sender: Any) {

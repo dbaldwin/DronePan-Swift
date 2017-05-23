@@ -12,14 +12,38 @@ class PanoramaController {
     
     var isGimbalYaw = false
     
-    func startPanoAtCurrentLocation() {
+    // Basic test for pitching and shooting
+    func pitchGimbal() -> [DJIMissionControlTimelineElement] {
         
-        // Clear out previous missions
-        DJISDKManager.missionControl()?.stopTimeline()
-        DJISDKManager.missionControl()?.unscheduleEverything()
+        var elements = [DJIMissionControlTimelineElement]()
+        var gimbalPitch: Float = 0
+        
+        for i in 0..<4 {
+            
+            // Set the gimbal pitch
+            gimbalPitch = 0 - Float(90/4) * Float(i)
+            
+            print("Pitching gimbal to \(gimbalPitch)")
+            
+            let attitude = DJIGimbalAttitude(pitch: gimbalPitch, roll: 0.0, yaw: 0.0)
+            let pitchAction: DJIGimbalAttitudeAction = DJIGimbalAttitudeAction(attitude: attitude)!
+            elements.append(pitchAction)
+            
+            let photoAction: DJIShootPhotoAction = DJIShootPhotoAction(singleShootPhoto:())!
+            elements.append(photoAction)
+            
+        }
+        
+        return elements
+    }
+    
+    // Execute pano at the current location
+    func buildPanoAtCurrentLocation() -> [DJIMissionControlTimelineElement] {
         
         let rows: Int = 4
         let cols: Int = 7
+        
+        var elements = [DJIMissionControlTimelineElement]()
         
         for _ in 0..<cols {
             
@@ -28,31 +52,16 @@ class PanoramaController {
             for row in 0..<rows {
                 
                 // Set the gimbal pitch
-                gimbalPitch = Float(90/rows) * Float(row)
+                gimbalPitch = 0 - Float(90/rows) * Float(row)
                 
                 print("Pitching gimbal to \(gimbalPitch)")
-                
-                var elements = [DJIMissionControlTimelineElement]()
                 
                 let attitude = DJIGimbalAttitude(pitch: gimbalPitch, roll: 0.0, yaw: 0.0)
                 let pitchAction: DJIGimbalAttitudeAction = DJIGimbalAttitudeAction(attitude: attitude)!
                 elements.append(pitchAction)
                 
-                var error = DJISDKManager.missionControl()?.scheduleElement(pitchAction)
-                
-                if error != nil {
-                    print("Error scheduling element \(error)")
-                    return;
-                }
-                
                 let photoAction: DJIShootPhotoAction = DJIShootPhotoAction(singleShootPhoto:())!
-                
-                error = DJISDKManager.missionControl()?.scheduleElement(photoAction)
-                
-                if error != nil {
-                    print("Error scheduling element \(error)")
-                    return;
-                }
+                elements.append(photoAction)
                 
             }
             
@@ -64,7 +73,8 @@ class PanoramaController {
                 print("Yawing gimbal \(yaw) degrees")
                 
                 let attitude = DJIGimbalAttitude(pitch: gimbalPitch, roll: 0.0, yaw: yaw)
-                
+                let pitchAction: DJIGimbalAttitudeAction = DJIGimbalAttitudeAction(attitude: attitude)!
+                elements.append(pitchAction)
             
             // Let's do aircraft yaw
             } else {
@@ -72,21 +82,16 @@ class PanoramaController {
                 print("Yawing aircraft \(yaw) degrees")
         
                 let yawAction: DJIAircraftYawAction = DJIAircraftYawAction(relativeAngle: Double(yaw), andAngularVelocity: 30)!
-                let error = DJISDKManager.missionControl()?.scheduleElement(yawAction)
-                
-                if error != nil {
-                    print("Error scheduling element \(error)")
-                    return;
-                }
-                
+                elements.append(yawAction)
             }
         }
         
+        return elements
         
     }
     
     // Start a pano from a saved waypoint
-    func startPanoAtPreviousLocation() {
+    func buildPanoAtPreviousLocation() {
         
     }
     
