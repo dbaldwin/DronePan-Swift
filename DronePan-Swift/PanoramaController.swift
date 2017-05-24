@@ -90,6 +90,20 @@ class PanoramaController {
         
     }
     
+    func buildPanoAtCurrentLocationWithWaypointMission(currentLocation: CLLocationCoordinate2D) -> DJIMutableWaypointMission {
+    
+        var mission = DJIMutableWaypointMission()
+        
+        
+        
+        var waypoint = DJIWaypoint(coordinate: currentLocation)
+        
+        
+        var waypoint2 = DJIWaypoint(coordinate: currentLocation)
+        
+        return mission
+    }
+    
     // Start a pano from a saved waypoint
     func buildPanoAtPreviousLocation() {
         
