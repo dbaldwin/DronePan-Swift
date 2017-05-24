@@ -18,6 +18,8 @@ class CameraViewController: UIViewController {
     
     @IBOutlet weak var buttonNavView: UIView!
     
+    var aircraftLocation: CLLocationCoordinate2D = kCLLocationCoordinate2DInvalid
+    
     // Following this approach from the DJI SDK example
     override func viewWillAppear(_ animated: Bool) {
         
@@ -77,9 +79,50 @@ class CameraViewController: UIViewController {
         // Clear out previous missions
         DJISDKManager.missionControl()?.stopTimeline()
         DJISDKManager.missionControl()?.unscheduleEverything()
+        DJISDKManager.missionControl()?.removeAllListeners()
         
-        let pano = PanoramaController()
+        DJISDKManager.missionControl()?.addListener(self, toTimelineProgressWith: { (event: DJIMissionControlTimelineEvent, element: DJIMissionControlTimelineElement?, error: Error?, info: Any?) in
+            
+            print("Mission control event \(String(describing: DJIMissionControlTimelineEvent(rawValue: event.rawValue)))")
+            
+            switch event {
+                
+            case .started:
+                print("Started")
+            case .startError:
+                print("Start error")
+            case .progressed:
+                print("Progressed")
+            case .paused:
+                print("Paused")
+            case .pauseError:
+                print("Pause error")
+            case .resumed:
+                print("Resumed")
+            case .resumeError:
+                print("Resume error")
+            case .stopped:
+                print("Stopped")
+            case .stopError:
+                print("Stop error")
+            case .finished:
+                print("Finished")
+            default:
+                print("Defaut")
+            }
+        })
+        
+        /*let pano = PanoramaController()
         let error = DJISDKManager.missionControl()?.scheduleElements(pano.buildPanoAtCurrentLocation())
+        
+        if error != nil {
+            print("Error scheduling elements \(String(describing: error))")
+            return;
+        }*/
+        
+        let yawAction: DJIAircraftYawAction = DJIAircraftYawAction(relativeAngle: 60, andAngularVelocity: 30)!
+        
+        let error = DJISDKManager.missionControl()?.scheduleElement(yawAction)
         
         if error != nil {
             print("Error scheduling elements \(String(describing: error))")
@@ -128,6 +171,13 @@ class CameraViewController: UIViewController {
             camera?.delegate = self
         }
         
+        // Setting up flight controller delegate
+        let fc: DJIFlightController? = fetchFlightController()
+        
+        if fc != nil {
+            fc?.delegate = self
+        }
+        
     }
 
     func fetchCamera() -> DJICamera? {
@@ -140,6 +190,19 @@ class CameraViewController: UIViewController {
             return (DJISDKManager.product() as! DJIAircraft).camera
         } else if DJISDKManager.product() is DJIHandheld {
             return (DJISDKManager.product() as! DJIHandheld).camera
+        }
+        
+        return nil
+    }
+    
+    func fetchFlightController() -> DJIFlightController? {
+        
+        if DJISDKManager.product() == nil {
+            return nil
+        }
+        
+        if DJISDKManager.product() is DJIAircraft {
+            return (DJISDKManager.product() as! DJIAircraft).flightController
         }
         
         return nil
@@ -173,4 +236,18 @@ extension CameraViewController: DJICameraDelegate {
     }
     
 
+}
+
+// Keep track of the current aircraft location
+extension CameraViewController: DJIFlightControllerDelegate {
+    
+    func flightController(_ fc: DJIFlightController, didUpdate state: DJIFlightControllerState) {
+        
+        self.aircraftLocation = state.aircraftLocation
+
+        // Send the location update to the map view
+        //self.cameraVCDelegate?.updateAircraftLocation(location: self.aircraftLocation, heading: self.aircraftHeading)
+        
+    }
+    
 }
