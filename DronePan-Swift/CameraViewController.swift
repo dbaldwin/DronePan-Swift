@@ -243,7 +243,7 @@ extension CameraViewController: DJIFlightControllerDelegate {
     
     func flightController(_ fc: DJIFlightController, didUpdate state: DJIFlightControllerState) {
         
-        self.aircraftLocation = state.aircraftLocation
+        self.aircraftLocation = (state.aircraftLocation?.coordinate)!
 
         // Send the location update to the map view
         //self.cameraVCDelegate?.updateAircraftLocation(location: self.aircraftLocation, heading: self.aircraftHeading)
