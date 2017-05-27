@@ -23,6 +23,8 @@ class CameraViewController: UIViewController {
     // Following this approach from the DJI SDK example
     override func viewWillAppear(_ animated: Bool) {
         
+        super.viewWillAppear(animated)
+        
         // Setup the connection key
         guard let connectedKey = DJIProductKey(param: DJIParamConnection) else {
             return;
@@ -30,12 +32,16 @@ class CameraViewController: UIViewController {
         
         // Delay and then call the connection function
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            
             DJISDKManager.keyManager()?.startListeningForChanges(on: connectedKey, withListener: self, andUpdate: { (oldValue: DJIKeyedValue?, newValue : DJIKeyedValue?) in
+                
                 if newValue != nil {
                     if newValue!.boolValue {
                         
                         DispatchQueue.main.async {
+                            
                             self.productConnected()
+
                         }
                         
                     }
@@ -51,14 +57,13 @@ class CameraViewController: UIViewController {
         
         // Setup video feed
         VideoPreviewer.instance().setView(cameraView)
-        DJISDKManager.videoFeeder()?.primaryVideoFeed.add(self, with: nil)
-        VideoPreviewer.instance().start()
         
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         
         VideoPreviewer.instance().unSetView()
+        DJISDKManager.videoFeeder()?.primaryVideoFeed.remove(self)
         
         super.viewWillDisappear(animated)
         
@@ -177,6 +182,9 @@ class CameraViewController: UIViewController {
         if fc != nil {
             fc?.delegate = self
         }
+        
+        DJISDKManager.videoFeeder()?.primaryVideoFeed.add(self, with: nil)
+        VideoPreviewer.instance().start()
         
     }
 

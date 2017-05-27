@@ -41,13 +41,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jlh-yu-yMr" customClass="DULRemainingFlightTimeWidget">
-                                <rect key="frame" x="0.0" y="0.0" width="667" height="128"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="128" id="JQb-Jr-szS"/>
-                                </constraints>
-                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lbf-Gc-gqu" userLabel="Camera">
                                 <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -194,14 +187,38 @@
                                     <action selector="startPano:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6N1-Kg-tdW"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hml-hv-Mh5" customClass="DULGPSSignalWidget">
+                                <rect key="frame" x="83.5" y="0.0" width="76" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Hml-hv-Mh5" secondAttribute="height" multiplier="38:15" id="VrT-RT-eL6"/>
+                                    <constraint firstAttribute="height" constant="30" id="nEo-Y9-rSC"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bNf-DQ-5vu" userLabel="Battery widget" customClass="DULBatteryWidget">
+                                <rect key="frame" x="0.0" y="0.0" width="73.5" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="bNf-DQ-5vu" secondAttribute="height" multiplier="22:9" id="rLs-TI-hhI"/>
+                                    <constraint firstAttribute="height" constant="30" id="xS5-tw-8Bp"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jlh-yu-yMr" customClass="DULRemainingFlightTimeWidget">
+                                <rect key="frame" x="0.0" y="30" width="612" height="12"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Jlh-yu-yMr" secondAttribute="height" multiplier="612:12" id="49L-fI-6fn"/>
+                                    <constraint firstAttribute="height" constant="12" id="JQb-Jr-szS"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="bNf-DQ-5vu" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="0Sz-yR-slP"/>
                             <constraint firstItem="lbf-Gc-gqu" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="2jo-B6-lIQ"/>
                             <constraint firstAttribute="trailing" secondItem="lbf-Gc-gqu" secondAttribute="trailing" id="Cne-oM-8GP"/>
-                            <constraint firstItem="Jlh-yu-yMr" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="GGq-V2-vYG"/>
+                            <constraint firstItem="bNf-DQ-5vu" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="FeG-62-4Zy"/>
                             <constraint firstItem="737-Ks-zjo" firstAttribute="top" secondItem="BYt-TT-eoJ" secondAttribute="bottom" constant="10" id="MNc-9H-WDe"/>
+                            <constraint firstItem="Hml-hv-Mh5" firstAttribute="leading" secondItem="bNf-DQ-5vu" secondAttribute="trailing" constant="10" id="UKT-gG-JkC"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="lbf-Gc-gqu" secondAttribute="bottom" id="aDT-sK-exj"/>
+                            <constraint firstItem="Hml-hv-Mh5" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" id="b5G-AZ-LnC"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="yZv-EF-lgt" secondAttribute="bottom" constant="75" id="bXD-ix-AsE"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Zhh-xe-z3j" secondAttribute="bottom" constant="20" id="dIw-Zt-wq3"/>
                             <constraint firstItem="yZv-EF-lgt" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="eq3-We-3qB"/>
@@ -210,7 +227,7 @@
                             <constraint firstItem="BYt-TT-eoJ" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="15" id="mOc-Al-kuv"/>
                             <constraint firstAttribute="trailingMargin" secondItem="737-Ks-zjo" secondAttribute="trailing" id="rgb-rl-iKW"/>
                             <constraint firstItem="lbf-Gc-gqu" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="sIQ-ku-uxK"/>
-                            <constraint firstItem="Jlh-yu-yMr" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="swu-rM-eNU"/>
+                            <constraint firstItem="Jlh-yu-yMr" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="30" id="swu-rM-eNU"/>
                             <constraint firstAttribute="trailing" secondItem="BYt-TT-eoJ" secondAttribute="trailing" constant="15" id="zF1-bZ-vsQ"/>
                         </constraints>
                     </view>
