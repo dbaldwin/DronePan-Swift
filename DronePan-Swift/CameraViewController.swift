@@ -57,6 +57,8 @@ class CameraViewController: UIViewController {
         
         // Setup video feed
         VideoPreviewer.instance().setView(cameraView)
+        DJISDKManager.videoFeeder()?.primaryVideoFeed.add(self, with: nil)
+        VideoPreviewer.instance().start()
         
     }
     
@@ -182,9 +184,6 @@ class CameraViewController: UIViewController {
         if fc != nil {
             fc?.delegate = self
         }
-        
-        DJISDKManager.videoFeeder()?.primaryVideoFeed.add(self, with: nil)
-        VideoPreviewer.instance().start()
         
     }
 
