@@ -52,5 +52,12 @@ class MapViewController: UIViewController {
 }
 
 extension MapViewController: GMSMapViewDelegate {
+    
+    func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
+        
+        print("You tapped at \(marker.position.latitude), \(marker.position.longitude)")
+        
+        return true
+    }
 
 }
