@@ -26,6 +26,20 @@ class MapViewController: UIViewController {
         googleMapView.settings.rotateGestures = false
         googleMapView.settings.tiltGestures = false
         googleMapView.settings.myLocationButton = true
+        
+        // Add the aircraft marker
+        let aircraftMarker = GMSMarker()
+        aircraftMarker.position = CLLocationCoordinate2D(latitude: 32, longitude: -98)
+        aircraftMarker.groundAnchor = CGPoint(x: 0.5, y: 0.5)
+        aircraftMarker.icon = UIImage(named: "aircraft_marker")
+        aircraftMarker.map = googleMapView
+        
+        // Add the pano marker
+        let panoMarker = GMSMarker()
+        panoMarker.position = CLLocationCoordinate2D(latitude: 32.001, longitude: -98.001)
+        panoMarker.groundAnchor = CGPoint(x: 0.5, y: 0.5)
+        panoMarker.icon = UIImage(named: "pano_marker")
+        panoMarker.map = googleMapView
     }
     
     @IBAction func toggleNavButtonView(_ sender: Any) {

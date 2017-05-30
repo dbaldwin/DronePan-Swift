@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1212" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -46,7 +46,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zhh-xe-z3j" customClass="DULDashboardWidget">
-                                <rect key="frame" x="20" y="304.5" width="300" height="50.5"/>
+                                <rect key="frame" x="20" y="305" width="300" height="50"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="300" id="Vcr-Sn-H1C"/>
@@ -281,7 +281,7 @@
                                     <constraint firstAttribute="height" constant="1" id="lKf-fK-r0n"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YjI-nf-1Zb">
+                            <button opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YjI-nf-1Zb">
                                 <rect key="frame" x="623" y="20" width="24" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="24" id="PN1-xE-L1o"/>
@@ -391,13 +391,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UVT-hP-Di6">
-                                <rect key="frame" x="20" y="30" width="627" height="325"/>
-                                <connections>
-                                    <segue destination="KPo-Nk-QaG" kind="embed" id="Iis-Pj-v7w"/>
-                                </connections>
-                            </containerView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3HP-0g-rzO">
+                            <button opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3HP-0g-rzO">
                                 <rect key="frame" x="633" y="30" width="24" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="24" id="28e-ny-KLK"/>
@@ -408,15 +402,24 @@
                                     <action selector="closeButtonClicked:" destination="YMA-rc-62W" eventType="touchUpInside" id="bc3-e1-h4h"/>
                                 </connections>
                             </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="QRY-2M-oXm">
+                                <rect key="frame" x="20" y="30" width="603" height="128"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="128" id="A6s-rx-QOe"/>
+                                </constraints>
+                                <string key="text">There is currently a bug in the DJI SDK that prevents us from displaying exposure controls. This will be fixed in an upcoming release.</string>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="M0P-6N-UqY" firstAttribute="top" secondItem="UVT-hP-Di6" secondAttribute="bottom" constant="20" id="MYM-La-I93"/>
+                            <constraint firstItem="QRY-2M-oXm" firstAttribute="top" secondItem="iZY-ys-bOI" secondAttribute="bottom" constant="10" id="FN8-0S-Ufa"/>
+                            <constraint firstItem="QRY-2M-oXm" firstAttribute="leading" secondItem="w1Y-TN-41Y" secondAttribute="leadingMargin" id="MN6-wT-Cac"/>
                             <constraint firstAttribute="trailing" secondItem="3HP-0g-rzO" secondAttribute="trailing" constant="10" id="PAe-ge-3vt"/>
-                            <constraint firstItem="UVT-hP-Di6" firstAttribute="leading" secondItem="w1Y-TN-41Y" secondAttribute="leadingMargin" id="QgA-Jw-Vlq"/>
                             <constraint firstItem="3HP-0g-rzO" firstAttribute="top" secondItem="iZY-ys-bOI" secondAttribute="bottom" constant="10" id="VTp-Ds-PyH"/>
-                            <constraint firstItem="UVT-hP-Di6" firstAttribute="trailing" secondItem="w1Y-TN-41Y" secondAttribute="trailingMargin" id="rbf-Ys-dOG"/>
-                            <constraint firstItem="UVT-hP-Di6" firstAttribute="top" secondItem="iZY-ys-bOI" secondAttribute="bottom" constant="10" id="smU-ox-Y6V"/>
+                            <constraint firstItem="3HP-0g-rzO" firstAttribute="leading" secondItem="QRY-2M-oXm" secondAttribute="trailing" constant="10" id="hYr-fg-zAj"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -567,7 +570,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WN7-21-Gr5" userLabel="Dashboard Widget" customClass="DULDashboardWidget">
-                                <rect key="frame" x="20" y="299.5" width="300" height="50.5"/>
+                                <rect key="frame" x="20" y="300" width="300" height="50"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="300" id="PR4-bx-6jr"/>
@@ -615,16 +618,16 @@
             </objects>
             <point key="canvasLocation" x="862.21889055472275" y="308"/>
         </scene>
-        <!--Exposure Settings Controller-->
+        <!--Camera Settings Controller-->
         <scene sceneID="bAf-PX-hEP">
             <objects>
-                <viewController id="KPo-Nk-QaG" customClass="DULExposureSettingsController" sceneMemberID="viewController">
+                <viewController id="KPo-Nk-QaG" customClass="DULCameraSettingsController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Swa-Hc-aSC"/>
                         <viewControllerLayoutGuide type="bottom" id="5Gc-Ic-rNA"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="T5u-tT-UeU">
-                        <rect key="frame" x="0.0" y="0.0" width="627" height="325"/>
+                        <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -637,40 +640,44 @@
         <scene sceneID="gfZ-1X-piJ">
             <objects>
                 <viewController id="pCG-DI-v51" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Gyw-KM-XWL"/>
+                        <viewControllerLayoutGuide type="bottom" id="18J-ys-GTx"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="6fg-GP-KI4">
                         <rect key="frame" x="0.0" y="0.0" width="587" height="32"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RiD-eV-6gc" customClass="DULBatteryWidget">
-                                <rect key="frame" x="0.0" y="0.0" width="58.5" height="24"/>
+                                <rect key="frame" x="0.0" y="0.0" width="59" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="RiD-eV-6gc" secondAttribute="height" multiplier="22:9" id="49z-sh-9ja"/>
                                     <constraint firstAttribute="height" constant="24" id="Lkc-Gh-xUg"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uJ7-wx-hbI" customClass="DULGPSSignalWidget">
-                                <rect key="frame" x="68.5" y="0.0" width="61" height="24"/>
+                                <rect key="frame" x="69" y="0.0" width="61" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="Jgi-Xq-KPW"/>
                                     <constraint firstAttribute="width" secondItem="uJ7-wx-hbI" secondAttribute="height" multiplier="38:15" id="oQy-Mx-Uft"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wbt-Qz-gfj" customClass="DULRemoteControlSignalWidget">
-                                <rect key="frame" x="139.5" y="0.0" width="50.5" height="24"/>
+                                <rect key="frame" x="140" y="0.0" width="50" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="oa9-SX-C4x"/>
                                     <constraint firstAttribute="width" secondItem="wbt-Qz-gfj" secondAttribute="height" multiplier="19:9" id="woq-gG-5wZ"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1DF-5z-XLt" customClass="DULFlightModeWidget">
-                                <rect key="frame" x="200" y="0.0" width="138.5" height="24"/>
+                                <rect key="frame" x="200" y="0.0" width="139" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="IfO-mO-5S4"/>
                                     <constraint firstAttribute="width" secondItem="1DF-5z-XLt" secondAttribute="height" multiplier="98:17" id="yLy-yP-UQu"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Acq-Pg-0AI" customClass="DULCameraConfigInfoWidget">
-                                <rect key="frame" x="330.5" y="0.0" width="206.5" height="28"/>
+                                <rect key="frame" x="331" y="0.0" width="206" height="28"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Acq-Pg-0AI" secondAttribute="height" multiplier="221:30" id="Fhl-zE-1N0"/>
                                     <constraint firstAttribute="height" constant="28" id="iGA-LP-AxR"/>
