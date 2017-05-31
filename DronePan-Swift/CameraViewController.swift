@@ -49,6 +49,10 @@ class CameraViewController: UIViewController {
             })
         }
         
+        // Enable virtual stick mode
+        guard let virtualStickKey = DJIFlightControllerKey(param: DJIFlightControllerParamVirtualStickAdvancedControlModeEnabled) else {
+            return;
+        }
         
     }
     
