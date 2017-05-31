@@ -49,11 +49,21 @@ class CameraViewController: UIViewController {
             })
         }
         
-        // Enable virtual stick mode
-        guard let virtualStickKey = DJIFlightControllerKey(param: DJIFlightControllerParamVirtualStickAdvancedControlModeEnabled) else {
+        // Enable virtual stick mode so that timeline yaws will work. This bug has been acknowledged here:
+        // https://github.com/dji-sdk/Mobile-SDK-iOS/issues/104
+        /*guard let virtualStickKey = DJIFlightControllerKey(param: DJIFlightControllerParamVirtualStickAdvancedControlModeEnabled) else {
             return;
         }
         
+        DJISDKManager.keyManager()?.setValue(true, for: virtualStickKey, withCompletion: { (error: Error?) in
+            
+            if error != nil {
+                
+                print("Error setting virtual stick mode")
+                
+            }
+            
+        })*/
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -61,8 +71,8 @@ class CameraViewController: UIViewController {
         
         // Setup video feed
         VideoPreviewer.instance().setView(cameraView)
-        DJISDKManager.videoFeeder()?.primaryVideoFeed.add(self, with: nil)
-        VideoPreviewer.instance().start()
+        //DJISDKManager.videoFeeder()?.primaryVideoFeed.add(self, with: nil)
+        //VideoPreviewer.instance().start()
         
     }
     
@@ -77,6 +87,9 @@ class CameraViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        print("SDK version: \(DJISDKManager.sdkVersion())")
+        
         // Do any additional setup after loading the view, typically from a nib.
     }
 
@@ -124,16 +137,23 @@ class CameraViewController: UIViewController {
         })
         
         /*let pano = PanoramaController()
-        let error = DJISDKManager.missionControl()?.scheduleElements(pano.buildPanoAtCurrentLocation())
+        let error = DJISDKManager.missionControl()?.scheduleElements(pano.pitchGimbal())
         
         if error != nil {
             print("Error scheduling elements \(String(describing: error))")
             return;
         }*/
         
-        let yawAction: DJIAircraftYawAction = DJIAircraftYawAction(relativeAngle: 60, andAngularVelocity: 30)!
+        var elements = [DJIMissionControlTimelineElement]()
         
-        let error = DJISDKManager.missionControl()?.scheduleElement(yawAction)
+        let attitude = DJIGimbalAttitude(pitch: -45, roll: 0.0, yaw: 0.0)
+        let pitchAction: DJIGimbalAttitudeAction = DJIGimbalAttitudeAction(attitude: attitude)!
+        elements.append(pitchAction)
+        
+        let yawAction: DJIAircraftYawAction = DJIAircraftYawAction(relativeAngle: 60, andAngularVelocity: 30)!
+        elements.append(yawAction)
+        
+        let error = DJISDKManager.missionControl()?.scheduleElements(elements)
         
         if error != nil {
             print("Error scheduling elements \(String(describing: error))")
@@ -189,6 +209,8 @@ class CameraViewController: UIViewController {
             fc?.delegate = self
         }
         
+        // Enable virtual stick mode so that the aircraft can yaw
+        fc?.setVirtualStickModeEnabled(true, withCompletion: nil)
     }
 
     func fetchCamera() -> DJICamera? {
