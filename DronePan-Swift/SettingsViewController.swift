@@ -19,11 +19,30 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var yawTypeSegmentedControl: UISegmentedControl!
     @IBOutlet weak var skyRowLabel: UILabel!
     @IBOutlet weak var skyRowSwitch: UISwitch!
+    @IBOutlet weak var saveButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print("Settings view loaded")
+        let defaults = UserDefaults.standard
+        
+        let rows = defaults.integer(forKey: "rows")
+        rowLabel.text = String(rows)
+        rowSlider.setValue(Float(rows), animated: false)
+        
+        let columns = defaults.integer(forKey: "columns")
+        columnLabel.text = String(columns)
+        columnSlider.setValue(Float(columns), animated: false)
+        
+        let yawType = defaults.integer(forKey: "yawType")
+        yawTypeLabel.text = yawTypeSegmentedControl.titleForSegment(at: yawType)
+        yawTypeSegmentedControl.selectedSegmentIndex = yawType
+        
+        let skyRow = defaults.bool(forKey: "skyRow")
+        skyRowLabel.text = skyRow ? "Enabled" : "Disabled"
+        skyRowSwitch.isOn = skyRow
+        
+        
     }
     
     @IBAction func closeButtonClicked(_ sender: Any) {
@@ -62,4 +81,20 @@ class SettingsViewController: UIViewController {
         
     }
     
+    @IBAction func saveButtonClicked(_ sender: Any) {
+        
+        let defaults = UserDefaults.standard
+        
+        let rows = Int(rowSlider.value)
+        let cols = Int(columnSlider.value)
+        let yawType = Int(yawTypeSegmentedControl.selectedSegmentIndex)
+        let skyRow = Bool(skyRowSwitch.isOn)
+        
+        // Save the data
+        defaults.set(rows, forKey: "rows")
+        defaults.set(cols, forKey: "columns")
+        defaults.set(yawType, forKey: "yawType")
+        defaults.set(skyRow, forKey: "skyRow")
+        
+    }
 }

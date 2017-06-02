@@ -251,7 +251,6 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Model Settings" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="igX-GC-pwo">
                                 <rect key="frame" x="209" y="20" width="250" height="21"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="Ihr-G4-rc3"/>
                                     <constraint firstAttribute="width" constant="250" id="q57-e8-RIe"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
@@ -496,21 +495,25 @@
                                     <constraint firstItem="x1u-SL-kLM" firstAttribute="leading" secondItem="Xkr-Or-XXv" secondAttribute="leading" constant="35" id="viW-2x-M65"/>
                                 </constraints>
                             </scrollView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cq4-Y2-yAW">
-                                <rect key="frame" x="310" y="860" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cq4-Y2-yAW">
+                                <rect key="frame" x="316" y="860" width="34" height="30"/>
                                 <state key="normal" title="Save"/>
+                                <connections>
+                                    <action selector="saveButtonClicked:" destination="ruh-iu-v8E" eventType="touchUpInside" id="PQ8-vz-IR5"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="GOa-EA-BcH" firstAttribute="top" secondItem="Xkr-Or-XXv" secondAttribute="bottom" constant="50" id="0c0-8N-ehs"/>
                             <constraint firstItem="igX-GC-pwo" firstAttribute="centerX" secondItem="Avm-F0-fH0" secondAttribute="centerX" id="D6A-mz-D3s"/>
+                            <constraint firstItem="GOa-EA-BcH" firstAttribute="top" secondItem="Cq4-Y2-yAW" secondAttribute="bottom" constant="10" id="L35-LK-7Oe"/>
                             <constraint firstItem="Xkr-Or-XXv" firstAttribute="top" secondItem="igX-GC-pwo" secondAttribute="bottom" constant="8" symbolic="YES" id="SXt-rn-KJ0"/>
                             <constraint firstItem="igX-GC-pwo" firstAttribute="top" secondItem="Avm-F0-fH0" secondAttribute="topMargin" constant="20" id="VLw-Rl-aRW"/>
                             <constraint firstItem="YjI-nf-1Zb" firstAttribute="top" secondItem="Avm-F0-fH0" secondAttribute="top" constant="20" id="czW-uw-DUx"/>
                             <constraint firstAttribute="trailing" secondItem="YjI-nf-1Zb" secondAttribute="trailing" constant="20" id="f4N-va-buC"/>
                             <constraint firstItem="Xkr-Or-XXv" firstAttribute="centerY" secondItem="Avm-F0-fH0" secondAttribute="centerY" id="fHv-ra-1Iv"/>
+                            <constraint firstItem="Cq4-Y2-yAW" firstAttribute="centerX" secondItem="Avm-F0-fH0" secondAttribute="centerX" id="w6H-RF-eds"/>
                             <constraint firstItem="Xkr-Or-XXv" firstAttribute="leading" secondItem="Avm-F0-fH0" secondAttribute="leading" id="wMl-5C-aaa"/>
                             <constraint firstItem="Xkr-Or-XXv" firstAttribute="centerX" secondItem="igX-GC-pwo" secondAttribute="centerX" id="wjJ-Ls-BZE"/>
                         </constraints>
@@ -522,6 +525,7 @@
                         <outlet property="columnSlider" destination="VUG-ex-x0x" id="tVy-3g-gFD"/>
                         <outlet property="rowLabel" destination="Emd-bu-ZUQ" id="KbN-yV-3Nm"/>
                         <outlet property="rowSlider" destination="x1u-SL-kLM" id="NNw-8A-unS"/>
+                        <outlet property="saveButton" destination="Cq4-Y2-yAW" id="ehZ-N6-Hrn"/>
                         <outlet property="skyRowLabel" destination="Rme-sR-XSg" id="Pdh-Dt-de8"/>
                         <outlet property="skyRowSwitch" destination="eUb-jB-NN8" id="GXC-yy-qpK"/>
                         <outlet property="yawTypeLabel" destination="4i1-Li-tnL" id="gpt-UL-8Vv"/>
