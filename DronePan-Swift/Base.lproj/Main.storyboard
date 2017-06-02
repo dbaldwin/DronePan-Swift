@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1212" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -245,7 +245,7 @@
                         <viewControllerLayoutGuide type="bottom" id="GOa-EA-BcH"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Avm-F0-fH0">
-                        <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
+                        <rect key="frame" x="0.0" y="0.0" width="667" height="900"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Model Settings" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="igX-GC-pwo">
@@ -269,8 +269,8 @@
                                     <action selector="closeButtonClicked:" destination="ruh-iu-v8E" eventType="touchUpInside" id="6T3-jO-QGW"/>
                                 </connections>
                             </button>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xkr-Or-XXv">
-                                <rect key="frame" x="0.0" y="49" width="667" height="310"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xkr-Or-XXv">
+                                <rect key="frame" x="0.0" y="49" width="667" height="801"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Number of rows:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bVE-og-a7t">
                                         <rect key="frame" x="30" y="20" width="115" height="21"/>
@@ -292,7 +292,7 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gimbal yaw:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KAy-EH-RQ0">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Yaw type:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KAy-EH-RQ0">
                                         <rect key="frame" x="30" y="278" width="85" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="85" id="5JY-K7-Bai"/>
@@ -342,7 +342,7 @@
                                         <color key="textColor" red="0.0" green="0.54004506890000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="224-Ox-IYZ">
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="224-Ox-IYZ">
                                         <rect key="frame" x="30" y="46" width="628" height="42"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="42" id="b3C-bD-6cr"/>
@@ -353,7 +353,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BGY-5a-du7">
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BGY-5a-du7">
                                         <rect key="frame" x="30" y="175" width="628" height="42"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="42" id="tKN-cW-mMN"/>
@@ -364,10 +364,22 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="JrT-FW-WRp">
+                                        <rect key="frame" x="30" y="518" width="140" height="29"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="140" id="hxD-9d-3iG"/>
+                                            <constraint firstAttribute="height" constant="28" id="qet-2c-cix"/>
+                                        </constraints>
+                                        <segments>
+                                            <segment title="Aircraft"/>
+                                            <segment title="Gimbal"/>
+                                        </segments>
+                                    </segmentedControl>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="Emd-bu-ZUQ" firstAttribute="leading" secondItem="bVE-og-a7t" secondAttribute="trailing" constant="5" id="4CJ-xf-PPj"/>
                                     <constraint firstAttribute="trailing" secondItem="FqC-PL-46D" secondAttribute="trailing" id="66n-ea-iBY"/>
+                                    <constraint firstAttribute="bottom" secondItem="JrT-FW-WRp" secondAttribute="bottom" constant="10" id="6eh-lN-Kat"/>
                                     <constraint firstItem="BGY-5a-du7" firstAttribute="leading" secondItem="KAy-EH-RQ0" secondAttribute="leading" id="Ad8-Y4-4fO"/>
                                     <constraint firstItem="19G-CK-YXr" firstAttribute="baseline" secondItem="Z2L-GB-gey" secondAttribute="baseline" id="BYh-Mr-Pvj"/>
                                     <constraint firstItem="BGY-5a-du7" firstAttribute="top" secondItem="19G-CK-YXr" secondAttribute="bottom" constant="5" id="BuH-in-5i0"/>
@@ -377,6 +389,7 @@
                                     <constraint firstItem="bVE-og-a7t" firstAttribute="leading" secondItem="224-Ox-IYZ" secondAttribute="leading" id="KJf-yC-D34"/>
                                     <constraint firstItem="224-Ox-IYZ" firstAttribute="leading" secondItem="19G-CK-YXr" secondAttribute="leading" id="Oeh-WH-Avx"/>
                                     <constraint firstItem="FqC-PL-46D" firstAttribute="leading" secondItem="ezf-4D-KmL" secondAttribute="leading" id="Omj-dU-QXS"/>
+                                    <constraint firstItem="JrT-FW-WRp" firstAttribute="top" secondItem="KAy-EH-RQ0" secondAttribute="bottom" constant="219" id="R9S-hC-orO"/>
                                     <constraint firstItem="x1u-SL-kLM" firstAttribute="top" secondItem="224-Ox-IYZ" secondAttribute="bottom" constant="5" id="RT8-3V-NSl"/>
                                     <constraint firstItem="FqC-PL-46D" firstAttribute="centerX" secondItem="BGY-5a-du7" secondAttribute="centerX" id="TZJ-Pa-gvf"/>
                                     <constraint firstAttribute="trailing" secondItem="x1u-SL-kLM" secondAttribute="trailing" constant="10" id="Vo3-Ag-ugb"/>
@@ -386,6 +399,7 @@
                                     <constraint firstItem="bVE-og-a7t" firstAttribute="top" secondItem="Xkr-Or-XXv" secondAttribute="top" constant="20" id="faM-ny-HGa"/>
                                     <constraint firstItem="ezf-4D-KmL" firstAttribute="top" secondItem="VUG-ex-x0x" secondAttribute="bottom" constant="10" id="fnm-5v-HOi"/>
                                     <constraint firstItem="bVE-og-a7t" firstAttribute="leading" secondItem="Xkr-Or-XXv" secondAttribute="leading" constant="30" id="g0p-Ym-apm"/>
+                                    <constraint firstItem="JrT-FW-WRp" firstAttribute="leading" secondItem="Xkr-Or-XXv" secondAttribute="leading" constant="30" id="kzh-sm-p1L"/>
                                     <constraint firstItem="VUG-ex-x0x" firstAttribute="top" secondItem="BGY-5a-du7" secondAttribute="bottom" constant="5" id="lQU-94-iLX"/>
                                     <constraint firstItem="19G-CK-YXr" firstAttribute="leading" secondItem="BGY-5a-du7" secondAttribute="leading" id="nLW-rt-jET"/>
                                     <constraint firstItem="FqC-PL-46D" firstAttribute="top" secondItem="x1u-SL-kLM" secondAttribute="bottom" constant="10" id="tJZ-su-IZa"/>
@@ -393,26 +407,28 @@
                                     <constraint firstItem="FqC-PL-46D" firstAttribute="trailing" secondItem="ezf-4D-KmL" secondAttribute="trailing" id="ucP-b7-Pd4"/>
                                     <constraint firstItem="224-Ox-IYZ" firstAttribute="top" secondItem="bVE-og-a7t" secondAttribute="bottom" constant="5" id="vIx-iX-nxz"/>
                                     <constraint firstItem="x1u-SL-kLM" firstAttribute="leading" secondItem="Xkr-Or-XXv" secondAttribute="leading" constant="35" id="viW-2x-M65"/>
-                                    <constraint firstAttribute="bottom" secondItem="KAy-EH-RQ0" secondAttribute="bottom" constant="11" id="yGx-Cl-HaO"/>
                                 </constraints>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="GOa-EA-BcH" firstAttribute="top" secondItem="Xkr-Or-XXv" secondAttribute="bottom" constant="16" id="0c0-8N-ehs"/>
+                            <constraint firstItem="GOa-EA-BcH" firstAttribute="top" secondItem="Xkr-Or-XXv" secondAttribute="bottom" constant="50" id="0c0-8N-ehs"/>
                             <constraint firstItem="igX-GC-pwo" firstAttribute="centerX" secondItem="Avm-F0-fH0" secondAttribute="centerX" id="D6A-mz-D3s"/>
                             <constraint firstItem="Xkr-Or-XXv" firstAttribute="top" secondItem="igX-GC-pwo" secondAttribute="bottom" constant="8" symbolic="YES" id="SXt-rn-KJ0"/>
                             <constraint firstItem="igX-GC-pwo" firstAttribute="top" secondItem="Avm-F0-fH0" secondAttribute="topMargin" constant="20" id="VLw-Rl-aRW"/>
                             <constraint firstItem="YjI-nf-1Zb" firstAttribute="top" secondItem="Avm-F0-fH0" secondAttribute="top" constant="20" id="czW-uw-DUx"/>
                             <constraint firstAttribute="trailing" secondItem="YjI-nf-1Zb" secondAttribute="trailing" constant="20" id="f4N-va-buC"/>
+                            <constraint firstItem="Xkr-Or-XXv" firstAttribute="centerY" secondItem="Avm-F0-fH0" secondAttribute="centerY" id="fHv-ra-1Iv"/>
                             <constraint firstItem="Xkr-Or-XXv" firstAttribute="leading" secondItem="Avm-F0-fH0" secondAttribute="leading" id="wMl-5C-aaa"/>
                             <constraint firstItem="Xkr-Or-XXv" firstAttribute="centerX" secondItem="igX-GC-pwo" secondAttribute="centerX" id="wjJ-Ls-BZE"/>
                         </constraints>
                     </view>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="667" height="900"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bhe-C9-7vZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="136.28185907046478" y="1128.8"/>
+            <point key="canvasLocation" x="136.28185907046478" y="1128"/>
         </scene>
         <!--Exposure Settings View Controller-->
         <scene sceneID="ZLM-ia-eLx">
