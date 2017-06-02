@@ -50,12 +50,15 @@ class CameraViewController: UIViewController {
         }
         
         // Enable virtual stick mode so that timeline yaws will work. This bug has been acknowledged here:
+        
         // https://github.com/dji-sdk/Mobile-SDK-iOS/issues/104
-        /*guard let virtualStickKey = DJIFlightControllerKey(param: DJIFlightControllerParamVirtualStickAdvancedControlModeEnabled) else {
+        
+        /* Can't seem to get this working so we'll revisit. We set the virtual stick mode right after setting up the delegate
+        guard let virtualStickKey = DJIFlightControllerKey(param: DJIFlightControllerParamVirtualStickAdvancedControlModeEnabled) else {
             return;
         }
         
-        DJISDKManager.keyManager()?.setValue(true, for: virtualStickKey, withCompletion: { (error: Error?) in
+        DJISDKManager.keyManager()?.setValue(NSNumber(value: true), for: virtualStickKey, withCompletion: { (error: Error?) in
             
             if error != nil {
                 
@@ -211,6 +214,7 @@ class CameraViewController: UIViewController {
         
         // Enable virtual stick mode so that the aircraft can yaw
         fc?.setVirtualStickModeEnabled(true, withCompletion: nil)
+
     }
 
     func fetchCamera() -> DJICamera? {
