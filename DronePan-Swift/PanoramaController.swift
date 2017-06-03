@@ -70,7 +70,17 @@ class PanoramaController {
             for row in 0..<rows {
                 
                 // Set the gimbal pitch
-                gimbalPitch = 0 - Float(90/rows) * Float(row)
+                // With sky row the total vertical range is from +30 to -90 which is 120 degrees
+                if skyRow {
+                    
+                    gimbalPitch = 30 - Float(120/rows) * Float(row)
+                
+                // Non sky row case
+                } else {
+                    
+                    gimbalPitch = 0 - Float(90/rows) * Float(row)
+                    
+                }
                 
                 print("Pitching gimbal to \(gimbalPitch)")
                 
