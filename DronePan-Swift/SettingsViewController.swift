@@ -26,11 +26,21 @@ class SettingsViewController: UIViewController {
         
         let defaults = UserDefaults.standard
         
-        let rows = defaults.integer(forKey: "rows")
+        var rows = defaults.integer(forKey: "rows")
+        
+        if rows == 0 {
+            rows = 4
+        }
+        
         rowLabel.text = String(rows)
         rowSlider.setValue(Float(rows), animated: false)
         
-        let columns = defaults.integer(forKey: "columns")
+        var columns = defaults.integer(forKey: "columns")
+        
+        if columns == 0 {
+            columns = 7
+        }
+        
         columnLabel.text = String(columns)
         columnSlider.setValue(Float(columns), animated: false)
         
@@ -95,6 +105,8 @@ class SettingsViewController: UIViewController {
         defaults.set(cols, forKey: "columns")
         defaults.set(yawType, forKey: "yawType")
         defaults.set(skyRow, forKey: "skyRow")
+        
+        dismiss(animated: true, completion: nil)
         
     }
 }

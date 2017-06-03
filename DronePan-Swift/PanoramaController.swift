@@ -40,11 +40,29 @@ class PanoramaController {
     // Execute pano at the current location
     func buildPanoAtCurrentLocation() -> [DJIMissionControlTimelineElement] {
         
-        let rows: Int = 4
-        let cols: Int = 7
+        // Get the defaults from storage
+        let defaults = UserDefaults.standard
         
+        let rows = defaults.integer(forKey: "rows")
+        let cols = defaults.integer(forKey: "columns")
+        let yawType = defaults.integer(forKey: "yawType") // 0 is aircraft and 1 is gimbal
+        let skyRow = defaults.bool(forKey: "skyRow") // 0 is disabled and 1 is enabled
+        
+        print("Shooting pano with \(rows) rows and \(cols) cols, yaw type: \(yawType), sky row: \(skyRow)")
+        
+        // Initialize the timeline array
         var elements = [DJIMissionControlTimelineElement]()
         
+        // Reset the gimbal for gimbal yaw scenario
+        if yawType == 1 {
+            
+            let attitude = DJIGimbalAttitude(pitch: 0.0, roll: 0.0, yaw: 0.0)
+            let pitchAction: DJIGimbalAttitudeAction = DJIGimbalAttitudeAction(attitude: attitude)!
+            elements.append(pitchAction)
+            
+        }
+        
+        // Loop and build the pano sequence
         for _ in 0..<cols {
             
             var gimbalPitch: Float = 0
@@ -68,7 +86,7 @@ class PanoramaController {
             let yaw: Float = Float(360/cols)
             
             // Let's do gimbal yaw for I1/I2 users
-            if isGimbalYaw {
+            if yawType == 1 {
                 
                 print("Yawing gimbal \(yaw) degrees")
                 
@@ -85,6 +103,15 @@ class PanoramaController {
                 elements.append(yawAction)
             }
         }
+        
+        // Let's add nadir shots (start with one and add more later)
+        let attitude = DJIGimbalAttitude(pitch: -90.0, roll: 0.0, yaw: 0.0)
+        let pitchAction: DJIGimbalAttitudeAction = DJIGimbalAttitudeAction(attitude: attitude)!
+        elements.append(pitchAction)
+        
+        // Take the nadir shot
+        let photoAction: DJIShootPhotoAction = DJIShootPhotoAction(singleShootPhoto:())!
+        elements.append(photoAction)
         
         return elements
         

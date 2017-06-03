@@ -496,8 +496,14 @@
                                 </constraints>
                             </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cq4-Y2-yAW">
-                                <rect key="frame" x="316" y="860" width="34" height="30"/>
-                                <state key="normal" title="Save"/>
+                                <rect key="frame" x="303" y="860" width="60" height="30"/>
+                                <color key="backgroundColor" red="0.1647943529" green="0.62178397809999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="efM-Qy-nOr"/>
+                                </constraints>
+                                <state key="normal" title="Save">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
                                 <connections>
                                     <action selector="saveButtonClicked:" destination="ruh-iu-v8E" eventType="touchUpInside" id="PQ8-vz-IR5"/>
                                 </connections>
