@@ -133,30 +133,14 @@ class CameraViewController: UIViewController {
             case .stopError:
                 print("Stop error")
             case .finished:
-                print("Finished")
+                self.panoFinished()
             default:
                 print("Defaut")
             }
         })
         
-        /*let pano = PanoramaController()
-        let error = DJISDKManager.missionControl()?.scheduleElements(pano.pitchGimbal())
-        
-        if error != nil {
-            print("Error scheduling elements \(String(describing: error))")
-            return;
-        }*/
-        
-        var elements = [DJIMissionControlTimelineElement]()
-        
-        let attitude = DJIGimbalAttitude(pitch: -45, roll: 0.0, yaw: 0.0)
-        let pitchAction: DJIGimbalAttitudeAction = DJIGimbalAttitudeAction(attitude: attitude)!
-        elements.append(pitchAction)
-        
-        let yawAction: DJIAircraftYawAction = DJIAircraftYawAction(relativeAngle: 60, andAngularVelocity: 30)!
-        elements.append(yawAction)
-        
-        let error = DJISDKManager.missionControl()?.scheduleElements(elements)
+        let pano = PanoramaController()
+        let error = DJISDKManager.missionControl()?.scheduleElements(pano.buildPanoAtCurrentLocation())
         
         if error != nil {
             print("Error scheduling elements \(String(describing: error))")
@@ -164,6 +148,12 @@ class CameraViewController: UIViewController {
         }
         
         DJISDKManager.missionControl()?.startTimeline()
+    }
+    
+    func panoFinished() {
+        
+        print("Pano finished successfully")
+        
     }
     
     @IBAction func showButtonNav(_ sender: Any) {
