@@ -52,7 +52,6 @@ class SettingsViewController: UIViewController {
         skyRowLabel.text = skyRow ? "Enabled" : "Disabled"
         skyRowSwitch.isOn = skyRow
         
-        
     }
     
     @IBAction func closeButtonClicked(_ sender: Any) {

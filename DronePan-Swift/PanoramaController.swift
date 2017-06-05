@@ -170,7 +170,7 @@ class PanoramaController {
         }
         
         // Let's add nadir shots (start with one and add more later)
-        let attitude = DJIGimbalAttitude(pitch: -90.0, roll: 0.0, yaw: 0.0)
+        let attitude = DJIGimbalAttitude(pitch: -90.0, roll: 0.0, yaw: -180)
         let pitchAction: DJIGimbalAttitudeAction = DJIGimbalAttitudeAction(attitude: attitude)!
         elements.append(pitchAction)
         

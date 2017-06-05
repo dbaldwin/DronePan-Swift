@@ -14,8 +14,8 @@
 		237001B11ECF95DB003EC4A0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 237001B01ECF95DB003EC4A0 /* Assets.xcassets */; };
 		237001B41ECF95DB003EC4A0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 237001B21ECF95DB003EC4A0 /* LaunchScreen.storyboard */; };
 		237001BF1ECF95DB003EC4A0 /* DronePan_SwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 237001BE1ECF95DB003EC4A0 /* DronePan_SwiftTests.swift */; };
-		237001D01ECFA12A003EC4A0 /* VideoPreviewer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 237001CF1ECFA109003EC4A0 /* VideoPreviewer.framework */; };
-		237001D11ECFA12A003EC4A0 /* VideoPreviewer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 237001CF1ECFA109003EC4A0 /* VideoPreviewer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		237001D01ECFA12A003EC4A0 /* ReferenceProxy in Frameworks */ = {isa = PBXBuildFile; fileRef = 237001CF1ECFA109003EC4A0 /* VideoPreviewer.framework */; };
+		237001D11ECFA12A003EC4A0 /* ReferenceProxy in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 237001CF1ECFA109003EC4A0 /* VideoPreviewer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		239377D61EE5AD130086BAF3 /* TelemetryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239377D51EE5AD130086BAF3 /* TelemetryViewController.swift */; };
 		23B1FADF1ECFC81D00EFC857 /* ProductCommunicationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23B1FADE1ECFC81D00EFC857 /* ProductCommunicationManager.swift */; };
 		23CD573B1ED0AC7200D62F06 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23CD573A1ED0AC7200D62F06 /* MapViewController.swift */; };
@@ -55,7 +55,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				237001D11ECFA12A003EC4A0 /* VideoPreviewer.framework in Embed Frameworks */,
+				237001D11ECFA12A003EC4A0 /* ReferenceProxy in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -90,7 +90,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				237001D01ECFA12A003EC4A0 /* VideoPreviewer.framework in Frameworks */,
+				237001D01ECFA12A003EC4A0 /* ReferenceProxy in Frameworks */,
 				F9D4D0A6C0565E4DD46993D9 /* libPods-DronePan-Swift.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -342,7 +342,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

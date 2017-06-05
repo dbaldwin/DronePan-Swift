@@ -22,7 +22,10 @@ class CameraViewController: UIViewController {
     
     var telemetryViewController: TelemetryViewController!
     
-    var photoCount: Int = 0
+    var totalPhotoCount: Int = 7 // This is the default 4 rows and 7 columns with 1 nadir
+    var currentPhotoCount: Int = 0
+    
+    var gimbal: DJIGimbal?
     
     // Following this approach from the DJI SDK example
     override func viewWillAppear(_ animated: Bool) {
@@ -107,10 +110,44 @@ class CameraViewController: UIViewController {
     
     @IBAction func startPano(_ sender: Any) {
         
+        let defaults = UserDefaults.standard
+        
+        // We should figure out how to update these immediately after the settings are saved and get rid of all this code
+        var rows = defaults.integer(forKey: "rows")
+        
+        if rows == 0 {
+            rows = 4
+        }
+        
+        var cols = defaults.integer(forKey: "columns")
+        
+        if cols == 0 {
+            cols = 7
+        }
+        
+        let skyRow = defaults.integer(forKey: "skyRow")
+        
+        if skyRow == 1 {
+            
+            rows = rows + 1
+            
+        }
+        
+        currentPhotoCount = 0
+        
+        print("Total number of rows \(rows), \(cols)")
+        totalPhotoCount = rows * cols + 1
+        
+        telemetryViewController.photoCountLabel.text = "\(currentPhotoCount)/\(totalPhotoCount)"
+    
+        
         // Clear out previous missions
         DJISDKManager.missionControl()?.stopTimeline()
         DJISDKManager.missionControl()?.unscheduleEverything()
         DJISDKManager.missionControl()?.removeAllListeners()
+        
+        // Reset the gimbal
+        gimbal?.reset(completion: nil)
         
         DJISDKManager.missionControl()?.addListener(self, toTimelineProgressWith: { (event: DJIMissionControlTimelineEvent, element: DJIMissionControlTimelineElement?, error: Error?, info: Any?) in
             
@@ -137,7 +174,9 @@ class CameraViewController: UIViewController {
             case .stopError:
                 print("Stop error")
             case .finished:
-                self.panoFinished()
+                // For some reason this gets called more than once
+                //self.panoFinished()
+                print("Finished")
             default:
                 print("Defaut")
             }
@@ -156,7 +195,17 @@ class CameraViewController: UIViewController {
     
     func panoFinished() {
         
-        print("Pano finished successfully")
+        let alert = UIAlertController(title: "Success", message: "Your panorama was successfully completed!", preferredStyle: UIAlertControllerStyle.alert)
+        let ok = UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil)
+        alert.addAction(ok)
+        
+        present(alert, animated: true, completion: nil)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+         
+            self.gimbal?.reset(completion: nil)
+            
+        }
         
     }
     
@@ -208,6 +257,13 @@ class CameraViewController: UIViewController {
             camera?.delegate = self
         }
         
+        // Setting up gimbal delegate
+        gimbal = fetchGimbal()
+        
+        if gimbal != nil {
+            gimbal?.delegate = self
+        }
+        
         // Setting up flight controller delegate
         let fc: DJIFlightController? = fetchFlightController()
         
@@ -233,6 +289,22 @@ class CameraViewController: UIViewController {
         }
         
         return nil
+    }
+    
+    func fetchGimbal() -> DJIGimbal? {
+        
+        if DJISDKManager.product() == nil {
+            return nil
+        }
+        
+        if DJISDKManager.product() is DJIAircraft {
+            return (DJISDKManager.product() as! DJIAircraft).gimbal
+        } else if DJISDKManager.product() is DJIHandheld {
+            return (DJISDKManager.product() as! DJIHandheld).gimbal
+        }
+        
+        return nil
+        
     }
     
     func fetchFlightController() -> DJIFlightController? {
@@ -271,8 +343,12 @@ extension CameraViewController: DJICameraDelegate {
     func camera(_ camera: DJICamera, didGenerateNewMediaFile newMedia: DJIMediaFile) {
         
         // Here we can increment the photo counter
-        photoCount = photoCount + 1
-        telemetryViewController.photoCountLabel.text = "\(photoCount)/25"
+        currentPhotoCount = currentPhotoCount + 1
+        telemetryViewController.photoCountLabel.text = "\(currentPhotoCount)/\(totalPhotoCount)"
+        
+        if currentPhotoCount == totalPhotoCount {
+            self.panoFinished()
+        }
         
     }
     
@@ -290,5 +366,9 @@ extension CameraViewController: DJIFlightControllerDelegate {
         //self.cameraVCDelegate?.updateAircraftLocation(location: self.aircraftLocation, heading: self.aircraftHeading)
         
     }
+    
+}
+
+extension CameraViewController: DJIGimbalDelegate {
     
 }
