@@ -201,7 +201,8 @@ class CameraViewController: UIViewController {
         
         present(alert, animated: true, completion: nil)
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+        // Reset the gimbal. For some reason with Inspire 1 this doesn't reset the pitch...only the yaw
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
          
             self.gimbal?.reset(completion: nil)
             

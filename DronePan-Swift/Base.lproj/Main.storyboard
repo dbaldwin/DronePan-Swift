@@ -847,7 +847,7 @@
                                 </constraints>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5u1-nb-IUH" customClass="DULRemainingFlightTimeWidget">
-                                <rect key="frame" x="0.0" y="20" width="587" height="12"/>
+                                <rect key="frame" x="0.0" y="28" width="587" height="12"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="12" id="M4j-rZ-V7t"/>
                                 </constraints>
@@ -870,7 +870,7 @@
                             <constraint firstItem="5u1-nb-IUH" firstAttribute="width" secondItem="6fg-GP-KI4" secondAttribute="width" id="419-I3-i6D"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Acq-Pg-0AI" secondAttribute="trailing" constant="30" id="5CC-5q-c2V"/>
                             <constraint firstItem="1DF-5z-XLt" firstAttribute="leading" secondItem="wbt-Qz-gfj" secondAttribute="trailing" constant="10" id="8OZ-ZH-N7k"/>
-                            <constraint firstAttribute="bottom" secondItem="5u1-nb-IUH" secondAttribute="bottom" id="N3c-iu-7sb"/>
+                            <constraint firstAttribute="bottom" secondItem="5u1-nb-IUH" secondAttribute="bottom" constant="-8" id="N3c-iu-7sb"/>
                             <constraint firstItem="wbt-Qz-gfj" firstAttribute="top" secondItem="6fg-GP-KI4" secondAttribute="topMargin" constant="2" id="Ozy-iY-9d9"/>
                             <constraint firstItem="1DF-5z-XLt" firstAttribute="top" secondItem="6fg-GP-KI4" secondAttribute="topMargin" constant="2" id="UcW-gB-QzU"/>
                             <constraint firstItem="uJ7-wx-hbI" firstAttribute="top" secondItem="6fg-GP-KI4" secondAttribute="topMargin" constant="2" id="eh6-bJ-Gfc"/>

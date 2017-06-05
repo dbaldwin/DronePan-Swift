@@ -120,6 +120,7 @@ class PanoramaController {
     }
     
     // Gimbal yaw requires absolute angles for each gimbal position
+    // Inspire 1 and Inspire 2 users
     func buildPanoWithGimbalYaw(rows: Int, cols: Int, skyRow: Bool)  -> [DJIMissionControlTimelineElement] {
         
         let yawAngle = 360/cols
@@ -170,13 +171,18 @@ class PanoramaController {
         }
         
         // Let's add nadir shots (start with one and add more later)
-        let attitude = DJIGimbalAttitude(pitch: -90.0, roll: 0.0, yaw: -180)
-        let pitchAction: DJIGimbalAttitudeAction = DJIGimbalAttitudeAction(attitude: attitude)!
+        var attitude = DJIGimbalAttitude(pitch: -90.0, roll: 0.0, yaw: -180)
+        var pitchAction: DJIGimbalAttitudeAction = DJIGimbalAttitudeAction(attitude: attitude)!
         elements.append(pitchAction)
         
         // Take the nadir shot
         let photoAction: DJIShootPhotoAction = DJIShootPhotoAction(singleShootPhoto:())!
         elements.append(photoAction)
+        
+        // Let's send the gimbal back to the starting position
+        attitude = DJIGimbalAttitude(pitch: 0, roll: 0.0, yaw: 0)
+        pitchAction = DJIGimbalAttitudeAction(attitude: attitude)!
+        elements.append(pitchAction)
         
         return elements
         
