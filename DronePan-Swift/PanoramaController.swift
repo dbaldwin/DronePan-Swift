@@ -50,17 +50,22 @@ class PanoramaController {
         
         print("Shooting pano with \(rows) rows and \(cols) cols, yaw type: \(yawType), sky row: \(skyRow)")
         
-        // Initialize the timeline array
-        var elements = [DJIMissionControlTimelineElement]()
-        
-        // Reset the gimbal for gimbal yaw scenario
         if yawType == 1 {
             
-            let attitude = DJIGimbalAttitude(pitch: 0.0, roll: 0.0, yaw: 0.0)
-            let pitchAction: DJIGimbalAttitudeAction = DJIGimbalAttitudeAction(attitude: attitude)!
-            elements.append(pitchAction)
+            return buildPanoWithGimbalYaw(rows: rows, cols: cols, skyRow: skyRow)
             
+        } else {
+            
+            return buildPanoWithAircraftYaw(rows: rows, cols: cols, skyRow: skyRow)
         }
+        
+    }
+    
+    // Aircraft yaw
+    func buildPanoWithAircraftYaw(rows: Int, cols: Int, skyRow: Bool) -> [DJIMissionControlTimelineElement] {
+        
+        // Initialize the timeline array
+        var elements = [DJIMissionControlTimelineElement]()
         
         // Loop and build the pano sequence
         for _ in 0..<cols {
@@ -74,15 +79,15 @@ class PanoramaController {
                 if skyRow {
                     
                     gimbalPitch = 30 - Float(120/rows) * Float(row)
-                
-                // Non sky row case
+                    
+                    // Non sky row case
                 } else {
                     
                     gimbalPitch = 0 - Float(90/rows) * Float(row)
                     
                 }
                 
-                print("Pitching gimbal to \(gimbalPitch)")
+                print("Pitching gimbal to \(gimbalPitch) degrees")
                 
                 let attitude = DJIGimbalAttitude(pitch: gimbalPitch, roll: 0.0, yaw: 0.0)
                 let pitchAction: DJIGimbalAttitudeAction = DJIGimbalAttitudeAction(attitude: attitude)!
@@ -94,24 +99,74 @@ class PanoramaController {
             }
             
             let yaw: Float = Float(360/cols)
+            print("Yawing aircraft \(yaw) degrees")
             
-            // Let's do gimbal yaw for I1/I2 users
-            if yawType == 1 {
+            let yawAction: DJIAircraftYawAction = DJIAircraftYawAction(relativeAngle: Double(yaw), andAngularVelocity: 30)!
+            elements.append(yawAction)
+            
+        }
+        
+        // Let's add nadir shots (start with one and add more later)
+        let attitude = DJIGimbalAttitude(pitch: -90.0, roll: 0.0, yaw: 0.0)
+        let pitchAction: DJIGimbalAttitudeAction = DJIGimbalAttitudeAction(attitude: attitude)!
+        elements.append(pitchAction)
+        
+        // Take the nadir shot
+        let photoAction: DJIShootPhotoAction = DJIShootPhotoAction(singleShootPhoto:())!
+        elements.append(photoAction)
+        
+        return elements
+        
+    }
+    
+    // Gimbal yaw requires absolute angles for each gimbal position
+    func buildPanoWithGimbalYaw(rows: Int, cols: Int, skyRow: Bool)  -> [DJIMissionControlTimelineElement] {
+        
+        let yawAngle = 360/cols
+        
+        // Initialize the timeline array
+        var elements = [DJIMissionControlTimelineElement]()
+        
+        // Loop through the columns (gimbal yaw)
+        for column in 0..<cols {
+            
+            var yaw = yawAngle * column
+            
+            if yaw > 180 {
                 
-                print("Yawing gimbal \(yaw) degrees")
+                yaw = -1 * (180 + (180 - yaw))
                 
-                let attitude = DJIGimbalAttitude(pitch: gimbalPitch, roll: 0.0, yaw: yaw)
+            }
+            
+            var gimbalPitch: Float = 0
+            
+            // Loop through the rows (gimbal pitch)
+            for row in 0..<rows {
+                
+                // Set the gimbal pitch
+                // With sky row the total vertical range is from +30 to -90 which is 120 degrees
+                if skyRow {
+                    
+                    gimbalPitch = 30 - Float(120/rows) * Float(row)
+                    
+                    // Non sky row case
+                } else {
+                    
+                    gimbalPitch = 0 - Float(90/rows) * Float(row)
+                    
+                }
+                
+                print("Pitching gimbal to \(gimbalPitch) degrees and yawing gimbal to \(yaw) degrees")
+                
+                let attitude = DJIGimbalAttitude(pitch: gimbalPitch, roll: 0.0, yaw: Float(yaw))
                 let pitchAction: DJIGimbalAttitudeAction = DJIGimbalAttitudeAction(attitude: attitude)!
                 elements.append(pitchAction)
-            
-            // Let's do aircraft yaw
-            } else {
-            
-                print("Yawing aircraft \(yaw) degrees")
-        
-                let yawAction: DJIAircraftYawAction = DJIAircraftYawAction(relativeAngle: Double(yaw), andAngularVelocity: 30)!
-                elements.append(yawAction)
+                
+                let photoAction: DJIShootPhotoAction = DJIShootPhotoAction(singleShootPhoto:())!
+                elements.append(photoAction)
+                
             }
+            
         }
         
         // Let's add nadir shots (start with one and add more later)
