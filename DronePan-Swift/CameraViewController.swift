@@ -20,6 +20,10 @@ class CameraViewController: UIViewController {
     
     var aircraftLocation: CLLocationCoordinate2D = kCLLocationCoordinate2DInvalid
     
+    var telemetryViewController: TelemetryViewController!
+    
+    var photoCount: Int = 0
+    
     // Following this approach from the DJI SDK example
     override func viewWillAppear(_ animated: Bool) {
         
@@ -166,6 +170,15 @@ class CameraViewController: UIViewController {
         
         buttonNavView.isHidden = true
         
+        if segue.identifier == "telemetryViewSegue" {
+            
+            if let vc = segue.destination as? TelemetryViewController {
+                
+                telemetryViewController = vc
+                
+            }
+        }
+        
     }
     
     func productConnected() {
@@ -255,10 +268,11 @@ extension CameraViewController: DJIVideoFeedListener {
 
 extension CameraViewController: DJICameraDelegate {
     
-    // This code does not work in SDK 4.0.1
     func camera(_ camera: DJICamera, didGenerateNewMediaFile newMedia: DJIMediaFile) {
         
-        print("THIS NEVER GETS CALLED")
+        // Here we can increment the photo counter
+        photoCount = photoCount + 1
+        telemetryViewController.photoCountLabel.text = "\(photoCount)/25"
         
     }
     
