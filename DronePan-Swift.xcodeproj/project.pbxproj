@@ -16,6 +16,7 @@
 		237001BF1ECF95DB003EC4A0 /* DronePan_SwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 237001BE1ECF95DB003EC4A0 /* DronePan_SwiftTests.swift */; };
 		237001D01ECFA12A003EC4A0 /* VideoPreviewer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 237001CF1ECFA109003EC4A0 /* VideoPreviewer.framework */; };
 		237001D11ECFA12A003EC4A0 /* VideoPreviewer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 237001CF1ECFA109003EC4A0 /* VideoPreviewer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		239377D61EE5AD130086BAF3 /* TelemetryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239377D51EE5AD130086BAF3 /* TelemetryViewController.swift */; };
 		23B1FADF1ECFC81D00EFC857 /* ProductCommunicationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23B1FADE1ECFC81D00EFC857 /* ProductCommunicationManager.swift */; };
 		23CD573B1ED0AC7200D62F06 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23CD573A1ED0AC7200D62F06 /* MapViewController.swift */; };
 		23DDA41C1ED0B54100378B75 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DDA41B1ED0B54100378B75 /* SettingsViewController.swift */; };
@@ -74,6 +75,7 @@
 		237001BE1ECF95DB003EC4A0 /* DronePan_SwiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DronePan_SwiftTests.swift; sourceTree = "<group>"; };
 		237001C01ECF95DB003EC4A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		237001CA1ECFA109003EC4A0 /* VideoPreviewer.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = VideoPreviewer.xcodeproj; path = VideoPreviewer/VideoPreviewer.xcodeproj; sourceTree = "<group>"; };
+		239377D51EE5AD130086BAF3 /* TelemetryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TelemetryViewController.swift; sourceTree = "<group>"; };
 		23B1FADE1ECFC81D00EFC857 /* ProductCommunicationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductCommunicationManager.swift; sourceTree = "<group>"; };
 		23CD573A1ED0AC7200D62F06 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		23DDA41B1ED0B54100378B75 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -137,6 +139,7 @@
 				23DDA41B1ED0B54100378B75 /* SettingsViewController.swift */,
 				23F174711ED2809C00AC109B /* ExposureSettingsViewController.swift */,
 				232009CB1ED3796500033559 /* PanoramaController.swift */,
+				239377D51EE5AD130086BAF3 /* TelemetryViewController.swift */,
 			);
 			path = "DronePan-Swift";
 			sourceTree = "<group>";
@@ -339,7 +342,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -351,6 +354,7 @@
 			files = (
 				23F174721ED2809C00AC109B /* ExposureSettingsViewController.swift in Sources */,
 				232009CC1ED3796500033559 /* PanoramaController.swift in Sources */,
+				239377D61EE5AD130086BAF3 /* TelemetryViewController.swift in Sources */,
 				23B1FADF1ECFC81D00EFC857 /* ProductCommunicationManager.swift in Sources */,
 				237001AC1ECF95DB003EC4A0 /* CameraViewController.swift in Sources */,
 				237001AA1ECF95DB003EC4A0 /* AppDelegate.swift in Sources */,
