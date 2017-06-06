@@ -268,7 +268,7 @@
                                     <action selector="closeButtonClicked:" destination="ruh-iu-v8E" eventType="touchUpInside" id="6T3-jO-QGW"/>
                                 </connections>
                             </button>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xkr-Or-XXv">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xkr-Or-XXv">
                                 <rect key="frame" x="0.0" y="49" width="667" height="801"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Number of rows:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bVE-og-a7t">
@@ -514,12 +514,14 @@
                             <constraint firstItem="GOa-EA-BcH" firstAttribute="top" secondItem="Xkr-Or-XXv" secondAttribute="bottom" constant="50" id="0c0-8N-ehs"/>
                             <constraint firstItem="igX-GC-pwo" firstAttribute="centerX" secondItem="Avm-F0-fH0" secondAttribute="centerX" id="D6A-mz-D3s"/>
                             <constraint firstItem="GOa-EA-BcH" firstAttribute="top" secondItem="Cq4-Y2-yAW" secondAttribute="bottom" constant="10" id="L35-LK-7Oe"/>
+                            <constraint firstItem="Xkr-Or-XXv" firstAttribute="top" secondItem="igX-GC-pwo" secondAttribute="bottom" constant="8" symbolic="YES" id="SXt-rn-KJ0"/>
                             <constraint firstItem="igX-GC-pwo" firstAttribute="top" secondItem="Avm-F0-fH0" secondAttribute="topMargin" constant="20" id="VLw-Rl-aRW"/>
                             <constraint firstItem="YjI-nf-1Zb" firstAttribute="top" secondItem="Avm-F0-fH0" secondAttribute="top" constant="20" id="czW-uw-DUx"/>
                             <constraint firstAttribute="trailing" secondItem="YjI-nf-1Zb" secondAttribute="trailing" constant="20" id="f4N-va-buC"/>
                             <constraint firstItem="Xkr-Or-XXv" firstAttribute="centerY" secondItem="Avm-F0-fH0" secondAttribute="centerY" id="fHv-ra-1Iv"/>
                             <constraint firstItem="Cq4-Y2-yAW" firstAttribute="centerX" secondItem="Avm-F0-fH0" secondAttribute="centerX" id="w6H-RF-eds"/>
                             <constraint firstItem="Xkr-Or-XXv" firstAttribute="leading" secondItem="Avm-F0-fH0" secondAttribute="leading" id="wMl-5C-aaa"/>
+                            <constraint firstItem="Xkr-Or-XXv" firstAttribute="centerX" secondItem="igX-GC-pwo" secondAttribute="centerX" id="wjJ-Ls-BZE"/>
                         </constraints>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -553,7 +555,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3HP-0g-rzO">
-                                <rect key="frame" x="623" y="20" width="24" height="24"/>
+                                <rect key="frame" x="633" y="30" width="24" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="24" id="28e-ny-KLK"/>
                                     <constraint firstAttribute="height" constant="24" id="i0d-Bz-pSr"/>
@@ -563,32 +565,24 @@
                                     <action selector="closeButtonClicked:" destination="YMA-rc-62W" eventType="touchUpInside" id="bc3-e1-h4h"/>
                                 </connections>
                             </button>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6cC-Fn-y7P">
-                                <rect key="frame" x="20" y="60" width="627" height="295"/>
-                                <connections>
-                                    <segue destination="z4b-EL-Fdv" kind="embed" id="jzW-W2-GHG"/>
-                                </connections>
-                            </containerView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Exposure Settings" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bPy-5D-4EE">
-                                <rect key="frame" x="208" y="20" width="250" height="21"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="QRY-2M-oXm">
+                                <rect key="frame" x="20" y="30" width="603" height="128"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="250" id="a2o-lM-vly"/>
+                                    <constraint firstAttribute="height" constant="128" id="A6s-rx-QOe"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <string key="text">There is currently a bug in the DJI SDK that prevents us from displaying exposure controls. This will be fixed in an upcoming release.</string>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="6cC-Fn-y7P" firstAttribute="top" secondItem="iZY-ys-bOI" secondAttribute="bottom" constant="40" id="4QU-jj-zWw"/>
-                            <constraint firstItem="6cC-Fn-y7P" firstAttribute="trailing" secondItem="w1Y-TN-41Y" secondAttribute="trailingMargin" id="7h9-iO-1vS"/>
-                            <constraint firstItem="bPy-5D-4EE" firstAttribute="centerX" secondItem="w1Y-TN-41Y" secondAttribute="centerX" id="9aI-mn-nLp"/>
-                            <constraint firstItem="bPy-5D-4EE" firstAttribute="top" secondItem="w1Y-TN-41Y" secondAttribute="topMargin" constant="20" id="BQv-jw-0v4"/>
-                            <constraint firstItem="M0P-6N-UqY" firstAttribute="top" secondItem="6cC-Fn-y7P" secondAttribute="bottom" constant="20" id="HjQ-eI-hRq"/>
-                            <constraint firstAttribute="trailing" secondItem="3HP-0g-rzO" secondAttribute="trailing" constant="20" id="PAe-ge-3vt"/>
-                            <constraint firstItem="6cC-Fn-y7P" firstAttribute="leading" secondItem="w1Y-TN-41Y" secondAttribute="leadingMargin" id="Qz3-hm-9W8"/>
-                            <constraint firstItem="3HP-0g-rzO" firstAttribute="top" secondItem="w1Y-TN-41Y" secondAttribute="top" constant="20" id="zvS-M2-Frj"/>
+                            <constraint firstItem="QRY-2M-oXm" firstAttribute="top" secondItem="iZY-ys-bOI" secondAttribute="bottom" constant="10" id="FN8-0S-Ufa"/>
+                            <constraint firstItem="QRY-2M-oXm" firstAttribute="leading" secondItem="w1Y-TN-41Y" secondAttribute="leadingMargin" id="MN6-wT-Cac"/>
+                            <constraint firstAttribute="trailing" secondItem="3HP-0g-rzO" secondAttribute="trailing" constant="10" id="PAe-ge-3vt"/>
+                            <constraint firstItem="3HP-0g-rzO" firstAttribute="top" secondItem="iZY-ys-bOI" secondAttribute="bottom" constant="10" id="VTp-Ds-PyH"/>
+                            <constraint firstItem="3HP-0g-rzO" firstAttribute="leading" secondItem="QRY-2M-oXm" secondAttribute="trailing" constant="10" id="hYr-fg-zAj"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -787,6 +781,24 @@
             </objects>
             <point key="canvasLocation" x="862.21889055472275" y="308"/>
         </scene>
+        <!--Camera Settings Controller-->
+        <scene sceneID="bAf-PX-hEP">
+            <objects>
+                <viewController id="KPo-Nk-QaG" customClass="DULCameraSettingsController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Swa-Hc-aSC"/>
+                        <viewControllerLayoutGuide type="bottom" id="5Gc-Ic-rNA"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="T5u-tT-UeU">
+                        <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="olW-g9-KgE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1528" y="-905"/>
+        </scene>
         <!--Telemetry View Controller-->
         <scene sceneID="gfZ-1X-piJ">
             <objects>
@@ -876,20 +888,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Nr-L3-2tr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="861.3193403298352" y="1217.5999999999999"/>
-        </scene>
-        <!--Exposure Settings Controller-->
-        <scene sceneID="Etb-tL-oaM">
-            <objects>
-                <viewController id="z4b-EL-Fdv" customClass="DULExposureSettingsController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="yz2-T3-GTJ">
-                        <rect key="frame" x="0.0" y="0.0" width="627" height="295"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="QV6-l6-MKW" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1503" y="-811"/>
         </scene>
     </scenes>
     <resources>
