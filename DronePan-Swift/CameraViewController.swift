@@ -81,8 +81,8 @@ class CameraViewController: UIViewController {
         
         // Setup video feed
         VideoPreviewer.instance().setView(cameraView)
-        //DJISDKManager.videoFeeder()?.primaryVideoFeed.add(self, with: nil)
-        //VideoPreviewer.instance().start()
+        DJISDKManager.videoFeeder()?.primaryVideoFeed.add(self, with: nil)
+        VideoPreviewer.instance().start()
         
     }
     
@@ -101,6 +101,12 @@ class CameraViewController: UIViewController {
         print("SDK version: \(DJISDKManager.sdkVersion())")
         
         // Do any additional setup after loading the view, typically from a nib.
+    }
+    
+    override var prefersStatusBarHidden: Bool {
+        
+        return true
+        
     }
 
     override func didReceiveMemoryWarning() {

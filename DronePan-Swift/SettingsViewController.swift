@@ -54,6 +54,12 @@ class SettingsViewController: UIViewController {
         
     }
     
+    override var prefersStatusBarHidden: Bool {
+        
+        return true
+        
+    }
+    
     @IBAction func closeButtonClicked(_ sender: Any) {
         
         dismiss(animated: true, completion: nil)

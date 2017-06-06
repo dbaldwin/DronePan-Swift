@@ -42,6 +42,12 @@ class MapViewController: UIViewController {
         panoMarker.map = googleMapView
     }
     
+    override var prefersStatusBarHidden: Bool {
+        
+        return true
+        
+    }
+    
     @IBAction func toggleNavButtonView(_ sender: Any) {
         
         buttonNavView.isHidden = !buttonNavView.isHidden
