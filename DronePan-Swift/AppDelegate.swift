@@ -21,8 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Register DJI SDK
         productCommunicationManager.registerWithSDK()
         
-        // Hide the status bar
-        application.isStatusBarHidden = true
+        // Don't let the screen sleep while app is open
+        UIApplication.shared.isIdleTimerDisabled = true
         
         // Google Maps registration
         GMSServices.provideAPIKey("AIzaSyDwU_Twls3FwrPH5VkZv7qZ_61tWe0r6Wc")
