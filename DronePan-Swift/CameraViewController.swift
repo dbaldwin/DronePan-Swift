@@ -84,12 +84,48 @@ class CameraViewController: UIViewController {
         DJISDKManager.videoFeeder()?.primaryVideoFeed.add(self, with: nil)
         VideoPreviewer.instance().start()
         
+        // Add listener so we can get mission status updates
+        DJISDKManager.missionControl()?.addListener(self, toTimelineProgressWith: { (event: DJIMissionControlTimelineEvent, element: DJIMissionControlTimelineElement?, error: Error?, info: Any?) in
+            
+            print("Mission control event \(String(describing: DJIMissionControlTimelineEvent(rawValue: event.rawValue)))")
+            
+            switch event {
+                
+            case .started:
+                print("Started")
+            case .startError:
+                print("Start error")
+            case .progressed:
+                print("Progressed")
+            case .paused:
+                print("Paused")
+            case .pauseError:
+                print("Pause error")
+            case .resumed:
+                print("Resumed")
+            case .resumeError:
+                print("Resume error")
+            case .stopped:
+                print("Stopped")
+            case .stopError:
+                print("Stop error")
+            case .finished:
+                // For some reason this gets called more than once
+                //self.panoFinished()
+                print("Finished")
+            default:
+                print("Defaut")
+            }
+        })
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         
         VideoPreviewer.instance().unSetView()
         DJISDKManager.videoFeeder()?.primaryVideoFeed.remove(self)
+        
+        DJISDKManager.missionControl()?.removeListener(self)
         
         super.viewWillDisappear(animated)
         
@@ -150,49 +186,16 @@ class CameraViewController: UIViewController {
         // Clear out previous missions
         DJISDKManager.missionControl()?.stopTimeline()
         DJISDKManager.missionControl()?.unscheduleEverything()
-        DJISDKManager.missionControl()?.removeAllListeners()
         
         // Reset the gimbal
         gimbal?.reset(completion: nil)
         
-        DJISDKManager.missionControl()?.addListener(self, toTimelineProgressWith: { (event: DJIMissionControlTimelineEvent, element: DJIMissionControlTimelineElement?, error: Error?, info: Any?) in
-            
-            print("Mission control event \(String(describing: DJIMissionControlTimelineEvent(rawValue: event.rawValue)))")
-            
-            switch event {
-                
-            case .started:
-                print("Started")
-            case .startError:
-                print("Start error")
-            case .progressed:
-                print("Progressed")
-            case .paused:
-                print("Paused")
-            case .pauseError:
-                print("Pause error")
-            case .resumed:
-                print("Resumed")
-            case .resumeError:
-                print("Resume error")
-            case .stopped:
-                print("Stopped")
-            case .stopError:
-                print("Stop error")
-            case .finished:
-                // For some reason this gets called more than once
-                //self.panoFinished()
-                print("Finished")
-            default:
-                print("Defaut")
-            }
-        })
-        
+        // Build the pano logic
         let pano = PanoramaController()
         let error = DJISDKManager.missionControl()?.scheduleElements(pano.buildPanoAtCurrentLocation())
         
         if error != nil {
-            print("Error scheduling elements \(String(describing: error))")
+            showAlert(title: "Error", message: String(describing: error))
             return;
         }
         
@@ -201,11 +204,7 @@ class CameraViewController: UIViewController {
     
     func panoFinished() {
         
-        let alert = UIAlertController(title: "Success", message: "Your panorama was successfully completed!", preferredStyle: UIAlertControllerStyle.alert)
-        let ok = UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil)
-        alert.addAction(ok)
-        
-        present(alert, animated: true, completion: nil)
+        showAlert(title: "Success", message: "Your panorama was successfully captured!")
         
         // Reset the gimbal. For some reason with Inspire 1 this doesn't reset the pitch...only the yaw
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
@@ -213,6 +212,16 @@ class CameraViewController: UIViewController {
             self.gimbal?.reset(completion: nil)
             
         }
+        
+    }
+    
+    func showAlert(title: String, message: String) {
+        
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+        let ok = UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil)
+        alert.addAction(ok)
+        
+        present(alert, animated: true, completion: nil)
         
     }
     
