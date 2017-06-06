@@ -81,8 +81,8 @@ class CameraViewController: UIViewController {
         
         // Setup video feed
         VideoPreviewer.instance().setView(cameraView)
-        //DJISDKManager.videoFeeder()?.primaryVideoFeed.add(self, with: nil)
-        //VideoPreviewer.instance().start()
+        DJISDKManager.videoFeeder()?.primaryVideoFeed.add(self, with: nil)
+        VideoPreviewer.instance().start()
         
     }
     
@@ -146,8 +146,6 @@ class CameraViewController: UIViewController {
         DJISDKManager.missionControl()?.unscheduleEverything()
         DJISDKManager.missionControl()?.removeAllListeners()
         
-        // Reset the gimbal
-        gimbal?.reset(completion: nil)
         
         DJISDKManager.missionControl()?.addListener(self, toTimelineProgressWith: { (event: DJIMissionControlTimelineEvent, element: DJIMissionControlTimelineElement?, error: Error?, info: Any?) in
             
