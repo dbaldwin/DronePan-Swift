@@ -12,7 +12,7 @@ import DJISDK
 class ProductCommunicationManager: NSObject {
     
     let enableBridgeMode = false
-    let bridgeAppIP = "10.0.1.18"
+    let bridgeAppIP = "10.0.1.23"
     
     func registerWithSDK() {
         
