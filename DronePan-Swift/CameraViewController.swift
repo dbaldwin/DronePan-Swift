@@ -152,6 +152,15 @@ class CameraViewController: UIViewController {
     
     @IBAction func startPano(_ sender: Any) {
         
+        // Test to see if this works. For some reason it works when bridging but not with the actual device. Adding here to test.
+        // Setting up camera delegate
+        let camera: DJICamera? = fetchCamera()
+        
+        if camera != nil {
+            print("camera delegate is setup")
+            camera?.delegate = self
+        }
+        
         let defaults = UserDefaults.standard
         
         // We should figure out how to update these immediately after the settings are saved and get rid of all this code
@@ -181,7 +190,6 @@ class CameraViewController: UIViewController {
         totalPhotoCount = rows * cols + 1
         
         telemetryViewController.photoCountLabel.text = "\(currentPhotoCount)/\(totalPhotoCount)"
-    
         
         // Clear out previous missions
         DJISDKManager.missionControl()?.stopTimeline()
