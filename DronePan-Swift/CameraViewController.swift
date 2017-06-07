@@ -89,6 +89,12 @@ class CameraViewController: UIViewController {
             
             print("Mission control event \(String(describing: DJIMissionControlTimelineEvent(rawValue: event.rawValue)))")
             
+            if error != nil {
+                
+                self.showAlert(title: "Error", message: String(describing: error!))
+                
+            }
+            
             switch event {
                 
             case .started:
@@ -160,6 +166,16 @@ class CameraViewController: UIViewController {
             print("camera delegate is setup")
             camera?.delegate = self
         }
+        
+        // Putting this here to see if we can get around the cases where the aircraft doesn't want to yaw
+        let fc: DJIFlightController? = fetchFlightController()
+        
+        if fc != nil {
+            fc?.delegate = self
+        }
+        
+        // Enable virtual stick mode so that the aircraft can yaw
+        fc?.setVirtualStickModeEnabled(true, withCompletion: nil)
         
         let defaults = UserDefaults.standard
         
@@ -294,9 +310,6 @@ class CameraViewController: UIViewController {
         if fc != nil {
             fc?.delegate = self
         }
-        
-        // Enable virtual stick mode so that the aircraft can yaw
-        fc?.setVirtualStickModeEnabled(true, withCompletion: nil)
 
     }
 
