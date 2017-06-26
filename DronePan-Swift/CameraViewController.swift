@@ -25,6 +25,9 @@ class CameraViewController: UIViewController {
     var totalPhotoCount: Int = 7 // This is the default 4 rows and 7 columns with 1 nadir
     var currentPhotoCount: Int = 0
     
+    
+    @IBOutlet weak var sdkVersionLabel: UILabel!
+    
     var gimbal: DJIGimbal?
     
     // Following this approach from the DJI SDK example
@@ -140,9 +143,8 @@ class CameraViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print("SDK version: \(DJISDKManager.sdkVersion())")
+        sdkVersionLabel.text = "SDK: \(DJISDKManager.sdkVersion())"
         
-        // Do any additional setup after loading the view, typically from a nib.
     }
     
     override var prefersStatusBarHidden: Bool {

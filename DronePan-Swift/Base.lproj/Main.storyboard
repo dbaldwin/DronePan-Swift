@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1212" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="ipad9_7" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -45,6 +45,16 @@
                                 <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SDK: -" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NCt-cj-8SP">
+                                <rect key="frame" x="913" y="737" width="91" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="FfN-rG-h1v"/>
+                                    <constraint firstAttribute="width" constant="91" id="GGs-S4-zm5"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zhh-xe-z3j" customClass="DULDashboardWidget">
                                 <rect key="frame" x="20" y="697.5" width="300" height="50.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -54,7 +64,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yZv-EF-lgt" userLabel="Pano button">
-                                <rect key="frame" x="474.5" y="618" width="75" height="75"/>
+                                <rect key="frame" x="475" y="618" width="75" height="75"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="75" id="jEy-fc-vhO"/>
                                     <constraint firstAttribute="width" constant="75" id="lHG-QA-VUQ"/>
@@ -220,8 +230,10 @@
                             <constraint firstItem="Zhh-xe-z3j" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="jWs-M8-IYs"/>
                             <constraint firstItem="BYt-TT-eoJ" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="15" id="mOc-Al-kuv"/>
                             <constraint firstItem="xj3-Aw-ufv" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="pOg-tf-zEQ"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="NCt-cj-8SP" secondAttribute="trailing" id="pkA-SI-oVq"/>
                             <constraint firstAttribute="trailingMargin" secondItem="737-Ks-zjo" secondAttribute="trailing" id="rgb-rl-iKW"/>
                             <constraint firstItem="lbf-Gc-gqu" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="sIQ-ku-uxK"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="NCt-cj-8SP" secondAttribute="bottom" constant="10" id="t2S-XW-OX9"/>
                             <constraint firstAttribute="trailing" secondItem="xj3-Aw-ufv" secondAttribute="trailing" id="v7r-m0-C5b"/>
                             <constraint firstAttribute="trailing" secondItem="BYt-TT-eoJ" secondAttribute="trailing" constant="15" id="zF1-bZ-vsQ"/>
                         </constraints>
@@ -230,11 +242,12 @@
                         <outlet property="buttonNavView" destination="737-Ks-zjo" id="Jvf-OC-wPt"/>
                         <outlet property="cameraView" destination="lbf-Gc-gqu" id="LFK-FS-f6f"/>
                         <outlet property="hamburgerButton" destination="BYt-TT-eoJ" id="2DT-A9-JQz"/>
+                        <outlet property="sdkVersionLabel" destination="NCt-cj-8SP" id="0SF-CU-foU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="137.18140929535232" y="136.80000000000001"/>
+            <point key="canvasLocation" x="137.109375" y="136.71875"/>
         </scene>
         <!--Settings View Controller-->
         <scene sceneID="jtD-ru-mU6">
@@ -902,6 +915,10 @@
         <scene sceneID="uTx-HH-46D">
             <objects>
                 <viewController id="CAJ-AJ-P4d" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="SkQ-o3-OUu"/>
+                        <viewControllerLayoutGuide type="bottom" id="vRN-Me-76A"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="faf-Ls-crG">
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -919,9 +936,9 @@
         <image name="photo_button_pressed" width="75" height="75"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="VOk-MN-cdM"/>
-        <segue reference="JsW-mp-782"/>
-        <segue reference="7l9-Vy-qZe"/>
-        <segue reference="Ss2-Me-3kO"/>
+        <segue reference="vXR-6Q-bQh"/>
+        <segue reference="m2E-ua-4Ir"/>
+        <segue reference="GwU-kH-7E7"/>
+        <segue reference="ubc-zp-mJn"/>
     </inferredMetricsTieBreakers>
 </document>
