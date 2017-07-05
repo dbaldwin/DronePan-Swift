@@ -25,6 +25,9 @@ class MapViewController: UIViewController {
     // for the aircraft marker
     let aircraftMarker = GMSMarker()
     
+    // for BoundBox
+    var bounds = GMSCoordinateBounds()
+    
 
 
     override func viewDidLoad() {
@@ -46,13 +49,15 @@ class MapViewController: UIViewController {
         aircraftMarker.map = googleMapView
         
         // Add the pano marker
-        let panoMarker = GMSMarker()
+        /*let panoMarker = GMSMarker()
         panoMarker.position = CLLocationCoordinate2D(latitude: 32.001, longitude: -98.001)
         panoMarker.groundAnchor = CGPoint(x: 0.5, y: 0.5)
         panoMarker.icon = UIImage(named: "pano_marker")
-        panoMarker.map = googleMapView
+        panoMarker.map = googleMapView*/
         
+        //initilizing the bounds
         
+        bounds = GMSCoordinateBounds(coordinate: self.aircraftMarker.position, coordinate: self.aircraftMarker.position)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -71,6 +76,21 @@ class MapViewController: UIViewController {
         
     }
     
+    func getAndShowSavedPanorama() {
+    // Get all saved pano from DB
+        if let totalpanorma:[Panorama] = DataBaseHelper.sharedInstance.allRecordsSortByAttribute(inTable: "Panorama") as? [Panorama]
+        {
+            for panorma in totalpanorma
+            {
+                // Add pano marker in mapview
+                self.addPanoMarker(latitude:panorma.dronCurrentLatitude , longitude: panorma.dronCurrentLongitude,identifier:panorma.countId)
+            }
+        }
+        //including marker in boundBox
+        self.googleMapView.animate(with: GMSCameraUpdate.fit(bounds, withPadding: 270))
+        }
+    
+
       
     @IBAction func toggleNavButtonView(_ sender: Any) {
         
@@ -97,6 +117,26 @@ class MapViewController: UIViewController {
         
         
     }
+    
+    func  addPanoMarker(latitude:CLLocationDegrees,longitude:CLLocationDegrees,identifier:Any)
+        
+    {
+        
+        let panoMarker = GMSMarker(position: CLLocationCoordinate2D(latitude: latitude, longitude: longitude))
+        
+        panoMarker.groundAnchor = CGPoint(x: 0.5, y: 0.5)
+        
+        panoMarker.icon = UIImage(named: "pano_marker")
+        
+        panoMarker.map = googleMapView
+        
+        panoMarker.userData = identifier
+        
+        bounds = bounds.includingCoordinate(panoMarker.position)
+        
+    }
+    
+
 }
 
 extension MapViewController: GMSMapViewDelegate {
