@@ -14,10 +14,23 @@ class MapViewController: UIViewController {
     @IBOutlet weak var googleMapView: GMSMapView!
     
     @IBOutlet weak var buttonNavView: UIView!
+    
+    @IBOutlet weak var panpramaDetailView: UIView!
+    @IBOutlet weak var panoramaPitchLabel: UILabel!
+    @IBOutlet weak var panoramaHeadingLabel: UILabel!
+    @IBOutlet weak var panormaAltitudeLabel: UILabel!
+    @IBOutlet weak var panoramaLatLongLabel: UILabel!
+    @IBOutlet weak var panoramaDateLabel: UILabel!
+    
+    // for the aircraft marker
+    let aircraftMarker = GMSMarker()
+    
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //let camera: GMSCameraPosition = GMSCameraPosition.camera(withLatitude: 32, longitude: -98, zoom: 16)
         let camera: GMSCameraPosition = GMSCameraPosition.camera(withLatitude: 32, longitude: -98, zoom: 16)
         googleMapView.camera = camera
         googleMapView.isMyLocationEnabled = true
@@ -27,8 +40,6 @@ class MapViewController: UIViewController {
         googleMapView.settings.tiltGestures = false
         googleMapView.settings.myLocationButton = true
         
-        // Add the aircraft marker
-        let aircraftMarker = GMSMarker()
         aircraftMarker.position = CLLocationCoordinate2D(latitude: 32, longitude: -98)
         aircraftMarker.groundAnchor = CGPoint(x: 0.5, y: 0.5)
         aircraftMarker.icon = UIImage(named: "aircraft_marker")
@@ -41,11 +52,12 @@ class MapViewController: UIViewController {
         panoMarker.icon = UIImage(named: "pano_marker")
         panoMarker.map = googleMapView
         
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+       
         let alert = UIAlertController(title: "Coming Soon", message: "We are currently working on waypoint functionality. This is just a static view and will be active in an upcoming beta.", preferredStyle: UIAlertControllerStyle.alert)
         let ok = UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil)
         alert.addAction(ok)
@@ -59,11 +71,12 @@ class MapViewController: UIViewController {
         
     }
     
+      
     @IBAction func toggleNavButtonView(_ sender: Any) {
         
         buttonNavView.isHidden = !buttonNavView.isHidden
         
-        print(buttonNavView.isHidden)
+        debugPrint(buttonNavView.isHidden)
         
         
     }
@@ -80,15 +93,18 @@ class MapViewController: UIViewController {
         
     }
     
+    @IBAction func launchButtonClicked(_ sender: UIButton) {
+        
+        
+    }
 }
 
 extension MapViewController: GMSMapViewDelegate {
     
     func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
         
-        print("You tapped at \(marker.position.latitude), \(marker.position.longitude)")
-        
-        return true
+        debugPrint("You tapped at \(marker.position.latitude), \(marker.position.longitude)")
+                return true
     }
 
 }

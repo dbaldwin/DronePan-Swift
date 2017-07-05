@@ -30,6 +30,7 @@ class CameraViewController: UIViewController {
     
     var gimbal: DJIGimbal?
     
+       
     // Following this approach from the DJI SDK example
     override func viewWillAppear(_ animated: Bool) {
         
@@ -145,6 +146,7 @@ class CameraViewController: UIViewController {
         
         sdkVersionLabel.text = "SDK: \(DJISDKManager.sdkVersion())"
         
+        
     }
     
     override var prefersStatusBarHidden: Bool {
@@ -159,6 +161,22 @@ class CameraViewController: UIViewController {
     }
     
     @IBAction func startPano(_ sender: Any) {
+        
+        let alertView = UIAlertController(title: "", message: "Panorama starting. Would you like to save this panorama location so that it can be repeated in the future?", preferredStyle: .alert)
+        
+        let yes = UIAlertAction(title: "Yes", style: UIAlertActionStyle.default, handler:{ (action) in
+            self.startPanoNow(true)
+        })
+        alertView.addAction(yes)
+        let no = UIAlertAction(title: "No", style: UIAlertActionStyle.cancel, handler:{(action) in
+            self.startPanoNow(false)
+        })
+         alertView.addAction(no)
+         present(alertView, animated: true, completion: nil)
+    }
+    
+    func startPanoNow(_ shouldSave:Bool)
+    {
         
         // Test to see if this works. For some reason it works when bridging but not with the actual device. Adding here to test.
         // Setting up camera delegate
@@ -182,19 +200,19 @@ class CameraViewController: UIViewController {
         let defaults = UserDefaults.standard
         
         // We should figure out how to update these immediately after the settings are saved and get rid of all this code
-        var rows = defaults.integer(forKey: "rows")
+        var rows:Int = defaults.integer(forKey: "rows")
         
         if rows == 0 {
             rows = 4
         }
         
-        var cols = defaults.integer(forKey: "columns")
+        var cols:Int = defaults.integer(forKey: "columns")
         
         if cols == 0 {
             cols = 7
         }
         
-        let skyRow = defaults.integer(forKey: "skyRow")
+        let skyRow:Int = defaults.integer(forKey: "skyRow")
         
         if skyRow == 1 {
             
@@ -203,8 +221,18 @@ class CameraViewController: UIViewController {
         }
         
         currentPhotoCount = 0
+        print("Total number of rows \(rows), \(cols),\(skyRow),\(String(describing: gimbal))")
+    // Generate unique id for a panorama
+        let arrayValue = DataBaseHelper.sharedInstance.allRecordsSortByAttribute(inTable: "Panorama")
         
-        print("Total number of rows \(rows), \(cols)")
+        //Store panorama in a DataBase table
+        if shouldSave
+        {
+            let panoramaDict:[String:Any] = ["captureDate":Date(),"rows":rows,"columns":cols,"dronCurrentLatitude":self.aircraftLocation.latitude,"dronCurrentLongitude":self.aircraftLocation.longitude,"skyRow":skyRow,"countId":(arrayValue.count + 1)]
+         _ = DataBaseHelper.sharedInstance.insertRecordInTable(tableName: "Panorama", attributes: panoramaDict)
+        }
+        
+        
         totalPhotoCount = rows * cols + 1
         
         telemetryViewController.photoCountLabel.text = "\(currentPhotoCount)/\(totalPhotoCount)"
