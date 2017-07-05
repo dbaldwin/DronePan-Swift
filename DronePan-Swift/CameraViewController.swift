@@ -229,8 +229,7 @@ class CameraViewController: UIViewController {
         if shouldSave
         {
             let panoramaDict:[String:Any] = ["captureDate":Date(),"rows":rows,"columns":cols,"dronCurrentLatitude":self.aircraftLocation.latitude,"dronCurrentLongitude":self.aircraftLocation.longitude,"skyRow":skyRow,"countId":(arrayValue.count + 1)]
-            debugPrint(panoramaDict)
-         _ = DataBaseHelper.sharedInstance.insertRecordInTable(tableName: "Panorama", attributes: panoramaDict)
+            _ = DataBaseHelper.sharedInstance.insertRecordInTable(tableName: "Panorama", attributes: panoramaDict)
         }
         
         
