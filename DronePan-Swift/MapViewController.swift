@@ -28,6 +28,13 @@ class MapViewController: UIViewController {
     // for BoundBox
     var bounds = GMSCoordinateBounds()
     
+    //for showingDate in Panorama
+    lazy var dateFormate:DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "E, d MMM yyyy HH:mm:ss"
+        return formatter
+    }()
+    
 
 
     override func viewDidLoad() {
@@ -142,9 +149,27 @@ class MapViewController: UIViewController {
 extension MapViewController: GMSMapViewDelegate {
     
     func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
-        
         debugPrint("You tapped at \(marker.position.latitude), \(marker.position.longitude)")
-                return true
+        debugPrint("identifier here\(marker.userData ?? "")")
+        
+        //get selected marker Value
+        if let p_markerId = marker.userData
+        {
+            if let tappedPanorama:[Panorama] = DataBaseHelper.sharedInstance.allRecordsSortByAttribute(inTable: "Panorama", whereKey: "countId", contains: p_markerId) as? [Panorama]
+            {
+              if let firstObject = tappedPanorama.first
+                {
+                    mapView.bringSubview(toFront: self.panpramaDetailView)
+                    self.panoramaLatLongLabel.text = "Lat:\(firstObject.dronCurrentLatitude), Lon:\(firstObject.dronCurrentLongitude)"
+                    self.panoramaDateLabel.text = dateFormate.string(from: firstObject.captureDate! as Date)
+                    self.panormaAltitudeLabel.text = "rows:\(firstObject.rows)"
+                    self.panoramaHeadingLabel.text = "columns:\(firstObject.columns)"
+                    self.panoramaPitchLabel.text = "skyRow:\(firstObject.columns)"
+                    debugPrint("panoramalongitute:\(firstObject.dronCurrentLongitude)\ndronCurrentLatitude\(firstObject.dronCurrentLatitude)")
+                }
+            }
+        }
+    return true
     }
 
 }
