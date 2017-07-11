@@ -8,6 +8,7 @@
 
 import UIKit
 import GoogleMaps
+import DJISDK
 
 class MapViewController: UIViewController {
     
@@ -28,19 +29,20 @@ class MapViewController: UIViewController {
     // for BoundBox
     var bounds = GMSCoordinateBounds()
     
+    //selectedPanorma for mission
+    var selectedPanorma:Panorama?
+    
     //for showingDate in Panorama
     lazy var dateFormate:DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "E, d MMM yyyy HH:mm:ss"
         return formatter
     }()
-    
 
-
+    //MARK:- UIView Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //let camera: GMSCameraPosition = GMSCameraPosition.camera(withLatitude: 32, longitude: -98, zoom: 16)
         let camera: GMSCameraPosition = GMSCameraPosition.camera(withLatitude: 32, longitude: -98, zoom: 16)
         googleMapView.camera = camera
         googleMapView.isMyLocationEnabled = true
@@ -69,7 +71,7 @@ class MapViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-       
+        self.getAndShowSavedPanorama()
         let alert = UIAlertController(title: "Coming Soon", message: "We are currently working on waypoint functionality. This is just a static view and will be active in an upcoming beta.", preferredStyle: UIAlertControllerStyle.alert)
         let ok = UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil)
         alert.addAction(ok)
@@ -78,13 +80,11 @@ class MapViewController: UIViewController {
     }
     
     override var prefersStatusBarHidden: Bool {
-        
         return true
-        
     }
     
     func getAndShowSavedPanorama() {
-    // Get all saved pano from DB
+        // Get all saved pano from DB
         if let totalpanorma:[Panorama] = DataBaseHelper.sharedInstance.allRecordsSortByAttribute(inTable: "Panorama") as? [Panorama]
         {
             for panorma in totalpanorma
@@ -95,57 +95,127 @@ class MapViewController: UIViewController {
         }
         //including marker in boundBox
         self.googleMapView.animate(with: GMSCameraUpdate.fit(bounds, withPadding: 270))
-        }
+    }
     
 
-      
+    //MARK:- UIButton Action methods
     @IBAction func toggleNavButtonView(_ sender: Any) {
-        
         buttonNavView.isHidden = !buttonNavView.isHidden
-        
-        debugPrint(buttonNavView.isHidden)
-        
-        
     }
     
     // Dismiss the view to get back to camera view
     @IBAction func cameraViewButtonClicked(_ sender: Any) {
-
         dismiss(animated: true, completion: nil)
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        buttonNavView.isHidden = true
-        
-    }
     
     @IBAction func launchButtonClicked(_ sender: UIButton) {
+        let alertView = UIAlertController(title: "", message:"Are you ready to begin the panorama mission?", preferredStyle: .alert)
         
-        
+        let yes = UIAlertAction(title: "Yes", style: UIAlertActionStyle.cancel, handler:{ (action) in
+            self.startPanormaMission()
+        })
+        alertView.addAction(yes)
+        let no = UIAlertAction(title: "No", style: UIAlertActionStyle.default, handler:nil)
+        alertView.addAction(no)
+        present(alertView, animated: true, completion: nil)
     }
     
-    func  addPanoMarker(latitude:CLLocationDegrees,longitude:CLLocationDegrees,identifier:Any)
-        
-    {
-        
-        let panoMarker = GMSMarker(position: CLLocationCoordinate2D(latitude: latitude, longitude: longitude))
-        
-        panoMarker.groundAnchor = CGPoint(x: 0.5, y: 0.5)
-        
-        panoMarker.icon = UIImage(named: "pano_marker")
-        
-        panoMarker.map = googleMapView
-        
-        panoMarker.userData = identifier
-        
-        bounds = bounds.includingCoordinate(panoMarker.position)
-        
+    //MARK:- Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        buttonNavView.isHidden = true
     }
-    
 
+    //MARK:- Private methods
+    private func startPanormaMission()
+    {
+        if let selectedPanorma = self.selectedPanorma
+        {
+            let destinationLocation = CLLocationCoordinate2D(latitude: selectedPanorma.dronCurrentLatitude, longitude: selectedPanorma.dronCurrentLongitude)
+            if  let takeOffToCoordinate = DJIGoToAction.init(coordinate: destinationLocation) {
+                
+                DJISDKManager.missionControl()?.scheduleElement(DJITakeOffAction.init())
+
+                var timeActionsCount = 0
+                if  let takeOffWithAltitude = DJIGoToAction.init(altitude: selectedPanorma.altitude) {
+                    let error = DJISDKManager.missionControl()?.scheduleElement(takeOffWithAltitude)
+                    if error == nil {
+                        timeActionsCount = 1
+                    }
+                }
+
+                let error =  DJISDKManager.missionControl()?.scheduleElement(takeOffToCoordinate)
+                if error == nil {
+                    timeActionsCount += 1
+                }
+                
+                // Build the pano logic
+                let pano = PanoramaController()
+                var elements : [DJIMissionControlTimelineElement] = []
+                
+                if  selectedPanorma.yawType == "1" {
+                    elements = pano.buildPanoWithGimbalYaw(rows: Int(selectedPanorma.rows), cols: Int(selectedPanorma.columns), skyRow: selectedPanorma.skyRow == 1 ? true : false)
+                }else{
+                    elements = pano.buildPanoWithAircraftYaw(rows: Int(selectedPanorma.rows), cols: Int(selectedPanorma.columns), skyRow: selectedPanorma.skyRow == 1 ? true : false)
+                }
+                
+                let panoError = DJISDKManager.missionControl()?.scheduleElements(elements)
+                
+                if error != nil {
+                    showAlert(title: "Error", message: String(describing: error?.localizedDescription))
+                    return;
+                }else if panoError != nil {
+                    showAlert(title: "Error", message: String(describing: panoError?.localizedDescription))
+                    return;
+                }
+                
+                ProductCommunicationManager.shared.fetchFlightController()?.delegate = self
+                
+                DJISDKManager.missionControl()?.startTimeline()
+                var finishedEventCount = 0
+                let totalEventCount = elements.count + 1 + timeActionsCount //{ (Panoromo Mission Elements) + (Take off mission element + Go to Alitude + Go To Location Element) }
+                DJISDKManager.missionControl()?.addListener(self, toTimelineProgressWith: { (timeLineEvent, missionControl, error, other) in
+                    
+                    self.panoramaHeadingLabel.text = "Heading:\(ProductCommunicationManager.shared.fetchFlightController()?.compass?.heading ?? 0)"
+                    
+                    switch(timeLineEvent)
+                    {
+                    case .started:
+                        print(missionControl  ?? "")
+                        break
+                    case .progressed:
+                        print(missionControl  ?? "")
+                        break
+                    case .finished:
+                        finishedEventCount += 1
+                        if finishedEventCount == totalEventCount {
+                            self.showAlert(title: "Panorama complete!", message: "You can now take manual control of your aircraft.")
+                        }
+                        break
+                    default:
+                        break
+                    }
+                    
+                })
+                
+            }
+        }
+        
+    }
+    
+    private func addPanoMarker(latitude:CLLocationDegrees,longitude:CLLocationDegrees,identifier:Any){
+        let panoMarker = GMSMarker(position: CLLocationCoordinate2D(latitude: latitude, longitude: longitude))
+        panoMarker.groundAnchor = CGPoint(x: 0.5, y: 0.5)
+        panoMarker.icon = UIImage(named: "pano_marker")
+        panoMarker.map = googleMapView
+        panoMarker.userData = identifier
+        bounds = bounds.includingCoordinate(panoMarker.position)
+    }
+    
+    
 }
 
+//MARK:- Map View Delegate
 extension MapViewController: GMSMapViewDelegate {
     
     func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
@@ -159,17 +229,33 @@ extension MapViewController: GMSMapViewDelegate {
             {
               if let firstObject = tappedPanorama.first
                 {
+                    self.selectedPanorma = firstObject
                     mapView.bringSubview(toFront: self.panpramaDetailView)
                     self.panoramaLatLongLabel.text = "Lat:\(firstObject.dronCurrentLatitude), Lon:\(firstObject.dronCurrentLongitude)"
                     self.panoramaDateLabel.text = dateFormate.string(from: firstObject.captureDate! as Date)
-                    self.panormaAltitudeLabel.text = "rows:\(firstObject.rows)"
-                    self.panoramaHeadingLabel.text = "columns:\(firstObject.columns)"
-                    self.panoramaPitchLabel.text = "skyRow:\(firstObject.columns)"
+                    self.panormaAltitudeLabel.text = "Altitude:0"
+                    self.panoramaHeadingLabel.text = "Heading:0"
+                    self.panoramaPitchLabel.text = "Pitch:0"
                     debugPrint("panoramalongitute:\(firstObject.dronCurrentLongitude)\ndronCurrentLatitude\(firstObject.dronCurrentLatitude)")
                 }
             }
+            return true
         }
-    return true
+        else
+        {
+            self.selectedPanorma = nil
+            mapView.sendSubview(toBack: self.panpramaDetailView)
+        }
+      return true
     }
 
+}
+
+//MARK:- Dji Gimble Delegate
+extension MapViewController : DJIFlightControllerDelegate {
+
+    func flightController(_ fc: DJIFlightController, didUpdate state: DJIFlightControllerState) {
+        self.panoramaPitchLabel.text = "Pitch:\(state.attitude.pitch)"
+        self.panormaAltitudeLabel.text = "Altitude:\(state.altitude)"
+    }
 }

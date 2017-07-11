@@ -37,7 +37,7 @@ class PanoramaController {
         return elements
     }
     
-    // Execute pano at the current location
+    //Execute pano at the current location
     func buildPanoAtCurrentLocation() -> [DJIMissionControlTimelineElement] {
         
         // Get the defaults from storage
@@ -61,7 +61,7 @@ class PanoramaController {
         
     }
     
-    // Aircraft yaw
+    //Aircraft yaw
     func buildPanoWithAircraftYaw(rows: Int, cols: Int, skyRow: Bool) -> [DJIMissionControlTimelineElement] {
         
         // Initialize the timeline array
@@ -121,7 +121,7 @@ class PanoramaController {
     
     // Gimbal yaw requires absolute angles for each gimbal position
     // Inspire 1 and Inspire 2 users
-    func buildPanoWithGimbalYaw(rows: Int, cols: Int, skyRow: Bool)  -> [DJIMissionControlTimelineElement] {
+    func buildPanoWithGimbalYaw(rows: Int, cols: Int, skyRow: Bool) -> [DJIMissionControlTimelineElement] {
         
         let yawAngle = 360/cols
         
@@ -190,14 +190,9 @@ class PanoramaController {
     
     func buildPanoAtCurrentLocationWithWaypointMission(currentLocation: CLLocationCoordinate2D) -> DJIMutableWaypointMission {
     
-        var mission = DJIMutableWaypointMission()
-        
-        
-        
-        var waypoint = DJIWaypoint(coordinate: currentLocation)
-        
-        
-        var waypoint2 = DJIWaypoint(coordinate: currentLocation)
+        let mission = DJIMutableWaypointMission()
+        _ = DJIWaypoint(coordinate: currentLocation)
+        _ = DJIWaypoint(coordinate: currentLocation)
         
         return mission
     }

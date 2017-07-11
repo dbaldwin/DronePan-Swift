@@ -14,12 +14,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
-    let productCommunicationManager = ProductCommunicationManager()
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         // Register DJI SDK
-        productCommunicationManager.registerWithSDK()
+        ProductCommunicationManager.shared.registerWithSDK()
         
         // Don't let the screen sleep while app is open
         UIApplication.shared.isIdleTimerDisabled = true

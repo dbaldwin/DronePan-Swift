@@ -19,6 +19,7 @@ class CameraViewController: UIViewController {
     @IBOutlet weak var buttonNavView: UIView!
     
     var aircraftLocation: CLLocationCoordinate2D = kCLLocationCoordinate2DInvalid
+    var aircraft_altitude:Double = 0
     
     var telemetryViewController: TelemetryViewController!
     
@@ -220,15 +221,20 @@ class CameraViewController: UIViewController {
             
         }
         
+        let yawType = defaults.integer(forKey: "yawType") 
+        print(yawType)
+        
         currentPhotoCount = 0
         print("Total number of rows \(rows), \(cols),\(skyRow),\(String(describing: gimbal))")
-    // Generate unique id for a panorama
+        // Generate unique id for a panorama
         let arrayValue = DataBaseHelper.sharedInstance.allRecordsSortByAttribute(inTable: "Panorama")
         
         //Store panorama in a DataBase table
         if shouldSave
         {
-            let panoramaDict:[String:Any] = ["captureDate":Date(),"rows":rows,"columns":cols,"dronCurrentLatitude":self.aircraftLocation.latitude,"dronCurrentLongitude":self.aircraftLocation.longitude,"skyRow":skyRow,"countId":(arrayValue.count + 1)]
+            let panoramaDict:[String:Any] = ["captureDate":Date(),"rows":rows,"columns":cols,"dronCurrentLatitude":self.aircraftLocation.latitude,"dronCurrentLongitude":self.aircraftLocation.longitude,"skyRow":skyRow,"countId":(arrayValue.count + 1),"yawType":"\(yawType)","altitude":aircraft_altitude]
+            
+//            let panoramaDict:[String:Any] = ["captureDate":Date(),"rows":rows,"columns":cols,"dronCurrentLatitude":32.25686,"dronCurrentLongitude":-120.26,"skyRow":skyRow,"countId":(arrayValue.count + 1),"yawType":"\(yawType)","altitude":aircraft_altitude]
             _ = DataBaseHelper.sharedInstance.insertRecordInTable(tableName: "Panorama", attributes: panoramaDict)
         }
         
@@ -266,16 +272,6 @@ class CameraViewController: UIViewController {
             self.gimbal?.reset(completion: nil)
             
         }
-        
-    }
-    
-    func showAlert(title: String, message: String) {
-        
-        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
-        let ok = UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil)
-        alert.addAction(ok)
-        
-        present(alert, animated: true, completion: nil)
         
     }
     
@@ -428,6 +424,7 @@ extension CameraViewController: DJIFlightControllerDelegate {
     func flightController(_ fc: DJIFlightController, didUpdate state: DJIFlightControllerState) {
         
         self.aircraftLocation = (state.aircraftLocation?.coordinate)!
+        self.aircraft_altitude = state.altitude
 
         // Send the location update to the map view
         //self.cameraVCDelegate?.updateAircraftLocation(location: self.aircraftLocation, heading: self.aircraftHeading)
