@@ -84,8 +84,6 @@ extension ProductCommunicationManager : DJISDKManagerDelegate,DJIFlightControlle
         
         if error == nil {
             
-            (UIApplication.shared.delegate as! AppDelegate).window?.rootViewController?.showAlert(title: "Message", message: "Registered successully")
-            
             if enableBridgeMode {
                 DJISDKManager.enableBridgeMode(withBridgeAppIP: bridgeAppIP)
             } else {

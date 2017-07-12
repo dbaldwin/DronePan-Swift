@@ -72,11 +72,6 @@ class MapViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.getAndShowSavedPanorama()
-        let alert = UIAlertController(title: "Coming Soon", message: "We are currently working on waypoint functionality. This is just a static view and will be active in an upcoming beta.", preferredStyle: UIAlertControllerStyle.alert)
-        let ok = UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil)
-        alert.addAction(ok)
-        
-        present(alert, animated: true, completion: nil)
     }
     
     override var prefersStatusBarHidden: Bool {
