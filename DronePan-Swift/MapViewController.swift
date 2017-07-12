@@ -16,12 +16,15 @@ class MapViewController: UIViewController {
     
     @IBOutlet weak var buttonNavView: UIView!
     
-    @IBOutlet weak var panpramaDetailView: UIView!
-    @IBOutlet weak var panoramaPitchLabel: UILabel!
-    @IBOutlet weak var panoramaHeadingLabel: UILabel!
-    @IBOutlet weak var panormaAltitudeLabel: UILabel!
+
+    @IBOutlet weak var panoramaDetailView: UIView!
+    @IBOutlet weak var panoramaAltitudeLabel: UILabel!
     @IBOutlet weak var panoramaLatLongLabel: UILabel!
     @IBOutlet weak var panoramaDateLabel: UILabel!
+    @IBOutlet weak var panoramaRowsColsLabel: UILabel!
+    @IBOutlet weak var panoramaYawTypeLabel: UILabel!
+    @IBOutlet weak var panoramaSkyRowLabel: UILabel!
+    
     
     // for the aircraft marker
     let aircraftMarker = GMSMarker()
@@ -82,10 +85,10 @@ class MapViewController: UIViewController {
         // Get all saved pano from DB
         if let totalpanorma:[Panorama] = DataBaseHelper.sharedInstance.allRecordsSortByAttribute(inTable: "Panorama") as? [Panorama]
         {
-            for panorma in totalpanorma
+            for panorama in totalpanorma
             {
                 // Add pano marker in mapview
-                self.addPanoMarker(latitude:panorma.dronCurrentLatitude , longitude: panorma.dronCurrentLongitude,identifier:panorma.countId)
+                self.addPanoMarker(latitude:panorama.droneCurrentLatitude , longitude: panorama.droneCurrentLongitude,identifier:panorama.countId)
             }
         }
         //including marker in boundBox
@@ -124,15 +127,15 @@ class MapViewController: UIViewController {
     //MARK:- Private methods
     private func startPanormaMission()
     {
-        if let selectedPanorma = self.selectedPanorma
+        if let selectedPanorama = self.selectedPanorma
         {
-            let destinationLocation = CLLocationCoordinate2D(latitude: selectedPanorma.dronCurrentLatitude, longitude: selectedPanorma.dronCurrentLongitude)
+            let destinationLocation = CLLocationCoordinate2D(latitude: selectedPanorama.droneCurrentLatitude, longitude: selectedPanorama.droneCurrentLongitude)
             if  let takeOffToCoordinate = DJIGoToAction.init(coordinate: destinationLocation) {
                 
                 DJISDKManager.missionControl()?.scheduleElement(DJITakeOffAction.init())
 
                 var timeActionsCount = 0
-                if  let takeOffWithAltitude = DJIGoToAction.init(altitude: selectedPanorma.altitude) {
+                if  let takeOffWithAltitude = DJIGoToAction.init(altitude: selectedPanorama.altitude) {
                     let error = DJISDKManager.missionControl()?.scheduleElement(takeOffWithAltitude)
                     if error == nil {
                         timeActionsCount = 1
@@ -148,10 +151,10 @@ class MapViewController: UIViewController {
                 let pano = PanoramaController()
                 var elements : [DJIMissionControlTimelineElement] = []
                 
-                if  selectedPanorma.yawType == "1" {
-                    elements = pano.buildPanoWithGimbalYaw(rows: Int(selectedPanorma.rows), cols: Int(selectedPanorma.columns), skyRow: selectedPanorma.skyRow == 1 ? true : false)
+                if  selectedPanorama.yawType == "1" {
+                    elements = pano.buildPanoWithGimbalYaw(rows: Int(selectedPanorama.rows), cols: Int(selectedPanorama.columns), skyRow: selectedPanorama.skyRow == 1 ? true : false)
                 }else{
-                    elements = pano.buildPanoWithAircraftYaw(rows: Int(selectedPanorma.rows), cols: Int(selectedPanorma.columns), skyRow: selectedPanorma.skyRow == 1 ? true : false)
+                    elements = pano.buildPanoWithAircraftYaw(rows: Int(selectedPanorama.rows), cols: Int(selectedPanorama.columns), skyRow: selectedPanorama.skyRow == 1 ? true : false)
                 }
                 
                 let panoError = DJISDKManager.missionControl()?.scheduleElements(elements)
@@ -170,8 +173,6 @@ class MapViewController: UIViewController {
                 var finishedEventCount = 0
                 let totalEventCount = elements.count + 1 + timeActionsCount //{ (Panoromo Mission Elements) + (Take off mission element + Go to Alitude + Go To Location Element) }
                 DJISDKManager.missionControl()?.addListener(self, toTimelineProgressWith: { (timeLineEvent, missionControl, error, other) in
-                    
-                    self.panoramaHeadingLabel.text = "Heading:\(ProductCommunicationManager.shared.fetchFlightController()?.compass?.heading ?? 0)"
                     
                     switch(timeLineEvent)
                     {
@@ -213,6 +214,12 @@ class MapViewController: UIViewController {
 //MARK:- Map View Delegate
 extension MapViewController: GMSMapViewDelegate {
     
+    // Map tapped
+    func mapView(_ mapView: GMSMapView, didTapAt coordinate: CLLocationCoordinate2D) {
+        mapView.sendSubview(toBack: self.panoramaDetailView)
+    }
+    
+    // Pano marker tapped
     func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
         debugPrint("You tapped at \(marker.position.latitude), \(marker.position.longitude)")
         debugPrint("identifier here\(marker.userData ?? "")")
@@ -225,13 +232,15 @@ extension MapViewController: GMSMapViewDelegate {
               if let firstObject = tappedPanorama.first
                 {
                     self.selectedPanorma = firstObject
-                    mapView.bringSubview(toFront: self.panpramaDetailView)
-                    self.panoramaLatLongLabel.text = "Lat:\(firstObject.dronCurrentLatitude), Lon:\(firstObject.dronCurrentLongitude)"
+                    mapView.bringSubview(toFront: self.panoramaDetailView)
+                    self.panoramaLatLongLabel.text = "Lat: \(firstObject.droneCurrentLatitude), Lon: \(firstObject.droneCurrentLongitude)"
                     self.panoramaDateLabel.text = dateFormate.string(from: firstObject.captureDate! as Date)
-                    self.panormaAltitudeLabel.text = "Altitude:0"
-                    self.panoramaHeadingLabel.text = "Heading:0"
-                    self.panoramaPitchLabel.text = "Pitch:0"
-                    debugPrint("panoramalongitute:\(firstObject.dronCurrentLongitude)\ndronCurrentLatitude\(firstObject.dronCurrentLatitude)")
+                    self.panoramaAltitudeLabel.text = "Altitude: \(firstObject.altitude) m"
+                    self.panoramaRowsColsLabel.text = "Rows: \(firstObject.rows), Columns: \(firstObject.columns)"
+                    self.panoramaYawTypeLabel.text = "Yaw type: \(firstObject.yawType == "0" ? "Aircraft" : "Gimbal")"
+                    self.panoramaSkyRowLabel.text = "Sky row: \(firstObject.skyRow == 1 ? "Enabled" : "Disabled")"
+                    
+                    debugPrint("panoramalongitude:\(firstObject.droneCurrentLongitude)\ndroneCurrentLatitude\(firstObject.droneCurrentLatitude)")
                 }
             }
             return true
@@ -239,7 +248,7 @@ extension MapViewController: GMSMapViewDelegate {
         else
         {
             self.selectedPanorma = nil
-            mapView.sendSubview(toBack: self.panpramaDetailView)
+            mapView.sendSubview(toBack: self.panoramaDetailView)
         }
       return true
     }
@@ -250,7 +259,5 @@ extension MapViewController: GMSMapViewDelegate {
 extension MapViewController : DJIFlightControllerDelegate {
 
     func flightController(_ fc: DJIFlightController, didUpdate state: DJIFlightControllerState) {
-        self.panoramaPitchLabel.text = "Pitch:\(state.attitude.pitch)"
-        self.panormaAltitudeLabel.text = "Altitude:\(state.altitude)"
     }
 }

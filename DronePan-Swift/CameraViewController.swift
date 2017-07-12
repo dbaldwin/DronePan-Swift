@@ -179,25 +179,6 @@ class CameraViewController: UIViewController {
     func startPanoNow(_ shouldSave:Bool)
     {
         
-        // Test to see if this works. For some reason it works when bridging but not with the actual device. Adding here to test.
-        // Setting up camera delegate
-        let camera: DJICamera? = fetchCamera()
-        
-        if camera != nil {
-            print("camera delegate is setup")
-            camera?.delegate = self
-        }
-        
-        // Putting this here to see if we can get around the cases where the aircraft doesn't want to yaw
-        let fc: DJIFlightController? = fetchFlightController()
-        
-        if fc != nil {
-            fc?.delegate = self
-        }
-        
-        // Enable virtual stick mode so that the aircraft can yaw
-        fc?.setVirtualStickModeEnabled(true, withCompletion: nil)
-        
         let defaults = UserDefaults.standard
         
         // We should figure out how to update these immediately after the settings are saved and get rid of all this code
@@ -232,9 +213,14 @@ class CameraViewController: UIViewController {
         //Store panorama in a DataBase table
         if shouldSave
         {
-            let panoramaDict:[String:Any] = ["captureDate":Date(),"rows":rows,"columns":cols,"dronCurrentLatitude":self.aircraftLocation.latitude,"dronCurrentLongitude":self.aircraftLocation.longitude,"skyRow":skyRow,"countId":(arrayValue.count + 1),"yawType":"\(yawType)","altitude":aircraft_altitude]
+            //let panoramaDict:[String:Any] = ["captureDate":Date(),"rows":rows,"columns":cols,"droneCurrentLatitude":self.aircraftLocation.latitude,"droneCurrentLongitude":self.aircraftLocation.longitude,"skyRow":skyRow,"countId":(arrayValue.count + 1),"yawType":"\(yawType)","altitude":aircraft_altitude]
             
-//            let panoramaDict:[String:Any] = ["captureDate":Date(),"rows":rows,"columns":cols,"dronCurrentLatitude":32.25686,"dronCurrentLongitude":-120.26,"skyRow":skyRow,"countId":(arrayValue.count + 1),"yawType":"\(yawType)","altitude":aircraft_altitude]
+            //let panoramaDict:[String:Any] = ["captureDate":Date(),"rows":rows,"columns":cols,"droneCurrentLatitude":32.25686,"droneCurrentLongitude":-120.26,"skyRow":skyRow,"countId":(arrayValue.count + 1),"yawType":"\(yawType)","altitude": 100]
+            
+            let panoramaDict:[String:Any] = ["captureDate":Date(),"rows":rows,"columns":cols,"droneCurrentLatitude":35.25686,"droneCurrentLongitude":-121.26,"skyRow":skyRow,"countId":(arrayValue.count + 1),"yawType":"\(yawType)","altitude":150]
+        
+            
+            
             _ = DataBaseHelper.sharedInstance.insertRecordInTable(tableName: "Panorama", attributes: panoramaDict)
         }
         
@@ -242,6 +228,25 @@ class CameraViewController: UIViewController {
         totalPhotoCount = rows * cols + 1
         
         telemetryViewController.photoCountLabel.text = "\(currentPhotoCount)/\(totalPhotoCount)"
+        
+        // Test to see if this works. For some reason it works when bridging but not with the actual device. Adding here to test.
+        // Setting up camera delegate
+        let camera: DJICamera? = fetchCamera()
+        
+        if camera != nil {
+            print("camera delegate is setup")
+            camera?.delegate = self
+        }
+        
+        // Putting this here to see if we can get around the cases where the aircraft doesn't want to yaw
+        let fc: DJIFlightController? = fetchFlightController()
+        
+        if fc != nil {
+            fc?.delegate = self
+        }
+        
+        // Enable virtual stick mode so that the aircraft can yaw
+        fc?.setVirtualStickModeEnabled(true, withCompletion: nil)
         
         // Clear out previous missions
         DJISDKManager.missionControl()?.stopTimeline()
