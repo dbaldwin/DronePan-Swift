@@ -58,21 +58,13 @@ class MapViewController: UIViewController {
         googleMapView.settings.tiltGestures = false
         googleMapView.settings.myLocationButton = true
         
-        aircraftMarker.position = CLLocationCoordinate2D(latitude: 32, longitude: -98)
+        /*aircraftMarker.position = CLLocationCoordinate2D(latitude: 32, longitude: -98)
         aircraftMarker.groundAnchor = CGPoint(x: 0.5, y: 0.5)
         aircraftMarker.icon = UIImage(named: "aircraft_marker")
-        aircraftMarker.map = googleMapView
-        
-        // Add the pano marker
-        /*let panoMarker = GMSMarker()
-        panoMarker.position = CLLocationCoordinate2D(latitude: 32.001, longitude: -98.001)
-        panoMarker.groundAnchor = CGPoint(x: 0.5, y: 0.5)
-        panoMarker.icon = UIImage(named: "pano_marker")
-        panoMarker.map = googleMapView*/
-        
+        aircraftMarker.map = googleMapView*/
+
         //initilizing the bounds
-        
-        bounds = GMSCoordinateBounds(coordinate: self.aircraftMarker.position, coordinate: self.aircraftMarker.position)
+        //bounds = GMSCoordinateBounds(coordinate: self.aircraftMarker.position, coordinate: self.aircraftMarker.position)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -232,6 +224,7 @@ extension MapViewController: GMSMapViewDelegate {
     // Map tapped
     func mapView(_ mapView: GMSMapView, didTapAt coordinate: CLLocationCoordinate2D) {
         mapView.sendSubview(toBack: self.panoramaDetailView)
+        unHighlightPanoMarkers()
     }
     
     // Pano marker tapped
