@@ -32,10 +32,13 @@ class MapViewController: UIViewController {
     // for BoundBox
     var bounds = GMSCoordinateBounds()
     
-    //selectedPanorma for mission
+    // selectedPanorama for mission
     var selectedPanorma:Panorama?
     
-    //for showingDate in Panorama
+    // All pano marker so we can enumerate and un-highlight
+    var panoMarkers = [GMSMarker]()
+    
+    //for showing date in Panorama
     lazy var dateFormate:DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "E, d MMM yyyy HH:mm:ss"
@@ -83,12 +86,13 @@ class MapViewController: UIViewController {
     
     func getAndShowSavedPanorama() {
         // Get all saved pano from DB
-        if let totalpanorma:[Panorama] = DataBaseHelper.sharedInstance.allRecordsSortByAttribute(inTable: "Panorama") as? [Panorama]
+        if let panoramas:[Panorama] = DataBaseHelper.sharedInstance.allRecordsSortByAttribute(inTable: "Panorama") as? [Panorama]
         {
-            for panorama in totalpanorma
+            for panorama in panoramas
             {
                 // Add pano marker in mapview
-                self.addPanoMarker(latitude:panorama.droneCurrentLatitude , longitude: panorama.droneCurrentLongitude,identifier:panorama.countId)
+                let panoMarker = self.addPanoMarker(latitude:panorama.droneCurrentLatitude , longitude: panorama.droneCurrentLongitude,identifier:panorama.countId)
+                panoMarkers.append(panoMarker)
             }
         }
         //including marker in boundBox
@@ -199,15 +203,26 @@ class MapViewController: UIViewController {
         
     }
     
-    private func addPanoMarker(latitude:CLLocationDegrees,longitude:CLLocationDegrees,identifier:Any){
+    private func addPanoMarker(latitude:CLLocationDegrees,longitude:CLLocationDegrees,identifier:Any) -> GMSMarker{
         let panoMarker = GMSMarker(position: CLLocationCoordinate2D(latitude: latitude, longitude: longitude))
         panoMarker.groundAnchor = CGPoint(x: 0.5, y: 0.5)
         panoMarker.icon = UIImage(named: "pano_marker")
         panoMarker.map = googleMapView
         panoMarker.userData = identifier
         bounds = bounds.includingCoordinate(panoMarker.position)
+        
+        return panoMarker
     }
     
+    func unHighlightPanoMarkers() {
+        
+        for marker in panoMarkers {
+
+            marker.icon = UIImage(named: "pano_marker")
+            
+        }
+        
+    }
     
 }
 
@@ -227,6 +242,12 @@ extension MapViewController: GMSMapViewDelegate {
         //get selected marker Value
         if let p_markerId = marker.userData
         {
+            // Un-highlight all pano markers
+            self.unHighlightPanoMarkers()
+            
+            // Highlight the selected marker
+            marker.icon = UIImage(named: "pano_marker_selected")
+            
             if let tappedPanorama:[Panorama] = DataBaseHelper.sharedInstance.allRecordsSortByAttribute(inTable: "Panorama", whereKey: "countId", contains: p_markerId) as? [Panorama]
             {
               if let firstObject = tappedPanorama.first
