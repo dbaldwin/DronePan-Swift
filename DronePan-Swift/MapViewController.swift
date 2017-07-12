@@ -136,7 +136,7 @@ class MapViewController: UIViewController {
             let destinationLocation = CLLocationCoordinate2D(latitude: selectedPanorama.droneCurrentLatitude, longitude: selectedPanorama.droneCurrentLongitude)
             if  let takeOffToCoordinate = DJIGoToAction.init(coordinate: destinationLocation) {
                 
-                DJISDKManager.missionControl()?.scheduleElement(DJITakeOffAction.init())
+                let _ = DJISDKManager.missionControl()?.scheduleElement(DJITakeOffAction.init())
 
                 var timeActionsCount = 0
                 if  let takeOffWithAltitude = DJIGoToAction.init(altitude: selectedPanorama.altitude) {
