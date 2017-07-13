@@ -163,20 +163,22 @@ class CameraViewController: UIViewController {
     
     @IBAction func startPano(_ sender: Any) {
         
-        let alertView = UIAlertController(title: "", message: "Panorama starting. Would you like to save this panorama location so that it can be repeated in the future?", preferredStyle: .alert)
+        let alertView = UIAlertController(title: "Confirm", message: "Are you ready to start the panorama sequence?", preferredStyle: .alert)
         
-        let yes = UIAlertAction(title: "Yes", style: UIAlertActionStyle.default, handler:{ (action) in
-            self.startPanoNow(true)
+        let cancel = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default, handler:{ (action) in
         })
-        alertView.addAction(yes)
-        let no = UIAlertAction(title: "No", style: UIAlertActionStyle.cancel, handler:{(action) in
-            self.startPanoNow(false)
+        
+        let start = UIAlertAction(title: "Start", style: UIAlertActionStyle.cancel, handler:{(action) in
+            self.startPanoNow()
         })
-         alertView.addAction(no)
-         present(alertView, animated: true, completion: nil)
+        
+        alertView.addAction(cancel)
+        alertView.addAction(start)
+        
+        present(alertView, animated: true, completion: nil)
     }
     
-    func startPanoNow(_ shouldSave:Bool)
+    func startPanoNow()
     {
         
         let defaults = UserDefaults.standard
@@ -210,20 +212,15 @@ class CameraViewController: UIViewController {
         // Generate unique id for a panorama
         let arrayValue = DataBaseHelper.sharedInstance.allRecordsSortByAttribute(inTable: "Panorama")
         
-        //Store panorama in a DataBase table
-        if shouldSave
-        {
-            //let panoramaDict:[String:Any] = ["captureDate":Date(),"rows":rows,"columns":cols,"droneCurrentLatitude":self.aircraftLocation.latitude,"droneCurrentLongitude":self.aircraftLocation.longitude,"skyRow":skyRow,"countId":(arrayValue.count + 1),"yawType":"\(yawType)","altitude":aircraft_altitude]
+        // Save pano to database
+        let panoramaDict:[String:Any] = ["captureDate":Date(),"rows":rows,"columns":cols,"droneCurrentLatitude":self.aircraftLocation.latitude,"droneCurrentLongitude":self.aircraftLocation.longitude,"skyRow":skyRow,"countId":(arrayValue.count + 1),"yawType":"\(yawType)","altitude":aircraft_altitude]
             
-            //let panoramaDict:[String:Any] = ["captureDate":Date(),"rows":rows,"columns":cols,"droneCurrentLatitude":32.25686,"droneCurrentLongitude":-120.26,"skyRow":skyRow,"countId":(arrayValue.count + 1),"yawType":"\(yawType)","altitude": 100]
+        //let panoramaDict:[String:Any] = ["captureDate":Date(),"rows":rows,"columns":cols,"droneCurrentLatitude":32.25686,"droneCurrentLongitude":-120.26,"skyRow":skyRow,"countId":(arrayValue.count + 1),"yawType":"\(yawType)","altitude": 100]
             
-            let panoramaDict:[String:Any] = ["captureDate":Date(),"rows":rows,"columns":cols,"droneCurrentLatitude":35.25686,"droneCurrentLongitude":-121.26,"skyRow":skyRow,"countId":(arrayValue.count + 1),"yawType":"\(yawType)","altitude":150]
+        //let panoramaDict:[String:Any] = ["captureDate":Date(),"rows":rows,"columns":cols,"droneCurrentLatitude":35.25686,"droneCurrentLongitude":-121.26,"skyRow":skyRow,"countId":(arrayValue.count + 1),"yawType":"\(yawType)","altitude":150]
         
-            
-            
-            _ = DataBaseHelper.sharedInstance.insertRecordInTable(tableName: "Panorama", attributes: panoramaDict)
-        }
-        
+        // Write to database
+        _ = DataBaseHelper.sharedInstance.insertRecordInTable(tableName: "Panorama", attributes: panoramaDict)
         
         totalPhotoCount = rows * cols + 1
         

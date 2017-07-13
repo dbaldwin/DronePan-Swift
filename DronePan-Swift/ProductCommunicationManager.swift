@@ -11,9 +11,9 @@ import DJISDK
 
 class ProductCommunicationManager: NSObject {
     
-    let enableBridgeMode = false
+    let enableBridgeMode = true
     var aircraftLocation : CLLocationCoordinate2D?
-    let bridgeAppIP = "192.168.0.110"
+    let bridgeAppIP = "10.0.1.17"
     
     static let shared = ProductCommunicationManager()
     
