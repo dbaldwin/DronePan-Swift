@@ -121,8 +121,6 @@ class CameraViewController: UIViewController {
             case .stopError:
                 print("Stop error")
             case .finished:
-                // For some reason this gets called more than once
-                //self.panoFinished()
                 print("Finished")
             default:
                 print("Defaut")
@@ -135,7 +133,6 @@ class CameraViewController: UIViewController {
         
         VideoPreviewer.instance().unSetView()
         DJISDKManager.videoFeeder()?.primaryVideoFeed.remove(self)
-        
         DJISDKManager.missionControl()?.removeListener(self)
         
         super.viewWillDisappear(animated)
@@ -224,16 +221,8 @@ class CameraViewController: UIViewController {
         
         totalPhotoCount = rows * cols + 1
         
-        telemetryViewController.photoCountLabel.text = "\(currentPhotoCount)/\(totalPhotoCount)"
-        
-        // Test to see if this works. For some reason it works when bridging but not with the actual device. Adding here to test.
-        // Setting up camera delegate
-        let camera: DJICamera? = fetchCamera()
-        
-        if camera != nil {
-            print("camera delegate is setup")
-            camera?.delegate = self
-        }
+        // Initialize the photo counter
+        telemetryViewController.resetAndStartCounting(photoCount: totalPhotoCount)
         
         // Putting this here to see if we can get around the cases where the aircraft doesn't want to yaw
         let fc: DJIFlightController? = fetchFlightController()
@@ -317,13 +306,14 @@ class CameraViewController: UIViewController {
         //Updates the product's connection status
         print("Product Connected")
         
+        // Trying to manage this in telemetry view controller
         // Setting up camera delegate
-        let camera: DJICamera? = fetchCamera()
+        /*let camera: DJICamera? = fetchCamera()
         
         if camera != nil {
             print("camera delegate is setup")
             camera?.delegate = self
-        }
+        }*/
         
         // Setting up gimbal delegate
         gimbal = fetchGimbal()
@@ -339,21 +329,6 @@ class CameraViewController: UIViewController {
             fc?.delegate = self
         }
 
-    }
-
-    func fetchCamera() -> DJICamera? {
-        
-        if DJISDKManager.product() == nil {
-            return nil
-        }
-        
-        if DJISDKManager.product() is DJIAircraft {
-            return (DJISDKManager.product() as! DJIAircraft).camera
-        } else if DJISDKManager.product() is DJIHandheld {
-            return (DJISDKManager.product() as! DJIHandheld).camera
-        }
-        
-        return nil
     }
     
     func fetchGimbal() -> DJIGimbal? {
@@ -403,22 +378,24 @@ extension CameraViewController: DJIVideoFeedListener {
     
 }
 
+// Trying to move this to TelemtryViewController
+/*
 extension CameraViewController: DJICameraDelegate {
     
     func camera(_ camera: DJICamera, didGenerateNewMediaFile newMedia: DJIMediaFile) {
         
-        // Here we can increment the photo counter
-        currentPhotoCount = currentPhotoCount + 1
-        telemetryViewController.photoCountLabel.text = "\(currentPhotoCount)/\(totalPhotoCount)"
+        print("CameraViewController didGenerateNewMediaFile")
+        
+        // This will fire the property observer and update the label
+        telemetryViewController.currentPhotoCount += 1
         
         if currentPhotoCount == totalPhotoCount {
             self.panoFinished()
         }
         
     }
-    
-
 }
+*/
 
 // Keep track of the current aircraft location
 extension CameraViewController: DJIFlightControllerDelegate {

@@ -145,7 +145,7 @@ class MapViewController: UIViewController {
         let alertView = UIAlertController(title: "Confirm", message:"Are you ready to begin the panorama mission?", preferredStyle: .alert)
         
         let yes = UIAlertAction(title: "Yes", style: UIAlertActionStyle.cancel, handler:{ (action) in
-            self.startPanormaMission()
+            self.startPanoramaMission()
         })
         alertView.addAction(yes)
         let no = UIAlertAction(title: "No", style: UIAlertActionStyle.default, handler:nil)
@@ -155,11 +155,13 @@ class MapViewController: UIViewController {
     
     //MARK:- Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        buttonNavView.isHidden = true
-    }
 
+        buttonNavView.isHidden = true
+
+    }
+    
     //MARK:- Private methods
-    private func startPanormaMission()
+    private func startPanoramaMission()
     {
         if let selectedPanorama = self.selectedPanorama {
             
@@ -173,6 +175,7 @@ class MapViewController: UIViewController {
                 DJISDKManager.missionControl()?.stopTimeline()
                 DJISDKManager.missionControl()?.unscheduleEverything()
                 
+                // Need to only do this if aircraft is not in the air - leaving out for now
                 //let _ = DJISDKManager.missionControl()?.scheduleElement(DJITakeOffAction())
 
                 var timeActionsCount = 0
@@ -208,7 +211,8 @@ class MapViewController: UIViewController {
                     return;
                 }
 
-                ProductCommunicationManager.shared.fetchFlightController()?.delegate = self
+                // Not necessary at the moment
+                //ProductCommunicationManager.shared.fetchFlightController()?.delegate = self
                 
                 DJISDKManager.missionControl()?.startTimeline()
                 var finishedEventCount = 0
@@ -316,8 +320,10 @@ extension MapViewController: GMSMapViewDelegate {
 }
 
 //MARK:- Dji Gimble Delegate
-extension MapViewController : DJIFlightControllerDelegate {
+/*extension MapViewController : DJIFlightControllerDelegate {
 
     func flightController(_ fc: DJIFlightController, didUpdate state: DJIFlightControllerState) {
+        
     }
-}
+}*/
+
