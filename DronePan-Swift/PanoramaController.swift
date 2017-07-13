@@ -64,10 +64,14 @@ class PanoramaController {
     //Aircraft yaw
     func buildPanoWithAircraftYaw(rows: Int, cols: Int, skyRow: Bool) -> [DJIMissionControlTimelineElement] {
         
-        // Get gimbal min
+        // Get gimbal capabilities
+        // Not doing anything with this at the moment
         let gimbal = ProductCommunicationManager.shared.fetchGimbal()
+        let capability: DJIParamCapability = gimbal?.capabilities[DJIGimbalParamAdjustPitch] as! DJIParamCapability
+        let minMax: DJIParamCapabilityMinMax = capability as! DJIParamCapabilityMinMax
+        print("Gimbal pitch max: \(minMax.max)")
+        print("Gimbal pitch min: \(minMax.min)")
         
-        gimbal?.getEndpointFor(DJIGimbalEndpointDirection.pitchUp, withCompletion: <#T##(Int, Error?) -> Void#>)
         
         // Initialize the timeline array
         var elements = [DJIMissionControlTimelineElement]()
@@ -112,7 +116,7 @@ class PanoramaController {
         }
         
         // Let's add nadir shots (start with one and add more later)
-        let attitude = DJIGimbalAttitude(pitch: -80.0, roll: 0.0, yaw: 0.0)
+        let attitude = DJIGimbalAttitude(pitch: -90.0, roll: 0.0, yaw: 0.0)
         let pitchAction: DJIGimbalAttitudeAction = DJIGimbalAttitudeAction(attitude: attitude)!
         elements.append(pitchAction)
         
