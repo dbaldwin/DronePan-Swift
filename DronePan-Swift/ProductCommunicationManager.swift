@@ -13,7 +13,7 @@ class ProductCommunicationManager: NSObject {
     
     let enableBridgeMode = true
     var aircraftLocation : CLLocationCoordinate2D?
-    let bridgeAppIP = "10.0.1.17"
+    let bridgeAppIP = "10.0.1.18"
     
     static let shared = ProductCommunicationManager()
     
@@ -124,7 +124,7 @@ extension UIViewController {
     
     func showAlert(title:String?,message:String?) -> Void {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction((UIAlertAction(title: "Ok", style: .cancel, handler: nil)))
+        alert.addAction((UIAlertAction(title: "OK", style: .cancel, handler: nil)))
         DispatchQueue.main.async {
             self.present(alert, animated: true, completion: nil)
         }
@@ -132,7 +132,7 @@ extension UIViewController {
     
     func showAlert(title:String?,message:String?,withCompletion completion:@escaping ((_ action:AnyObject)->Void)) -> Void {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: { (action) in
+        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (action) in
             completion(action)
         }))
         DispatchQueue.main.async {
