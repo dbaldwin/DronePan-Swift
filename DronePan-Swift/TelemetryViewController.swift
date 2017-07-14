@@ -62,6 +62,13 @@ extension TelemetryViewController: DJICameraDelegate {
         
         print("TelemetryViewController didGenerateNewMediaFile")
         currentPhotoCount += 1
+        
+        // Let the user know the panorama is complete
+        if currentPhotoCount == totalPhotoCount {
+            
+            self.showAlert(title: "Panorama complete!", message: "It may be necessary to toggle your flight mode switch to Sport mode and back to regain control of your aircraft.")
+            
+        }
     }
     
 }

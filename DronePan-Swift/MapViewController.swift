@@ -143,6 +143,8 @@ class MapViewController: UIViewController {
     
     
     @IBAction func launchButtonClicked(_ sender: UIButton) {
+        
+        
         let alertView = UIAlertController(title: "Confirm", message:"Are you ready to start the panorama mission?", preferredStyle: .alert)
         
         let yes = UIAlertAction(title: "Start", style: UIAlertActionStyle.cancel, handler:{ (action) in
@@ -232,7 +234,7 @@ class MapViewController: UIViewController {
                     case .finished:
                         finishedEventCount += 1
                         if finishedEventCount == totalEventCount {
-                            self.showAlert(title: "Panorama complete!", message: "You can now take manual control of your aircraft.")
+                            self.showAlert(title: "Panorama complete!", message: "It may be necessary to toggle your flight mode switch to Sport mode and back to regain control of your aircraft.")
                         }
                         break
                     default:

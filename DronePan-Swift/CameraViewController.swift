@@ -162,10 +162,10 @@ class CameraViewController: UIViewController {
         
         let alertView = UIAlertController(title: "Confirm", message: "Are you ready to start the panorama sequence?", preferredStyle: .alert)
         
-        let cancel = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default, handler:{ (action) in
+        let cancel = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler:{ (action) in
         })
         
-        let start = UIAlertAction(title: "Start", style: UIAlertActionStyle.cancel, handler:{(action) in
+        let start = UIAlertAction(title: "Start", style: UIAlertActionStyle.default, handler:{(action) in
             self.startPanoNow()
         })
         
@@ -255,7 +255,7 @@ class CameraViewController: UIViewController {
     
     func panoFinished() {
         
-        showAlert(title: "Success", message: "Your panorama was successfully captured!")
+        showAlert(title: "Panorama complete!", message: "It may be necessary to toggle your flight mode switch to Sport mode and back to regain control of your aircraft.")
         
         // Reset the gimbal. For some reason with Inspire 1 this doesn't reset the pitch...only the yaw
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
