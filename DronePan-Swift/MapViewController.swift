@@ -143,13 +143,13 @@ class MapViewController: UIViewController {
     
     
     @IBAction func launchButtonClicked(_ sender: UIButton) {
-        let alertView = UIAlertController(title: "Confirm", message:"Are you ready to begin the panorama mission?", preferredStyle: .alert)
+        let alertView = UIAlertController(title: "Confirm", message:"Are you ready to start the panorama mission?", preferredStyle: .alert)
         
-        let yes = UIAlertAction(title: "Yes", style: UIAlertActionStyle.cancel, handler:{ (action) in
+        let yes = UIAlertAction(title: "Start", style: UIAlertActionStyle.cancel, handler:{ (action) in
             self.startPanoramaMission()
         })
         alertView.addAction(yes)
-        let no = UIAlertAction(title: "No", style: UIAlertActionStyle.default, handler:nil)
+        let no = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default, handler:nil)
         alertView.addAction(no)
         present(alertView, animated: true, completion: nil)
     }
