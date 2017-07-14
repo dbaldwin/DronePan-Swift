@@ -695,10 +695,19 @@
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A1X-CD-tcO">
+                                                <rect key="frame" x="175" y="6" width="36" height="28"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="36" id="0up-M8-RvV"/>
+                                                    <constraint firstAttribute="height" constant="28" id="bIs-8G-EBE"/>
+                                                </constraints>
+                                                <state key="normal" image="delete_pano"/>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.84441887842465757" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstItem="3XW-sp-fp8" firstAttribute="width" secondItem="2Dz-aY-Tht" secondAttribute="width" id="04y-sH-ko1"/>
+                                            <constraint firstItem="3XW-sp-fp8" firstAttribute="top" secondItem="A1X-CD-tcO" secondAttribute="bottom" constant="6" id="1MX-8l-FpF"/>
                                             <constraint firstItem="985-WY-f3f" firstAttribute="leading" secondItem="2Dz-aY-Tht" secondAttribute="leading" id="3LW-Rh-Yb0"/>
                                             <constraint firstItem="YtP-xk-P3M" firstAttribute="leading" secondItem="l7k-GW-D5g" secondAttribute="leading" id="3jT-9P-jTc"/>
                                             <constraint firstAttribute="height" constant="280" id="4Zw-b9-d4N"/>
@@ -716,6 +725,8 @@
                                             <constraint firstItem="djw-5M-dIh" firstAttribute="height" secondItem="YtP-xk-P3M" secondAttribute="height" id="Q9y-AC-p59"/>
                                             <constraint firstItem="8QH-rM-ALt" firstAttribute="width" secondItem="djw-5M-dIh" secondAttribute="width" id="TDB-Za-4eS"/>
                                             <constraint firstItem="3XW-sp-fp8" firstAttribute="leading" secondItem="2Dz-aY-Tht" secondAttribute="leading" id="TlJ-C7-mUn"/>
+                                            <constraint firstItem="A1X-CD-tcO" firstAttribute="top" secondItem="2Dz-aY-Tht" secondAttribute="top" constant="6" id="VY2-cD-m2B"/>
+                                            <constraint firstAttribute="trailing" secondItem="A1X-CD-tcO" secondAttribute="trailing" constant="19" id="VxF-ul-ilf"/>
                                             <constraint firstItem="l7k-GW-D5g" firstAttribute="top" secondItem="uNc-Mn-yeC" secondAttribute="bottom" constant="5" id="ZvF-9B-I0q"/>
                                             <constraint firstItem="3XW-sp-fp8" firstAttribute="top" secondItem="985-WY-f3f" secondAttribute="bottom" id="bqz-5B-zn0"/>
                                             <constraint firstItem="YtP-xk-P3M" firstAttribute="trailing" secondItem="l7k-GW-D5g" secondAttribute="trailing" id="cSG-ye-fT8"/>
@@ -1031,6 +1042,7 @@
     </scenes>
     <resources>
         <image name="close_button" width="33" height="32"/>
+        <image name="delete_pano" width="28" height="28"/>
         <image name="hamburger" width="32" height="24"/>
         <image name="photo_button" width="75" height="75"/>
         <image name="photo_button_pressed" width="75" height="75"/>
