@@ -205,7 +205,7 @@ class MapViewController: UIViewController {
                 if  selectedPanorama.yawType == "1" {
                     elements = pano.buildPanoWithGimbalYaw(rows: Int(selectedPanorama.rows), cols: Int(selectedPanorama.columns), skyRow: selectedPanorama.skyRow == 1 ? true : false)
                 }else{
-                    elements = pano.buildPanoWithAircraftYaw(rows: Int(selectedPanorama.rows), cols: Int(selectedPanorama.columns), skyRow: selectedPanorama.skyRow == 1 ? true : false)
+                    elements = pano.buildPanoWithAircraftYaw(rows: Int(selectedPanorama.rows), cols: Int(selectedPanorama.columns), skyRow: selectedPanorama.skyRow == 1 ? true : false, altitude: selectedPanorama.altitude)
                 }
                 
                 let panoError = DJISDKManager.missionControl()?.scheduleElements(elements)
@@ -238,7 +238,7 @@ class MapViewController: UIViewController {
                     case .finished:
                         finishedEventCount += 1
                         if finishedEventCount == totalEventCount {
-                            self.showAlert(title: "Panorama complete!", message: "It may be necessary to toggle your flight mode switch to Sport mode and back to regain control of your aircraft.")
+                            self.showAlert(title: "Panorama complete!", message: "You can now take manual control of your aircraft.")
                         }
                         break
                     default:

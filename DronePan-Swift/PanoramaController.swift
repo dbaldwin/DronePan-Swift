@@ -38,7 +38,7 @@ class PanoramaController {
     }
     
     //Execute pano at the current location
-    func buildPanoAtCurrentLocation() -> [DJIMissionControlTimelineElement] {
+    func buildPanoAtCurrentLocation(altitude: Double) -> [DJIMissionControlTimelineElement] {
         
         // Get the defaults from storage
         let defaults = UserDefaults.standard
@@ -56,13 +56,13 @@ class PanoramaController {
             
         } else {
             
-            return buildPanoWithAircraftYaw(rows: rows, cols: cols, skyRow: skyRow)
+            return buildPanoWithAircraftYaw(rows: rows, cols: cols, skyRow: skyRow, altitude: altitude)
         }
         
     }
     
     //Aircraft yaw
-    func buildPanoWithAircraftYaw(rows: Int, cols: Int, skyRow: Bool) -> [DJIMissionControlTimelineElement] {
+    func buildPanoWithAircraftYaw(rows: Int, cols: Int, skyRow: Bool, altitude: Double) -> [DJIMissionControlTimelineElement] {
         
         // Get gimbal capabilities
         // Not doing anything with this at the moment
@@ -123,6 +123,11 @@ class PanoramaController {
         // Take the nadir shot
         let photoAction: DJIShootPhotoAction = DJIShootPhotoAction(singleShootPhoto:())!
         elements.append(photoAction)
+        
+        // Raise altitude by 1m to get around being stuck in joystick mode at the end of the mission
+        // This will force the aircraft back into GPS mode
+        let gotoAction: DJIGoToAction = DJIGoToAction(altitude: altitude+1)!
+        elements.append(gotoAction)
         
         return elements
         

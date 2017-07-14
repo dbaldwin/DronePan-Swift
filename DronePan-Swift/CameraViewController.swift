@@ -19,7 +19,7 @@ class CameraViewController: UIViewController {
     @IBOutlet weak var buttonNavView: UIView!
     
     var aircraftLocation: CLLocationCoordinate2D = kCLLocationCoordinate2DInvalid
-    var aircraft_altitude:Double = 0
+    var aircraftAltitude:Double = 0
     
     var telemetryViewController: TelemetryViewController!
     
@@ -191,7 +191,7 @@ class CameraViewController: UIViewController {
         let arrayValue = DataBaseHelper.sharedInstance.allRecordsSortByAttribute(inTable: "Panorama")
         
         // Save pano to database
-        let panoramaDict:[String:Any] = ["captureDate":Date(),"rows":rows,"columns":cols,"droneCurrentLatitude":self.aircraftLocation.latitude,"droneCurrentLongitude":self.aircraftLocation.longitude,"skyRow":skyRow,"countId":(arrayValue.count + 1),"yawType":"\(yawType)","altitude":aircraft_altitude]
+        let panoramaDict:[String:Any] = ["captureDate":Date(),"rows":rows,"columns":cols,"droneCurrentLatitude":self.aircraftLocation.latitude,"droneCurrentLongitude":self.aircraftLocation.longitude,"skyRow":skyRow,"countId":(arrayValue.count + 1),"yawType":"\(yawType)","altitude":aircraftAltitude]
             
         //let panoramaDict:[String:Any] = ["captureDate":Date(),"rows":rows,"columns":cols,"droneCurrentLatitude":32.25686,"droneCurrentLongitude":-120.26,"skyRow":skyRow,"countId":(arrayValue.count + 1),"yawType":"\(yawType)","altitude": 100]
             
@@ -214,7 +214,7 @@ class CameraViewController: UIViewController {
         
         // Build the pano logic
         let pano = PanoramaController()
-        let error = DJISDKManager.missionControl()?.scheduleElements(pano.buildPanoAtCurrentLocation())
+        let error = DJISDKManager.missionControl()?.scheduleElements(pano.buildPanoAtCurrentLocation(altitude: self.aircraftAltitude))
         
         if error != nil {
             showAlert(title: "Error", message: String(describing: error))
@@ -222,19 +222,6 @@ class CameraViewController: UIViewController {
         }
         
         DJISDKManager.missionControl()?.startTimeline()
-    }
-    
-    func panoFinished() {
-        
-        showAlert(title: "Panorama complete!", message: "It may be necessary to toggle your flight mode switch to Sport mode and back to regain control of your aircraft.")
-        
-        // Reset the gimbal. For some reason with Inspire 1 this doesn't reset the pitch...only the yaw
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-         
-            self.gimbal?.reset(completion: nil)
-            
-        }
-        
     }
     
     @IBAction func showButtonNav(_ sender: Any) {
@@ -349,32 +336,13 @@ extension CameraViewController: DJIVideoFeedListener {
     
 }
 
-// Trying to move this to TelemtryViewController
-/*
-extension CameraViewController: DJICameraDelegate {
-    
-    func camera(_ camera: DJICamera, didGenerateNewMediaFile newMedia: DJIMediaFile) {
-        
-        print("CameraViewController didGenerateNewMediaFile")
-        
-        // This will fire the property observer and update the label
-        telemetryViewController.currentPhotoCount += 1
-        
-        if currentPhotoCount == totalPhotoCount {
-            self.panoFinished()
-        }
-        
-    }
-}
-*/
-
 // Keep track of the current aircraft location
 extension CameraViewController: DJIFlightControllerDelegate {
     
     func flightController(_ fc: DJIFlightController, didUpdate state: DJIFlightControllerState) {
         
         self.aircraftLocation = (state.aircraftLocation?.coordinate)!
-        self.aircraft_altitude = state.altitude
+        self.aircraftAltitude = state.altitude
 
         // Send the location update to the map view
         //self.cameraVCDelegate?.updateAircraftLocation(location: self.aircraftLocation, heading: self.aircraftHeading)
