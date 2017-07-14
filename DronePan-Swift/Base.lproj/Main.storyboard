@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1212" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="ipad9_7" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -56,7 +56,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zhh-xe-z3j" customClass="DULDashboardWidget">
-                                <rect key="frame" x="20" y="698" width="300" height="50"/>
+                                <rect key="frame" x="20" y="697.5" width="300" height="50.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="300" id="Vcr-Sn-H1C"/>
@@ -763,7 +763,7 @@
                                 </connections>
                             </containerView>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6OE-zC-Daa" userLabel="Button navigation view">
-                                <rect key="frame" x="815" y="49" width="189" height="145"/>
+                                <rect key="frame" x="815" y="49" width="189" height="109"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q8e-Mg-jJx" userLabel="Camera view button">
                                         <rect key="frame" x="1" y="1" width="187" height="35"/>
@@ -777,7 +777,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sfX-IR-jHw">
-                                        <rect key="frame" x="1" y="73" width="187" height="35"/>
+                                        <rect key="frame" x="1" y="37" width="187" height="35"/>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="187" id="S56-Gy-gHt"/>
@@ -788,7 +788,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rRd-m0-C62" userLabel="Pre-flight checklist button">
-                                        <rect key="frame" x="1" y="109" width="187" height="35"/>
+                                        <rect key="frame" x="1" y="73" width="187" height="35"/>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="187" id="B9N-7Y-c2S"/>
@@ -796,17 +796,6 @@
                                         </constraints>
                                         <connections>
                                             <segue destination="gMO-jP-nui" kind="show" id="VOk-MN-cdM"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5ao-bA-oKI">
-                                        <rect key="frame" x="1" y="37" width="187" height="35"/>
-                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="187" id="64R-Ld-AF3"/>
-                                            <constraint firstAttribute="height" constant="35" id="cf4-BN-K6R"/>
-                                        </constraints>
-                                        <connections>
-                                            <segue destination="ruh-iu-v8E" kind="show" id="Ss2-Me-3kO"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Camera View" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zgw-dF-3gt">
@@ -819,18 +808,8 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pano Settings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SC3-v6-8fo">
-                                        <rect key="frame" x="10" y="44" width="110" height="21"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="21" id="0Xf-wV-Nth"/>
-                                            <constraint firstAttribute="width" constant="110" id="zQK-Y3-lbl"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Exposure Settings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ILx-Zw-oc5">
-                                        <rect key="frame" x="10" y="80" width="144" height="21"/>
+                                        <rect key="frame" x="10" y="44" width="144" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="g8u-gV-qMT"/>
                                             <constraint firstAttribute="width" constant="144" id="uDN-Iv-PWF"/>
@@ -840,7 +819,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pre-flight Checklist" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vh6-YD-NMT">
-                                        <rect key="frame" x="10" y="116" width="144" height="21"/>
+                                        <rect key="frame" x="10" y="80" width="144" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="144" id="Y62-pd-ndl"/>
                                             <constraint firstAttribute="height" constant="21" id="ZYa-AJ-f2I"/>
@@ -854,22 +833,18 @@
                                 <constraints>
                                     <constraint firstAttribute="width" constant="189" id="1FD-Yn-WJ4"/>
                                     <constraint firstItem="rRd-m0-C62" firstAttribute="top" secondItem="sfX-IR-jHw" secondAttribute="bottom" constant="1" id="2Tg-Ud-MTw"/>
-                                    <constraint firstItem="5ao-bA-oKI" firstAttribute="top" secondItem="Q8e-Mg-jJx" secondAttribute="bottom" constant="1" id="CZ4-ce-z7I"/>
                                     <constraint firstItem="Vh6-YD-NMT" firstAttribute="leading" secondItem="6OE-zC-Daa" secondAttribute="leading" constant="10" id="CfT-Yj-ZNP"/>
                                     <constraint firstItem="rRd-m0-C62" firstAttribute="leading" secondItem="6OE-zC-Daa" secondAttribute="leading" constant="1" id="DQM-Tk-32W"/>
                                     <constraint firstItem="zgw-dF-3gt" firstAttribute="centerY" secondItem="Q8e-Mg-jJx" secondAttribute="centerY" id="EXk-Xc-hBM"/>
-                                    <constraint firstItem="5ao-bA-oKI" firstAttribute="leading" secondItem="6OE-zC-Daa" secondAttribute="leading" constant="1" id="H6S-sU-Gwg"/>
+                                    <constraint firstItem="sfX-IR-jHw" firstAttribute="top" secondItem="Q8e-Mg-jJx" secondAttribute="bottom" constant="1" id="GH4-iK-zqt"/>
                                     <constraint firstItem="ILx-Zw-oc5" firstAttribute="centerY" secondItem="sfX-IR-jHw" secondAttribute="centerY" id="Q8u-Nv-crF"/>
-                                    <constraint firstItem="sfX-IR-jHw" firstAttribute="top" secondItem="5ao-bA-oKI" secondAttribute="bottom" constant="1" id="RKB-T5-6zn"/>
                                     <constraint firstItem="sfX-IR-jHw" firstAttribute="leading" secondItem="6OE-zC-Daa" secondAttribute="leading" constant="1" id="U07-qn-b3N"/>
                                     <constraint firstItem="Q8e-Mg-jJx" firstAttribute="leading" secondItem="6OE-zC-Daa" secondAttribute="leading" constant="1" id="XJB-bT-GAw"/>
                                     <constraint firstItem="ILx-Zw-oc5" firstAttribute="leading" secondItem="6OE-zC-Daa" secondAttribute="leading" constant="10" id="b8e-WS-Dh5"/>
                                     <constraint firstItem="Vh6-YD-NMT" firstAttribute="centerY" secondItem="rRd-m0-C62" secondAttribute="centerY" id="cR9-So-XDx"/>
-                                    <constraint firstItem="SC3-v6-8fo" firstAttribute="centerY" secondItem="5ao-bA-oKI" secondAttribute="centerY" id="efB-eu-U2P"/>
                                     <constraint firstItem="zgw-dF-3gt" firstAttribute="leading" secondItem="6OE-zC-Daa" secondAttribute="leading" constant="10" id="iwL-xd-uy4"/>
                                     <constraint firstItem="Q8e-Mg-jJx" firstAttribute="top" secondItem="6OE-zC-Daa" secondAttribute="top" constant="1" id="kNh-Ga-sFv"/>
-                                    <constraint firstItem="SC3-v6-8fo" firstAttribute="leading" secondItem="6OE-zC-Daa" secondAttribute="leading" constant="10" id="r88-C5-Z5k"/>
-                                    <constraint firstAttribute="height" constant="145" id="xLk-NN-6e5"/>
+                                    <constraint firstAttribute="height" constant="109" id="xLk-NN-6e5"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WN7-21-Gr5" userLabel="Dashboard Widget" customClass="DULDashboardWidget">
@@ -1061,9 +1036,8 @@
         <image name="photo_button_pressed" width="75" height="75"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Ss2-Me-3kO"/>
-        <segue reference="7l9-Vy-qZe"/>
         <segue reference="JsW-mp-782"/>
         <segue reference="VOk-MN-cdM"/>
+        <segue reference="7l9-Vy-qZe"/>
     </inferredMetricsTieBreakers>
 </document>
