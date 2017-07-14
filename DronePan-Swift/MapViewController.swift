@@ -79,6 +79,7 @@ class MapViewController: UIViewController {
                     self.aircraftMarker.position = CLLocationCoordinate2D(latitude: 32, longitude: -98)
                     self.aircraftMarker.groundAnchor = CGPoint(x: 0.5, y: 0.5)
                     self.aircraftMarker.icon = UIImage(named: "aircraft_marker")
+                    self.aircraftMarker.zIndex = 1000
                     self.aircraftMarker.map = self.googleMapView
                     
                 }
