@@ -30,6 +30,9 @@ class MapViewController: UIViewController {
     // for the aircraft marker
     let aircraftMarker = GMSMarker()
     
+    //for selectedMarker on map
+    var selectedMarker = GMSMarker()
+    
     // for BoundBox
     var bounds = GMSCoordinateBounds()
     
@@ -160,6 +163,35 @@ class MapViewController: UIViewController {
         
     }
     
+    @IBAction func deletePanoButtonClicked(_ sender: UIButton) {
+        
+        let alert = UIAlertController(title: "Message", message: "Do you want to delete panorama", preferredStyle: .alert)
+        let yesAction = UIAlertAction(title: "Accept", style: .default) { (action) in
+            
+            if let coundID = self.selectedPanorama?.countId {
+                
+                let resultPredicate = NSPredicate(format: "countId = %@", "\(coundID)")
+                if( DataBaseHelper.sharedInstance.deleteRecordInTable(inTable: "Panorama", wherePredicate: resultPredicate))
+                {
+                    debugPrint("Penorma deleted SuccsesFully")
+                    self.selectedMarker.map = nil
+                    self.googleMapView.sendSubview(toBack: self.panoramaDetailView)
+                }
+                else
+                {
+                    debugPrint("Somthing went wroung")
+                }
+                
+            }
+            
+        }
+        let noAction = UIAlertAction(title:"Cancel", style: .cancel, handler: nil)
+        alert.addAction(yesAction)
+        alert.addAction(noAction)
+        self.present(alert, animated: true, completion: nil)
+        
+    }
+
     //MARK:- Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 
@@ -303,6 +335,7 @@ extension MapViewController: GMSMapViewDelegate {
               if let firstObject = tappedPanorama.first
                 {
                     self.selectedPanorama = firstObject
+                    self.selectedMarker = marker
                     mapView.bringSubview(toFront: self.panoramaDetailView)
                     self.panoramaLatLongLabel.text = "Lat: \(firstObject.droneCurrentLatitude), Lon: \(firstObject.droneCurrentLongitude)"
                     self.panoramaDateLabel.text = dateFormate.string(from: firstObject.captureDate! as Date)
