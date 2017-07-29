@@ -167,12 +167,16 @@ class CameraViewController: UIViewController {
         
         if rows == 0 {
             rows = 4
+            //save row if not set
+            defaults.set(rows, forKey: "rows")
         }
         
         var cols:Int = defaults.integer(forKey: "columns")
         
         if cols == 0 {
             cols = 7
+            //save colums if not set
+            defaults.set(cols, forKey: "columns")
         }
         
         let skyRow:Int = defaults.integer(forKey: "skyRow")
@@ -181,6 +185,8 @@ class CameraViewController: UIViewController {
             
             rows = rows + 1
             
+            //save skyRow if not set
+            defaults.set(skyRow, forKey: "skyRow")
         }
         
         let yawType = defaults.integer(forKey: "yawType") 
