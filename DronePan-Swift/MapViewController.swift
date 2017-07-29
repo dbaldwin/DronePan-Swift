@@ -206,6 +206,9 @@ class MapViewController: UIViewController {
             
             let destinationLocation = CLLocationCoordinate2D(latitude: selectedPanorama.droneCurrentLatitude, longitude: selectedPanorama.droneCurrentLongitude)
             
+            //find how much aircraft want to move
+            let heading = self.calculateHeading(forDestination: destinationLocation)
+            
             print("Starting autonomous pano mission at \(destinationLocation.latitude), \(destinationLocation.longitude) and altitude \(selectedPanorama.altitude)")
             
             if  let takeOffToCoordinate = DJIGoToAction(coordinate: destinationLocation) {
@@ -284,6 +287,51 @@ class MapViewController: UIViewController {
         
     }
     
+    
+    private func calculateHeading(forDestination:CLLocationCoordinate2D)-> Double
+    {
+        // Find the bearing for destination location if its not zero will be taken into consideration
+        let bearing = self.getBearingBetweenTwoPoints1(point1:  CLLocation(latitude: (self.aircraftLocation?.latitude ?? 0.0), longitude: (self.aircraftLocation?.longitude ?? 0.0)), point2:  CLLocation(latitude: forDestination.latitude, longitude: forDestination.longitude))
+        if bearing == 0
+        {
+            //Bearing is zero so we need to take the current aircraft heading into calculation to achieve the saved heading
+            return (selectedPanorama!.airCraftHeading - (self.aircraftHeading ?? 0) )
+        }
+        else
+        {
+            //Bearing is not zero so current aircradt heeading will be same as bearing will be taken into calculation for achieving the saved heading
+            return (selectedPanorama!.airCraftHeading - bearing)
+        }
+        
+        //For e.g
+        /*
+         
+         {
+         
+         
+         headingToMove = savedHeading - currentAircraftHeading (Bearing is zero)
+         
+         case 1. Saved heading is 50, and Bearing is zero (destination location is same as current location or current location and destination location have zero bearing related to north) & aircraft heading is 90 so we need to go 40 anticlockwise to achieve heading 50.
+         
+         Result = 50 - 90 => -40 so this will rotate the aircraft 40 degree anticlockwise
+         
+         case 2. Saved heading is 90, and Bearing is zero (destination location is same as current location or current location and destination location have zero bearing related to north) & aircraft heading is 90 so we need to go 40 anticlockwise to achieve heading 50.
+         
+         Result = 90 - 50 => 40 so this will rotate the aircraft 40 degree clockwise
+         
+         
+         }
+         
+         {
+         
+         case 3. Bearing is not zero, so when aircraft will fly to destination from current location so aircraft will change its yaw according to destination i.e bearing , So this bearing will be aircraft current heading after reaching the destination. So calculations will be same as in above cases but here bearing is the current heading of aircraft.
+         
+         }
+         
+         */
+    }
+
+    
     private func addPanoMarker(latitude:CLLocationDegrees,longitude:CLLocationDegrees,identifier:Any) -> GMSMarker{
         let panoMarker = GMSMarker(position: CLLocationCoordinate2D(latitude: latitude, longitude: longitude))
         panoMarker.groundAnchor = CGPoint(x: 0.5, y: 0.5)
@@ -304,6 +352,8 @@ class MapViewController: UIViewController {
         }
         
     }
+    
+    
     
 }
 
@@ -358,6 +408,32 @@ extension MapViewController: GMSMapViewDelegate {
     }
 
 }
+
+
+//MARK:- Find Bearing
+extension MapViewController{
+    
+    func degreesToRadians(degrees: Double) -> Double { return degrees * .pi / 180.0 }
+    func radiansToDegrees(radians: Double) -> Double { return radians * 180.0 / .pi }
+    
+    func getBearingBetweenTwoPoints1(point1 : CLLocation, point2 : CLLocation) -> Double {
+        
+        let lat1 = degreesToRadians(degrees: point1.coordinate.latitude)
+        let lon1 = degreesToRadians(degrees: point1.coordinate.longitude)
+        
+        let lat2 = degreesToRadians(degrees: point2.coordinate.latitude)
+        let lon2 = degreesToRadians(degrees: point2.coordinate.longitude)
+        
+        let dLon = lon2 - lon1
+        
+        let y = sin(dLon) * cos(lat2)
+        let x = cos(lat1) * sin(lat2) - sin(lat1) * cos(lat2) * cos(dLon)
+        let radiansBearing = atan2(y, x)
+        
+        return radiansToDegrees(radians: radiansBearing)
+    }
+}
+
 
 //MARK:- Dji Gimble Delegate
 /*extension MapViewController : DJIFlightControllerDelegate {

@@ -20,6 +20,7 @@ class CameraViewController: UIViewController {
     
     var aircraftLocation: CLLocationCoordinate2D = kCLLocationCoordinate2DInvalid
     var aircraftAltitude:Double = 0
+    var aircraftHeading:Double = 0
     
     var telemetryViewController: TelemetryViewController!
     
@@ -190,12 +191,14 @@ class CameraViewController: UIViewController {
         // Generate unique id for a panorama
         let arrayValue = DataBaseHelper.sharedInstance.allRecordsSortByAttribute(inTable: "Panorama")
         
+        
         // Save pano to database
-        let panoramaDict:[String:Any] = ["captureDate":Date(),"rows":rows,"columns":cols,"droneCurrentLatitude":self.aircraftLocation.latitude,"droneCurrentLongitude":self.aircraftLocation.longitude,"skyRow":skyRow,"countId":(arrayValue.count + 1),"yawType":"\(yawType)","altitude":aircraftAltitude]
-            
-        //let panoramaDict:[String:Any] = ["captureDate":Date(),"rows":rows,"columns":cols,"droneCurrentLatitude":32.25686,"droneCurrentLongitude":-120.26,"skyRow":skyRow,"countId":(arrayValue.count + 1),"yawType":"\(yawType)","altitude": 100]
-            
-        //let panoramaDict:[String:Any] = ["captureDate":Date(),"rows":rows,"columns":cols,"droneCurrentLatitude":35.25686,"droneCurrentLongitude":-121.26,"skyRow":skyRow,"countId":(arrayValue.count + 1),"yawType":"\(yawType)","altitude":150]
+        let panoramaDict:[String:Any] = ["captureDate":Date(),"rows":rows,"columns":cols,"droneCurrentLatitude":self.aircraftLocation.latitude,"droneCurrentLongitude":self.aircraftLocation.longitude,"skyRow":skyRow,"countId":(arrayValue.count + 1),"yawType":"\(yawType)","altitude":aircraftAltitude,"airCraftHeading":self.aircraftHeading]
+        
+        //  let panoramaDict:[String:Any] = ["captureDate":Date(),"rows":rows,"columns":cols,"droneCurrentLatitude":32.25686,"droneCurrentLongitude":-120.26,"skyRow":skyRow,"countId":(arrayValue.count + 1),"yawType":"\(yawType)","altitude": 100,"airCraftHeading":self.aircraftHeading]
+        
+        // let panoramaDict:[String:Any] = ["captureDate":Date(),"rows":rows,"columns":cols,"droneCurrentLatitude":22.78,"droneCurrentLongitude":74.2485,"skyRow":skyRow,"countId":(arrayValue.count + 1),"yawType":"\(yawType)","altitude":10,"airCraftHeading":-120]
+        debugPrint(panoramaDict)
         
         // Write to database
         _ = DataBaseHelper.sharedInstance.insertRecordInTable(tableName: "Panorama", attributes: panoramaDict)
@@ -341,9 +344,18 @@ extension CameraViewController: DJIFlightControllerDelegate {
     
     func flightController(_ fc: DJIFlightController, didUpdate state: DJIFlightControllerState) {
         
-        self.aircraftLocation = (state.aircraftLocation?.coordinate)!
+        if let cordinate = state.aircraftLocation?.coordinate
+        {
+            self.aircraftLocation = cordinate
+        }
+
         self.aircraftAltitude = state.altitude
 
+        //Change aircraft heading
+        if let heading = fc.compass?.heading
+        {
+            self.aircraftHeading = heading
+        }
         // Send the location update to the map view
         //self.cameraVCDelegate?.updateAircraftLocation(location: self.aircraftLocation, heading: self.aircraftHeading)
         

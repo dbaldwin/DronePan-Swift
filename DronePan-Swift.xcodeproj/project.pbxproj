@@ -15,8 +15,8 @@
 		237001B11ECF95DB003EC4A0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 237001B01ECF95DB003EC4A0 /* Assets.xcassets */; };
 		237001B41ECF95DB003EC4A0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 237001B21ECF95DB003EC4A0 /* LaunchScreen.storyboard */; };
 		237001BF1ECF95DB003EC4A0 /* DronePan_SwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 237001BE1ECF95DB003EC4A0 /* DronePan_SwiftTests.swift */; };
-		237001D01ECFA12A003EC4A0 /* ReferenceProxy in Frameworks */ = {isa = PBXBuildFile; fileRef = 237001CF1ECFA109003EC4A0 /* VideoPreviewer.framework */; };
-		237001D11ECFA12A003EC4A0 /* ReferenceProxy in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 237001CF1ECFA109003EC4A0 /* VideoPreviewer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		237001D01ECFA12A003EC4A0 /* VideoPreviewer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 237001CF1ECFA109003EC4A0 /* VideoPreviewer.framework */; };
+		237001D11ECFA12A003EC4A0 /* VideoPreviewer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 237001CF1ECFA109003EC4A0 /* VideoPreviewer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		239377D61EE5AD130086BAF3 /* TelemetryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239377D51EE5AD130086BAF3 /* TelemetryViewController.swift */; };
 		23B1FADF1ECFC81D00EFC857 /* ProductCommunicationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23B1FADE1ECFC81D00EFC857 /* ProductCommunicationManager.swift */; };
 		23CD573B1ED0AC7200D62F06 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23CD573A1ED0AC7200D62F06 /* MapViewController.swift */; };
@@ -58,7 +58,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				237001D11ECFA12A003EC4A0 /* ReferenceProxy in Embed Frameworks */,
+				237001D11ECFA12A003EC4A0 /* VideoPreviewer.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -98,7 +98,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				237001D01ECFA12A003EC4A0 /* ReferenceProxy in Frameworks */,
+				237001D01ECFA12A003EC4A0 /* VideoPreviewer.framework in Frameworks */,
 				1382D2DA49D81C6B75E303BA /* Pods_DronePan_Swift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -251,7 +251,6 @@
 				TargetAttributes = {
 					237001A51ECF95DB003EC4A0 = {
 						CreatedOnToolsVersion = 8.2;
-						DevelopmentTeam = TP7ZU94CZV;
 						ProvisioningStyle = Automatic;
 					};
 					237001B91ECF95DB003EC4A0 = {
@@ -569,7 +568,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
-				DEVELOPMENT_TEAM = TP7ZU94CZV;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				HEADER_SEARCH_PATHS = (
 					"\"${PODS_ROOT}/Headers/Public\"",
@@ -589,7 +588,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
-				DEVELOPMENT_TEAM = TP7ZU94CZV;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				HEADER_SEARCH_PATHS = (
 					"\"${PODS_ROOT}/Headers/Public\"",
