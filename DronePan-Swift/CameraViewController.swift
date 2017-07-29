@@ -210,6 +210,9 @@ class CameraViewController: UIViewController {
         _ = DataBaseHelper.sharedInstance.insertRecordInTable(tableName: "Panorama", attributes: panoramaDict)
         
         totalPhotoCount = rows * cols + 1
+        //set PhotoCount
+        AppDelegate.totalPhotoCount = totalPhotoCount
+        AppDelegate.currentPhotoCount = 0
         
         // Initialize the photo counter
         telemetryViewController.resetAndStartCounting(photoCount: totalPhotoCount)

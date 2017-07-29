@@ -13,6 +13,10 @@ import GoogleMaps
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    //for keep photo count
+    static var isStartingNewTaskOfPano:Bool = true
+    static var totalPhotoCount:Int = 0
+    static var currentPhotoCount:Int = 0
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         

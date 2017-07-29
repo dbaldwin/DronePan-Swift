@@ -24,6 +24,8 @@ class MapViewController: UIViewController {
     @IBOutlet weak var panoramaYawTypeLabel: UILabel!
     @IBOutlet weak var panoramaSkyRowLabel: UILabel!
     
+    var telemetryViewController: TelemetryViewController!
+    
     var aircraftLocation: CLLocationCoordinate2D?
     var aircraftHeading: Double?
     
@@ -194,9 +196,18 @@ class MapViewController: UIViewController {
 
     //MARK:- Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-
+        
         buttonNavView.isHidden = true
-
+        
+        if segue.identifier == "telemetryViewSegue" {
+            
+            if let vc = segue.destination as? TelemetryViewController {
+                
+                telemetryViewController = vc
+                
+            }
+        }
+        
     }
     
     //MARK:- Private methods
@@ -204,84 +215,69 @@ class MapViewController: UIViewController {
     {
         if let selectedPanorama = self.selectedPanorama {
             
+            
             let destinationLocation = CLLocationCoordinate2D(latitude: selectedPanorama.droneCurrentLatitude, longitude: selectedPanorama.droneCurrentLongitude)
+            
             
             //find how much aircraft want to move
             let heading = self.calculateHeading(forDestination: destinationLocation)
             
-            print("Starting autonomous pano mission at \(destinationLocation.latitude), \(destinationLocation.longitude) and altitude \(selectedPanorama.altitude)")
+            debugPrint("Starting autonomous pano mission at \(destinationLocation.latitude), \(destinationLocation.longitude) and altitude \(selectedPanorama.altitude) and heading \(selectedPanorama.airCraftHeading)")
             
             if  let takeOffToCoordinate = DJIGoToAction(coordinate: destinationLocation) {
                 
-                // Clear everything out
-                DJISDKManager.missionControl()?.stopTimeline()
-                DJISDKManager.missionControl()?.unscheduleEverything()
-                
-                // Need to only do this if aircraft is not in the air - leaving out for now
-                //let _ = DJISDKManager.missionControl()?.scheduleElement(DJITakeOffAction())
-
-                var timeActionsCount = 0
-                if  let takeOffWithAltitude = DJIGoToAction(altitude: selectedPanorama.altitude) {
-                    let error = DJISDKManager.missionControl()?.scheduleElement(takeOffWithAltitude)
-                    if error == nil {
-                        timeActionsCount = 1
-                    }
-                }
-                
-                let error =  DJISDKManager.missionControl()?.scheduleElement(takeOffToCoordinate)
-                if error == nil {
-                    timeActionsCount += 1
-                }
-                
-                // Build the pano logic
-                let pano = PanoramaController()
-                var elements : [DJIMissionControlTimelineElement] = []
-                
-                if  selectedPanorama.yawType == "1" {
-                    elements = pano.buildPanoWithGimbalYaw(rows: Int(selectedPanorama.rows), cols: Int(selectedPanorama.columns), skyRow: selectedPanorama.skyRow == 1 ? true : false)
-                }else{
-                    elements = pano.buildPanoWithAircraftYaw(rows: Int(selectedPanorama.rows), cols: Int(selectedPanorama.columns), skyRow: selectedPanorama.skyRow == 1 ? true : false, altitude: selectedPanorama.altitude)
-                }
-                
-                let panoError = DJISDKManager.missionControl()?.scheduleElements(elements)
-                
-                if error != nil {
-                    showAlert(title: "Error", message: String(describing: error?.localizedDescription))
-                    return;
-                }else if panoError != nil {
-                    showAlert(title: "Error", message: String(describing: panoError?.localizedDescription))
-                    return;
-                }
-
-                // Not necessary at the moment
-                //ProductCommunicationManager.shared.fetchFlightController()?.delegate = self
-                
-                DJISDKManager.missionControl()?.startTimeline()
-                var finishedEventCount = 0
-                let totalEventCount = elements.count + 1 + timeActionsCount //{ (Panoromo Mission Elements) + (Take off mission element + Go to Alitude + Go To Location Element) }
-                
-                DJISDKManager.missionControl()?.addListener(self, toTimelineProgressWith: { (timeLineEvent, missionControl, error, other) in
+                if let yawAction  = DJIAircraftYawAction(relativeAngle: heading, andAngularVelocity: 20) {
                     
-                    switch(timeLineEvent)
-                    {
-                    case .started:
-                        print(missionControl  ?? "")
-                        break
-                    case .progressed:
-                        print(missionControl  ?? "")
-                        break
-                    case .finished:
-                        finishedEventCount += 1
-                        if finishedEventCount == totalEventCount {
-                            self.showAlert(title: "Panorama complete!", message: "You can now take manual control of your aircraft.")
-                        }
-                        break
-                    default:
-                        break
+                    // Clear everything out
+                    DJISDKManager.missionControl()?.stopTimeline()
+                    DJISDKManager.missionControl()?.unscheduleEverything()
+                    
+                    // Need to only do this if aircraft is not in the air - leaving out for now
+                    
+                    if  let takeOffWithAltitude = DJIGoToAction(altitude: selectedPanorama.altitude) {
+                        _ = DJISDKManager.missionControl()?.scheduleElement(takeOffWithAltitude)
+                        
                     }
                     
-                })
-                
+                    let error =  DJISDKManager.missionControl()?.scheduleElement(takeOffToCoordinate)
+                    
+                    
+                    //add heading for panorma
+                    _ =  DJISDKManager.missionControl()?.scheduleElement(yawAction)
+                    
+                    // Build the pano logic
+                    let pano = PanoramaController()
+                    var elements : [DJIMissionControlTimelineElement] = []
+                    
+                    if  selectedPanorama.yawType == "1" {
+                        elements = pano.buildPanoWithGimbalYaw(rows: Int(selectedPanorama.rows), cols: Int(selectedPanorama.columns), skyRow: selectedPanorama.skyRow == 1 ? true : false)
+                    }else{
+                        elements = pano.buildPanoWithAircraftYaw(rows: Int(selectedPanorama.rows), cols: Int(selectedPanorama.columns), skyRow: selectedPanorama.skyRow == 1 ? true : false, altitude: selectedPanorama.altitude)
+                    }
+                    //add newcode for photoCount
+                    let totalPhotoCount = Int(selectedPanorama.rows) * Int(selectedPanorama.columns) + 1
+                    AppDelegate.totalPhotoCount = totalPhotoCount
+                    AppDelegate.currentPhotoCount = 0
+                    // Initialize the photo counter
+                    telemetryViewController.resetAndStartCounting(photoCount: totalPhotoCount)
+                    
+                    
+                    let panoError = DJISDKManager.missionControl()?.scheduleElements(elements)
+                    
+                    if error != nil {
+                        showAlert(title: "Error", message: String(describing: error?.localizedDescription))
+                        return;
+                    }else if panoError != nil {
+                        showAlert(title: "Error", message: String(describing: panoError?.localizedDescription))
+                        return;
+                    }
+                    
+                    // Not necessary at the moment
+                    //ProductCommunicationManager.shared.fetchFlightController()?.delegate = self
+                    
+                    DJISDKManager.missionControl()?.startTimeline()
+                    
+                }
             }
         }
         

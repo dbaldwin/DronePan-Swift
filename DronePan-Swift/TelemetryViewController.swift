@@ -13,44 +13,27 @@ class TelemetryViewController: UIViewController {
     
     @IBOutlet weak var photoCountLabel: UILabel!
     
-    var totalPhotoCount: Int = 0 {
-        
-        didSet {
-            
-            updatePhotoCountLabel()
-            
-        }
-        
-    }
-    
-    var currentPhotoCount: Int = 0 {
-     
-        didSet {
-            
-            updatePhotoCountLabel()
-            
-        }
-    }
     
     override func viewDidLoad() {
         
         print("Telemetry view controller view did load")
-        
         super.viewDidLoad()
         
     }
-    
-    func resetAndStartCounting(photoCount: Int) {
-        
-        currentPhotoCount = 0
-        totalPhotoCount = photoCount
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         ProductCommunicationManager.shared.fetchCamera()?.delegate = self
-        
+        updatePhotoCountLabel()
     }
     
-    private func updatePhotoCountLabel() {
+    func resetAndStartCounting(photoCount: Int) {
+        AppDelegate.isStartingNewTaskOfPano = true
+    }
+    
+    func updatePhotoCountLabel() {
         
-        photoCountLabel.text = "\(currentPhotoCount)/\(totalPhotoCount)"
+        photoCountLabel.text = "\(AppDelegate.currentPhotoCount)/\(AppDelegate.totalPhotoCount)"
+        
         
     }
     
@@ -61,14 +44,17 @@ extension TelemetryViewController: DJICameraDelegate {
     func camera(_ camera: DJICamera, didGenerateNewMediaFile newMedia: DJIMediaFile) {
         
         print("TelemetryViewController didGenerateNewMediaFile")
-        currentPhotoCount += 1
-        
-        // Let the user know the panorama is complete
-        if currentPhotoCount == totalPhotoCount {
-            
-            self.showAlert(title: "Panorama complete!", message: "You can now take manual control of your aircraft.")
-            
+        if(AppDelegate.isStartingNewTaskOfPano)
+        {
+            AppDelegate.currentPhotoCount += 1
         }
+        if AppDelegate.currentPhotoCount == AppDelegate.totalPhotoCount {
+            AppDelegate.currentPhotoCount = 0
+            AppDelegate.totalPhotoCount = 0
+            AppDelegate.isStartingNewTaskOfPano = false
+            self.showAlert(title: "Panorama complete!", message: "You can now take manual control of your aircraft.")
+        }
+        self.updatePhotoCountLabel()
     }
     
 }
