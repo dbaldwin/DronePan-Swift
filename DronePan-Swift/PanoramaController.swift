@@ -66,13 +66,13 @@ class PanoramaController {
         
         // Get gimbal capabilities
         // Not doing anything with this at the moment
-        if let gimbal = ProductCommunicationManager.shared.fetchGimbal()
+        /*if let gimbal = ProductCommunicationManager.shared.fetchGimbal()
         {
         let capability: DJIParamCapability = gimbal.capabilities[DJIGimbalParamAdjustPitch] as! DJIParamCapability
         let minMax: DJIParamCapabilityMinMax = capability as! DJIParamCapabilityMinMax
         print("Gimbal pitch max: \(minMax.max)")
         print("Gimbal pitch min: \(minMax.min)")
-        }
+        }*/
         
         
         // Initialize the timeline array
