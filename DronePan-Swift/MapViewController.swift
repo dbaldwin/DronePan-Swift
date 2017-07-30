@@ -18,6 +18,7 @@ class MapViewController: UIViewController {
 
     @IBOutlet weak var panoramaDetailView: UIView!
     @IBOutlet weak var panoramaAltitudeLabel: UILabel!
+    @IBOutlet weak var panoramaHeadingLabel: UILabel!
     @IBOutlet weak var panoramaLatLongLabel: UILabel!
     @IBOutlet weak var panoramaDateLabel: UILabel!
     @IBOutlet weak var panoramaRowsColsLabel: UILabel!
@@ -258,8 +259,11 @@ class MapViewController: UIViewController {
                     let totalPhotoCount = Int(selectedPanorama.rows) * Int(selectedPanorama.columns) + 1
                     AppDelegate.totalPhotoCount = totalPhotoCount
                     AppDelegate.currentPhotoCount = 0
+                    AppDelegate.isStartingNewTaskOfPano = true
+                    
+                    // The code below generates a nil exception
                     // Initialize the photo counter
-                    telemetryViewController.resetAndStartCounting(photoCount: totalPhotoCount)
+                    //telemetryViewController.resetAndStartCounting(photoCount: totalPhotoCount)
                     
                     
                     let panoError = DJISDKManager.missionControl()?.scheduleElements(elements)
@@ -384,9 +388,10 @@ extension MapViewController: GMSMapViewDelegate {
                     self.selectedPanorama = firstObject
                     self.selectedMarker = marker
                     mapView.bringSubview(toFront: self.panoramaDetailView)
-                    self.panoramaLatLongLabel.text = "Lat: \(firstObject.droneCurrentLatitude), Lon: \(firstObject.droneCurrentLongitude)"
+                    self.panoramaLatLongLabel.text = "Lat: \(String(format: "%.5f", firstObject.droneCurrentLatitude)), Lon: \(String(format: "%.5f", firstObject.droneCurrentLongitude))"
                     self.panoramaDateLabel.text = dateFormate.string(from: firstObject.captureDate! as Date)
                     self.panoramaAltitudeLabel.text = "Altitude: \(firstObject.altitude) m"
+                    self.panoramaHeadingLabel.text = "Heading: \(firstObject.airCraftHeading)°"
                     self.panoramaRowsColsLabel.text = "Rows: \(firstObject.rows), Columns: \(firstObject.columns)"
                     self.panoramaYawTypeLabel.text = "Yaw type: \(firstObject.yawType == "0" ? "Aircraft" : "Gimbal")"
                     self.panoramaSkyRowLabel.text = "Sky row: \(firstObject.skyRow == 1 ? "Enabled" : "Disabled")"
