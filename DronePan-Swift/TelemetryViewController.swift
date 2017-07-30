@@ -52,7 +52,7 @@ extension TelemetryViewController: DJICameraDelegate {
             AppDelegate.currentPhotoCount = 0
             AppDelegate.totalPhotoCount = 0
             AppDelegate.isStartingNewTaskOfPano = false
-            self.showAlert(title: "Panorama complete!", message: "You can now take manual control of your aircraft.")
+            self.showAlert(title: "Panorama complete!", message: "You can now take manual control of your aircraft. If you have any problems taking manual control please toggle your flight mode switch away from GPS mode and back. Then you should have control again.")
         }
         self.updatePhotoCountLabel()
     }
