@@ -127,7 +127,7 @@ class MapViewController: UIViewController {
             for panorama in panoramas
             {
                 // Add pano marker in mapview
-                let panoMarker = self.addPanoMarker(latitude:panorama.droneCurrentLatitude , longitude: panorama.droneCurrentLongitude,identifier:panorama.countId)
+                let panoMarker = self.addPanoMarker(latitude:panorama.droneCurrentLatitude , longitude: panorama.droneCurrentLongitude,identifier:panorama.countId, heading: panorama.airCraftHeading)
                 panoMarkers.append(panoMarker)
             }
         }
@@ -328,10 +328,11 @@ class MapViewController: UIViewController {
     }
 
     
-    private func addPanoMarker(latitude:CLLocationDegrees,longitude:CLLocationDegrees,identifier:Any) -> GMSMarker{
+    private func addPanoMarker(latitude:CLLocationDegrees,longitude:CLLocationDegrees,identifier:Any, heading: Double) -> GMSMarker{
         let panoMarker = GMSMarker(position: CLLocationCoordinate2D(latitude: latitude, longitude: longitude))
         panoMarker.groundAnchor = CGPoint(x: 0.5, y: 0.5)
         panoMarker.icon = UIImage(named: "pano_marker")
+        panoMarker.rotation = heading
         panoMarker.map = googleMapView
         panoMarker.userData = identifier
         bounds = bounds.includingCoordinate(panoMarker.position)
