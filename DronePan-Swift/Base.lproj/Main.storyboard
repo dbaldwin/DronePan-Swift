@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="ipad9_7" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -786,7 +787,7 @@
                                 </connections>
                             </containerView>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6OE-zC-Daa" userLabel="Button navigation view">
-                                <rect key="frame" x="815" y="49" width="189" height="109"/>
+                                <rect key="frame" x="815" y="49" width="189" height="145"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q8e-Mg-jJx" userLabel="Camera view button">
                                         <rect key="frame" x="1" y="1" width="187" height="35"/>
@@ -851,10 +852,26 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mc9-MC-TLv">
+                                        <rect key="frame" x="1" y="109" width="187" height="35"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="35" id="k3E-B1-ccT"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
+                                        <state key="normal" title="  Save Panos to Cloud">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="savePanosToCloudButtonAction:" destination="V9v-qI-rKa" eventType="touchUpInside" id="Lad-uM-uek"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstItem="Mc9-MC-TLv" firstAttribute="leading" secondItem="rRd-m0-C62" secondAttribute="leading" id="0d4-eH-UAZ"/>
                                     <constraint firstAttribute="width" constant="189" id="1FD-Yn-WJ4"/>
+                                    <constraint firstItem="Mc9-MC-TLv" firstAttribute="top" secondItem="rRd-m0-C62" secondAttribute="bottom" constant="1" id="1vk-mP-0G5"/>
                                     <constraint firstItem="rRd-m0-C62" firstAttribute="top" secondItem="sfX-IR-jHw" secondAttribute="bottom" constant="1" id="2Tg-Ud-MTw"/>
                                     <constraint firstItem="Vh6-YD-NMT" firstAttribute="leading" secondItem="6OE-zC-Daa" secondAttribute="leading" constant="10" id="CfT-Yj-ZNP"/>
                                     <constraint firstItem="rRd-m0-C62" firstAttribute="leading" secondItem="6OE-zC-Daa" secondAttribute="leading" constant="1" id="DQM-Tk-32W"/>
@@ -862,12 +879,13 @@
                                     <constraint firstItem="sfX-IR-jHw" firstAttribute="top" secondItem="Q8e-Mg-jJx" secondAttribute="bottom" constant="1" id="GH4-iK-zqt"/>
                                     <constraint firstItem="ILx-Zw-oc5" firstAttribute="centerY" secondItem="sfX-IR-jHw" secondAttribute="centerY" id="Q8u-Nv-crF"/>
                                     <constraint firstItem="sfX-IR-jHw" firstAttribute="leading" secondItem="6OE-zC-Daa" secondAttribute="leading" constant="1" id="U07-qn-b3N"/>
+                                    <constraint firstItem="Mc9-MC-TLv" firstAttribute="trailing" secondItem="rRd-m0-C62" secondAttribute="trailing" id="XFc-JW-avh"/>
                                     <constraint firstItem="Q8e-Mg-jJx" firstAttribute="leading" secondItem="6OE-zC-Daa" secondAttribute="leading" constant="1" id="XJB-bT-GAw"/>
                                     <constraint firstItem="ILx-Zw-oc5" firstAttribute="leading" secondItem="6OE-zC-Daa" secondAttribute="leading" constant="10" id="b8e-WS-Dh5"/>
                                     <constraint firstItem="Vh6-YD-NMT" firstAttribute="centerY" secondItem="rRd-m0-C62" secondAttribute="centerY" id="cR9-So-XDx"/>
                                     <constraint firstItem="zgw-dF-3gt" firstAttribute="leading" secondItem="6OE-zC-Daa" secondAttribute="leading" constant="10" id="iwL-xd-uy4"/>
                                     <constraint firstItem="Q8e-Mg-jJx" firstAttribute="top" secondItem="6OE-zC-Daa" secondAttribute="top" constant="1" id="kNh-Ga-sFv"/>
-                                    <constraint firstAttribute="height" constant="109" id="xLk-NN-6e5"/>
+                                    <constraint firstAttribute="height" constant="145" id="xLk-NN-6e5"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WN7-21-Gr5" userLabel="Dashboard Widget" customClass="DULDashboardWidget">
@@ -921,6 +939,7 @@
                         <outlet property="panoramaRowsColsLabel" destination="YtP-xk-P3M" id="bu6-W4-iGq"/>
                         <outlet property="panoramaSkyRowLabel" destination="8QH-rM-ALt" id="JKL-EM-1ca"/>
                         <outlet property="panoramaYawTypeLabel" destination="djw-5M-dIh" id="2ik-3f-ANN"/>
+                        <segue destination="Ibn-Ip-cOh" kind="show" identifier="ToLoginViewCtroller" id="89W-Xh-bvX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9wQ-rK-gvU" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1051,6 +1070,66 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SyB-0E-sV3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+        </scene>
+        <!--Login View Controller-->
+        <scene sceneID="3ht-7A-hCw">
+            <objects>
+                <viewController id="Ibn-Ip-cOh" customClass="LoginViewController" customModule="DronePan_Swift" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="DsV-t5-zGB"/>
+                        <viewControllerLayoutGuide type="bottom" id="rWz-q7-gAv"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="f4K-3P-1R6">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Dia-KT-gaA">
+                                <rect key="frame" x="494" y="245.5" width="37" height="37"/>
+                                <color key="color" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </activityIndicatorView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rG9-Jc-VFe" customClass="GIDSignInButton">
+                                <rect key="frame" x="392" y="311.5" width="240" height="45"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" placeholder="YES" id="FRu-IH-Yp3"/>
+                                    <constraint firstAttribute="width" constant="240" placeholder="YES" id="ttt-rB-dX3"/>
+                                </constraints>
+                                <connections>
+                                    <action selector="actionOnLoginWithGoogleButton:" destination="Ibn-Ip-cOh" eventType="valueChanged" id="SOt-1s-CSx"/>
+                                </connections>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F6X-Fd-vnF">
+                                <rect key="frame" x="392" y="406.5" width="240" height="40.5"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" title="Login With Facebook">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="actionOnFacebookLogin:" destination="Ibn-Ip-cOh" eventType="touchUpInside" id="MsM-7S-Hc7"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Dia-KT-gaA" firstAttribute="centerX" secondItem="f4K-3P-1R6" secondAttribute="centerX" id="5WK-11-iN7"/>
+                            <constraint firstItem="F6X-Fd-vnF" firstAttribute="height" secondItem="rG9-Jc-VFe" secondAttribute="height" multiplier="0.9" id="GXn-Ii-qUk"/>
+                            <constraint firstItem="Dia-KT-gaA" firstAttribute="centerY" secondItem="f4K-3P-1R6" secondAttribute="centerY" constant="-120" id="PcJ-WX-lyz"/>
+                            <constraint firstItem="rG9-Jc-VFe" firstAttribute="centerX" secondItem="f4K-3P-1R6" secondAttribute="centerX" id="Tjp-6O-aeB"/>
+                            <constraint firstItem="F6X-Fd-vnF" firstAttribute="top" secondItem="rG9-Jc-VFe" secondAttribute="bottom" constant="50" id="byj-Zu-qI4"/>
+                            <constraint firstItem="F6X-Fd-vnF" firstAttribute="trailing" secondItem="rG9-Jc-VFe" secondAttribute="trailing" id="jqY-Hr-YKI"/>
+                            <constraint firstItem="rG9-Jc-VFe" firstAttribute="centerY" secondItem="f4K-3P-1R6" secondAttribute="centerY" constant="-50" id="lvZ-kw-TJ0"/>
+                            <constraint firstItem="F6X-Fd-vnF" firstAttribute="leading" secondItem="rG9-Jc-VFe" secondAttribute="leading" id="n78-km-cAm"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="activityIndicator" destination="Dia-KT-gaA" id="Dpt-Ta-09Y"/>
+                        <outlet property="signInButton" destination="rG9-Jc-VFe" id="VpE-gS-LeH"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="g6a-Px-Sjh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1661" y="-130"/>
         </scene>
     </scenes>
     <resources>

@@ -9,6 +9,13 @@ target 'DronePan-Swift' do
  pod 'GoogleMaps'
  pod ‘DJI-UILibrary-iOS’, ‘~> 4.2’
  pod 'DJI-SDK-iOS', ‘~> 4.2.2’
+ pod 'GoogleMaps'
+ pod 'Firebase/Auth'
+ pod 'GoogleSignIn'
+ pod 'Firebase/Core'
+ pod 'FacebookCore'
+ pod 'FacebookLogin'
+ pod 'Firebase/Database'
 
   target 'DronePan-SwiftTests' do
     inherit! :search_paths

@@ -13,7 +13,7 @@ class ProductCommunicationManager: NSObject {
     
     let enableBridgeMode = true
     var aircraftLocation : CLLocationCoordinate2D?
-    let bridgeAppIP = "10.0.1.18"
+    let bridgeAppIP = "192.168.1.100"
     
     static let shared = ProductCommunicationManager()
     

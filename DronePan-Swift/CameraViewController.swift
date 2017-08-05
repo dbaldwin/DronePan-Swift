@@ -13,23 +13,16 @@ import VideoPreviewer
 class CameraViewController: UIViewController {
     
     @IBOutlet weak var cameraView: UIView!
-    
     @IBOutlet weak var hamburgerButton: UIButton!
-    
     @IBOutlet weak var buttonNavView: UIView!
-    
+    @IBOutlet weak var sdkVersionLabel: UILabel!
+
     var aircraftLocation: CLLocationCoordinate2D = kCLLocationCoordinate2DInvalid
-    var aircraftAltitude:Double = 0
-    var aircraftHeading:Double = 0
-    
+    var aircraftAltitude:Double = 0.0
+    var aircraftHeading:Double = 0.0
     var telemetryViewController: TelemetryViewController!
-    
     var totalPhotoCount: Int = 7 // This is the default 4 rows and 7 columns with 1 nadir
     var currentPhotoCount: Int = 0
-    
-    
-    @IBOutlet weak var sdkVersionLabel: UILabel!
-    
     var gimbal: DJIGimbal?
     
        
@@ -123,37 +116,27 @@ class CameraViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         sdkVersionLabel.text = "SDK: \(DJISDKManager.sdkVersion())"
-        
         
     }
     
     override var prefersStatusBarHidden: Bool {
-        
         return true
-        
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     @IBAction func startPano(_ sender: Any) {
         
         let alertView = UIAlertController(title: "Confirm", message: "Are you ready to start the panorama sequence?", preferredStyle: .alert)
-        
-        let cancel = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler:{ (action) in
-        })
-        
+        let cancel = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler:nil)
         let start = UIAlertAction(title: "Start", style: UIAlertActionStyle.default, handler:{(action) in
             self.startPanoNow()
         })
-        
         alertView.addAction(cancel)
         alertView.addAction(start)
-        
         present(alertView, animated: true, completion: nil)
     }
     
@@ -194,20 +177,28 @@ class CameraViewController: UIViewController {
         
         currentPhotoCount = 0
         print("Total number of rows \(rows), \(cols),\(skyRow),\(String(describing: gimbal))")
-        // Generate unique id for a panorama
-        let arrayValue = DataBaseHelper.sharedInstance.allRecordsSortByAttribute(inTable: "Panorama")
+
+        
+        // Save pano to database(add timeStamp for uniqueness with firebase)
+        let panoramaDict:[String:Any] = ["captureDate":Date(),"timeStamp":Date().timeIntervalSince1970,"rows":rows,"columns":cols,"airCraftLatitude":self.aircraftLocation.latitude,"airCraftLongitude":self.aircraftLocation.longitude,"skyRow":skyRow,"yawType":"\(yawType)","airCraftAltitude":aircraftAltitude,"airCraftHeading":self.aircraftHeading]
         
         
-        // Save pano to database
-        let panoramaDict:[String:Any] = ["captureDate":Date(),"rows":rows,"columns":cols,"droneCurrentLatitude":self.aircraftLocation.latitude,"droneCurrentLongitude":self.aircraftLocation.longitude,"skyRow":skyRow,"countId":(arrayValue.count + 1),"yawType":"\(yawType)","altitude":aircraftAltitude,"airCraftHeading":self.aircraftHeading]
+          //let panoramaDict:[String:Any] = ["captureDate":Date(),"timeStamp":Date().timeIntervalSince1970,"rows":rows,"columns":cols,"airCraftLatitude":32.25686,"airCraftLongitude":-120.26,"skyRow":skyRow,"yawType":"\(yawType)","airCraftAltitude": 100.0,"airCraftHeading":self.aircraftHeading]
         
-        //  let panoramaDict:[String:Any] = ["captureDate":Date(),"rows":rows,"columns":cols,"droneCurrentLatitude":32.25686,"droneCurrentLongitude":-120.26,"skyRow":skyRow,"countId":(arrayValue.count + 1),"yawType":"\(yawType)","altitude": 100,"airCraftHeading":self.aircraftHeading]
+       // let panoramaDict:[String:Any] = ["captureDate":Date(),"timeStamp":Date().timeIntervalSince1970,"rows":rows,"columns":cols,"airCraftLatitude":40.78,"airCraftLongitude":100.2485,"skyRow":skyRow,"yawType":"\(yawType)","airCraftAltitude":10.0,"airCraftHeading":90.0]
+//        debugPrint(panoramaDict)
         
-        // let panoramaDict:[String:Any] = ["captureDate":Date(),"rows":rows,"columns":cols,"droneCurrentLatitude":22.78,"droneCurrentLongitude":74.2485,"skyRow":skyRow,"countId":(arrayValue.count + 1),"yawType":"\(yawType)","altitude":10,"airCraftHeading":-120]
-        debugPrint(panoramaDict)
         
-        // Write to database
-        _ = DataBaseHelper.sharedInstance.insertRecordInTable(tableName: "Panorama", attributes: panoramaDict)
+        //save to fireBase if user exist
+        if (userID != nil)
+        {
+            let panorma = PanoramaModel.init(panoramaDict as Dictionary<String, AnyObject>)
+            self.addPanoramaToCloudStoraga(panorama:[panorma])
+        }
+        else// Write to database
+        {
+             _ = DataBaseHelper.sharedInstance.insertRecordInTable(tableName: "Panorama", attributes: panoramaDict)
+        }
         
         totalPhotoCount = rows * cols + 1
         //set PhotoCount
