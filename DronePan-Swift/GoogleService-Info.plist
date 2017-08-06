@@ -7,21 +7,21 @@
 	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
 	<string>ca-app-pub-3940256099942544/4411468910</string>
 	<key>CLIENT_ID</key>
-	<string>702332134015-olgpniqpfm71t48nqefbeq68bu9t694f.apps.googleusercontent.com</string>
+	<string>277134059488-itto8itg7gm4kv6d4voc52oaluj2pgej.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.702332134015-olgpniqpfm71t48nqefbeq68bu9t694f</string>
+	<string>com.googleusercontent.apps.277134059488-itto8itg7gm4kv6d4voc52oaluj2pgej</string>
 	<key>API_KEY</key>
-	<string>AIzaSyCYjBt72GYlWQT7WnzkuGXrlFyFJd82vKk</string>
+	<string>AIzaSyDF040N3E2HNMVd1FJhL_TP5xEB1VWtbs4</string>
 	<key>GCM_SENDER_ID</key>
-	<string>702332134015</string>
+	<string>277134059488</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.canopus.droneTestApp</string>
+	<string>com.unmannedairlines.DronePan</string>
 	<key>PROJECT_ID</key>
-	<string>dronepan-da471</string>
+	<string>dronepan-dev</string>
 	<key>STORAGE_BUCKET</key>
-	<string>dronepan-da471.appspot.com</string>
+	<string>dronepan-dev.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<true/>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -33,8 +33,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true/>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:702332134015:ios:e107e934e34f7159</string>
+	<string>1:277134059488:ios:936db54c784f093f</string>
 	<key>DATABASE_URL</key>
-	<string>https://dronepan-da471.firebaseio.com</string>
+	<string>https://dronepan-dev.firebaseio.com</string>
 </dict>
 </plist>

@@ -31,20 +31,12 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.googleusercontent.apps.702332134015-2oek3v28ib8t8dqu4ovvn63rl9linq4r</string>
-			</array>
-		</dict>
-		<dict>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>com.googleusercontent.apps.702332134015-olgpniqpfm71t48nqefbeq68bu9t694f</string>
+				<string>com.googleusercontent.apps.277134059488-itto8itg7gm4kv6d4voc52oaluj2pgej</string>
 			</array>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>24</string>
+	<string>25</string>
 	<key>DJISDKAppKey</key>
 	<string>d6b78c9337f72fadd85d88e2</string>
 	<key>FacebookAppID</key>
