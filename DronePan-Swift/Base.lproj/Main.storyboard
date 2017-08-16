@@ -1108,36 +1108,37 @@
                                     <action selector="actionOnFacebookLogin:" destination="Ibn-Ip-cOh" eventType="touchUpInside" id="MsM-7S-Hc7"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d83-ls-6tb">
-                                <rect key="frame" x="392" y="674.5" width="240" height="40.5"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lz8-3P-E6c">
+                                <rect key="frame" x="392" y="671" width="240" height="40.5"/>
                                 <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <state key="normal" title="Cancel Login">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="cancelLoginButtonAction:" destination="Ibn-Ip-cOh" eventType="touchUpInside" id="3nn-Tx-QAj"/>
+                                    <action selector="cancelLoginButtonAction:" destination="Ibn-Ip-cOh" eventType="touchUpInside" id="phV-Ai-GOx"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Dia-KT-gaA" firstAttribute="centerX" secondItem="f4K-3P-1R6" secondAttribute="centerX" id="5WK-11-iN7"/>
-                            <constraint firstItem="rWz-q7-gAv" firstAttribute="top" secondItem="d83-ls-6tb" secondAttribute="bottom" constant="53" id="8O3-2t-2df"/>
                             <constraint firstItem="F6X-Fd-vnF" firstAttribute="height" secondItem="rG9-Jc-VFe" secondAttribute="height" multiplier="0.9" id="GXn-Ii-qUk"/>
+                            <constraint firstItem="rWz-q7-gAv" firstAttribute="top" secondItem="Lz8-3P-E6c" secondAttribute="bottom" constant="56.5" id="P4z-oQ-RYr"/>
                             <constraint firstItem="Dia-KT-gaA" firstAttribute="centerY" secondItem="f4K-3P-1R6" secondAttribute="centerY" constant="-120" id="PcJ-WX-lyz"/>
+                            <constraint firstItem="Lz8-3P-E6c" firstAttribute="width" secondItem="F6X-Fd-vnF" secondAttribute="width" id="Qvb-2k-ZDW"/>
                             <constraint firstItem="rG9-Jc-VFe" firstAttribute="centerX" secondItem="f4K-3P-1R6" secondAttribute="centerX" id="Tjp-6O-aeB"/>
-                            <constraint firstItem="d83-ls-6tb" firstAttribute="height" secondItem="F6X-Fd-vnF" secondAttribute="height" id="VBf-ek-u1S"/>
-                            <constraint firstItem="d83-ls-6tb" firstAttribute="width" secondItem="F6X-Fd-vnF" secondAttribute="width" id="YC8-e4-LQh"/>
+                            <constraint firstItem="Lz8-3P-E6c" firstAttribute="centerX" secondItem="f4K-3P-1R6" secondAttribute="centerX" id="ZX7-Zq-3vR"/>
                             <constraint firstItem="F6X-Fd-vnF" firstAttribute="top" secondItem="rG9-Jc-VFe" secondAttribute="bottom" constant="50" id="byj-Zu-qI4"/>
+                            <constraint firstItem="Lz8-3P-E6c" firstAttribute="height" secondItem="F6X-Fd-vnF" secondAttribute="height" id="eq4-XQ-po3"/>
                             <constraint firstItem="F6X-Fd-vnF" firstAttribute="trailing" secondItem="rG9-Jc-VFe" secondAttribute="trailing" id="jqY-Hr-YKI"/>
                             <constraint firstItem="rG9-Jc-VFe" firstAttribute="centerY" secondItem="f4K-3P-1R6" secondAttribute="centerY" constant="-50" id="lvZ-kw-TJ0"/>
                             <constraint firstItem="F6X-Fd-vnF" firstAttribute="leading" secondItem="rG9-Jc-VFe" secondAttribute="leading" id="n78-km-cAm"/>
-                            <constraint firstItem="d83-ls-6tb" firstAttribute="centerX" secondItem="f4K-3P-1R6" secondAttribute="centerX" id="n8T-fp-eFa"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="activityIndicator" destination="Dia-KT-gaA" id="Dpt-Ta-09Y"/>
-                        <outlet property="cancelLoginButton" destination="d83-ls-6tb" id="0b7-kM-6FU"/>
+                        <outlet property="cancelLoginButton" destination="Lz8-3P-E6c" id="JGH-33-hBd"/>
                         <outlet property="signInButton" destination="rG9-Jc-VFe" id="VpE-gS-LeH"/>
                     </connections>
                 </viewController>

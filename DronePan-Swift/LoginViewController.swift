@@ -20,8 +20,8 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var signInButton: GIDSignInButton!
     var loginButton : LoginButton!
-     @IBOutlet weak var cancelLoginButton: UIButton!
     
+    @IBOutlet weak var cancelLoginButton: UIButton!
     //======================================
     //MARK: =========== View's life cycle ========
     //======================================
@@ -70,9 +70,8 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func cancelLoginButtonAction(_ sender: UIButton) {
-        self.dismiss(animated: true, completion: nil)
+         self.dismiss(animated: true, completion: nil)
     }
-
 }
 
 

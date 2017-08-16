@@ -125,6 +125,87 @@ class MapViewController: UIViewController {
     }
     
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        // Add listener so we can get mission status updates
+        DJISDKManager.missionControl()?.addListener(self, toTimelineProgressWith: { (event: DJIMissionControlTimelineEvent, element: DJIMissionControlTimelineElement?, error: Error?, info: Any?) in
+            
+            print("Mission control event \(String(describing: DJIMissionControlTimelineEvent(rawValue: event.rawValue)))")
+            
+            if error != nil {
+                
+                self.showAlert(title: "Error", message: String(describing: error!))
+                self.setPhotoCount()
+                
+            }
+            
+            switch event {
+                
+            case .started:
+                print("Started")
+            case .startError:
+                print("Start error")
+            case .progressed:
+                print("Progressed")
+            case .paused:
+                print("Paused")
+            case .pauseError:
+                print("Pause error")
+            case .resumed:
+                print("Resumed")
+            case .resumeError:
+                print("Resume error")
+            case .stopped:
+                print("Stopped")
+            case .stopError:
+                print("Stop error")
+            case .finished:
+                print("Finished")
+            default:
+                print("Defaut")
+            }
+        })
+        
+    }
+
+    func setPhotoCount()
+    {
+        
+        if let missionCantrol = DJISDKManager.missionControl()
+        {
+            if missionCantrol.isTimelineRunning || missionCantrol.isTimelinePaused
+            {
+                return
+            }
+        }
+        
+        //saving default saving setting if not set and also update photo count
+        let defaults = UserDefaults.standard
+        var rows = defaults.integer(forKey: "rows")
+        if rows == 0 {
+            rows = 4
+        }
+        
+        var cols = defaults.integer(forKey: "columns")
+        if cols == 0 {
+            cols = 7
+        }
+        
+        let skyRow = defaults.integer(forKey: "skyRow")
+        if skyRow == 1 {
+            rows = rows + 1
+            AppDelegate.totalPhotoCount = rows * cols + 1
+            AppDelegate.currentPhotoCount = 0
+        }
+        else{
+            AppDelegate.totalPhotoCount = rows * cols + 1
+            AppDelegate.currentPhotoCount = 0
+        }
+        
+        // show photo count every time(either it will come from setting view controller)issue#19
+        telemetryViewController.updatePhotoCountLabel()
+    }
+    
     
     
     override var prefersStatusBarHidden: Bool {
@@ -306,6 +387,7 @@ class MapViewController: UIViewController {
                     AppDelegate.totalPhotoCount = totalPhotoCount
                     AppDelegate.currentPhotoCount = 0
                     AppDelegate.isStartingNewTaskOfPano = true
+                    telemetryViewController.updatePhotoCountLabel()
                     
                     // The code below generates a nil exception
                     // Initialize the photo counter

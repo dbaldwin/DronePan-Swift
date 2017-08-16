@@ -28,6 +28,7 @@ class TelemetryViewController: UIViewController {
     
     func resetAndStartCounting(photoCount: Int) {
         AppDelegate.isStartingNewTaskOfPano = true
+        ProductCommunicationManager.shared.fetchCamera()?.delegate = self
         //for label immediate update
         updatePhotoCountLabel()
     }
@@ -51,8 +52,14 @@ extension TelemetryViewController: DJICameraDelegate {
             AppDelegate.currentPhotoCount += 1
         }
         if AppDelegate.currentPhotoCount == AppDelegate.totalPhotoCount {
+            var rows:Int = UserDefaults.standard.integer(forKey: "rows")
+            let cols:Int = UserDefaults.standard.integer(forKey: "columns")
+            let skyRow:Int = UserDefaults.standard.integer(forKey: "skyRow")
+            if skyRow == 1 {
+                rows = rows + 1
+            }
             AppDelegate.currentPhotoCount = 0
-            AppDelegate.totalPhotoCount = 0
+            AppDelegate.totalPhotoCount = rows * cols + 1
             AppDelegate.isStartingNewTaskOfPano = false
             self.showAlert(title: "Panorama complete!", message: "You can now take manual control of your aircraft. If you have any problems taking manual control please toggle your flight mode switch away from GPS mode and back. Then you should have control again.")
         }

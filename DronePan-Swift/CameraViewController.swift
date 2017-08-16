@@ -59,6 +59,8 @@ class CameraViewController: UIViewController {
                 }
             })
         }
+        //If timeline not running then setInitial photo Count
+        self.setPhotoCount()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -77,6 +79,7 @@ class CameraViewController: UIViewController {
             if error != nil {
                 
                 self.showAlert(title: "Error", message: String(describing: error!))
+                self.setPhotoCount()
                 
             }
             
@@ -134,6 +137,48 @@ class CameraViewController: UIViewController {
     }
     
     //======================================
+    //MARK: ========== set photo count ========
+    //======================================
+    func setPhotoCount()
+    {
+        
+        if let missionCantrol = DJISDKManager.missionControl()
+        {
+            if missionCantrol.isTimelineRunning || missionCantrol.isTimelinePaused
+            {
+                return
+            }
+        }
+        
+        //saving default saving setting if not set and also update photo count
+        let defaults = UserDefaults.standard
+        var rows = defaults.integer(forKey: "rows")
+        if rows == 0 {
+            rows = 4
+        }
+        
+        var cols = defaults.integer(forKey: "columns")
+        if cols == 0 {
+            cols = 7
+        }
+        
+        let skyRow = defaults.integer(forKey: "skyRow")
+        if skyRow == 1 {
+            rows = rows + 1
+            AppDelegate.totalPhotoCount = rows * cols + 1
+            AppDelegate.currentPhotoCount = 0
+        }
+        else{
+            AppDelegate.totalPhotoCount = rows * cols + 1
+            AppDelegate.currentPhotoCount = 0
+        }
+        
+        // show photo count every time(either it will come from setting view controller)issue#19
+        telemetryViewController.updatePhotoCountLabel()
+    }
+    
+    
+    //======================================
     //MARK: =========== Button Action ========
     //======================================
     @IBAction func startPano(_ sender: Any) {
@@ -187,7 +232,11 @@ class CameraViewController: UIViewController {
 
         
         // Save pano to database(add timeStamp for uniqueness with firebase)
-        let panoramaDict:[String:Any] = [SerializationKeys.timeStamp:Date().timeIntervalSince1970,
+        //let panoramaDict:[String:Any] = ["captureDate":Date(),"timeStamp":Date().timeIntervalSince1970,"rows":rows,"columns":cols,"airCraftLatitude":self.aircraftLocation.latitude,"airCraftLongitude":self.aircraftLocation.longitude,"skyRow":skyRow,"yawType":"\(yawType)","airCraftAltitude":aircraftAltitude,"airCraftHeading":self.aircraftHeading]
+       
+
+        /*let panoramaDict:[String:Any] = [SerializationKeys.captureDate:Date(),
+                                          SerializationKeys.timeStamp:Date().timeIntervalSince1970,
                                           SerializationKeys.rows:rows,
                                           SerializationKeys.columns:cols,
                                          SerializationKeys.airCraftLatitude:self.aircraftLocation.latitude,
@@ -195,10 +244,11 @@ class CameraViewController: UIViewController {
                                          SerializationKeys.skyRow:skyRow,
                                          SerializationKeys.yawType:"\(yawType)",
                                          SerializationKeys.airCraftAltitude:aircraftAltitude,
-                                         SerializationKeys.airCraftHeading:self.aircraftHeading]
+                                         SerializationKeys.airCraftHeading:self.aircraftHeading]*/
         
-    
-       /* let panoramaDict:[String:Any] = [SerializationKeys.timeStamp:Date().timeIntervalSince1970,
+        
+          //let panoramaDict:[String:Any] = ["captureDate":Date(),"timeStamp":Date().timeIntervalSince1970,"rows":rows,"columns":cols,"airCraftLatitude":32.25686,"airCraftLongitude":-120.26,"skyRow":skyRow,"yawType":"\(yawType)","airCraftAltitude": 100.0,"airCraftHeading":self.aircraftHeading]
+        let panoramaDict:[String:Any] = [SerializationKeys.timeStamp:Date().timeIntervalSince1970,
                                          SerializationKeys.rows:rows,
                                          SerializationKeys.columns:cols,
                                          SerializationKeys.airCraftLatitude:64.25686,
@@ -206,9 +256,10 @@ class CameraViewController: UIViewController {
                                          SerializationKeys.skyRow:skyRow,
                                          SerializationKeys.yawType:"\(yawType)",
             SerializationKeys.airCraftAltitude:50.0,
-            SerializationKeys.airCraftHeading:-135.0]*/
+            SerializationKeys.airCraftHeading:-135.0]
 
         
+       // let panoramaDict:[String:Any] = ["captureDate":Date(),"timeStamp":Date().timeIntervalSince1970,"rows":rows,"columns":cols,"airCraftLatitude":40.78,"airCraftLongitude":100.2485,"skyRow":skyRow,"yawType":"\(yawType)","airCraftAltitude":10.0,"airCraftHeading":90.0]
         debugPrint(panoramaDict)
         
         
