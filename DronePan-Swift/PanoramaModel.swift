@@ -12,7 +12,6 @@ import FirebaseAuth
 
 struct SerializationKeys {
     static let airCraftHeading = "airCraftHeading"
-    static let captureDate  = "captureDate"
     static let airCraftAltitude = "airCraftAltitude"
     static let columns   = "columns"
     static let airCraftLatitude = "airCraftLatitude"
@@ -31,7 +30,6 @@ var userID = Auth.auth().currentUser?.uid
 class PanoramaModel: NSObject {
 
     var airCraftHeading:Double
-    var captureDate:String
     var airCraftAltitude:Double
     var columns:Int
     var airCraftLatitude:Double
@@ -45,9 +43,8 @@ class PanoramaModel: NSObject {
     
     init(_ dictionary : Dictionary<String,AnyObject>) {
         self.airCraftHeading = dictionary["airCraftHeading"] as? Double ?? 0.0
-        self.captureDate = "\(dictionary["captureDate"] as? Date ?? Date())"
         self.airCraftAltitude = dictionary["airCraftAltitude"] as? Double ?? 0.0
-        self.columns = dictionary["columns"] as? Int ?? 4
+        self.columns = dictionary["columns"] as? Int ?? 0
         self.airCraftLatitude = dictionary["airCraftLatitude"] as? Double ?? 0.0
         self.airCraftLongitude = dictionary["airCraftLongitude"] as? Double ?? 0.0
         self.rows = dictionary["rows"] as? Int ?? 0
@@ -62,7 +59,6 @@ class PanoramaModel: NSObject {
         var dictionary: [String: Any] = [:]
         
         dictionary[SerializationKeys.airCraftHeading] = airCraftHeading
-        dictionary[SerializationKeys.captureDate] = captureDate
         dictionary[SerializationKeys.airCraftAltitude] = airCraftAltitude
         dictionary[SerializationKeys.columns] = columns
         dictionary[SerializationKeys.airCraftLatitude] = airCraftLatitude

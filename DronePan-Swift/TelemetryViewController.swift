@@ -28,6 +28,8 @@ class TelemetryViewController: UIViewController {
     
     func resetAndStartCounting(photoCount: Int) {
         AppDelegate.isStartingNewTaskOfPano = true
+        //for label immediate update
+        updatePhotoCountLabel()
     }
     
     func updatePhotoCountLabel() {

@@ -111,6 +111,8 @@ class SettingsViewController: UIViewController {
         defaults.set(yawType, forKey: "yawType")
         defaults.set(skyRow, forKey: "skyRow")
         
+       
+        
         dismiss(animated: true, completion: nil)
         
     }

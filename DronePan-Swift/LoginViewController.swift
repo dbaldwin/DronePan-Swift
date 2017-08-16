@@ -115,7 +115,7 @@ fileprivate extension LoginViewController {
                     { var panormas:[PanoramaModel] = [PanoramaModel]()
                         for panorama in panoramas
                         {
-                       let panoramaDict:[String:Any] = ["captureDate":"\(panorama.captureDate as AnyObject)" ,"timeStamp":panorama.timeStamp,"rows":panorama.rows,"columns":panorama.columns,"airCraftLatitude":panorama.airCraftLatitude,"airCraftLongitude":panorama.airCraftLongitude,"skyRow":panorama.skyRow,"yawType":(panorama.yawType ?? ""),"airCraftAltitude":panorama.airCraftAltitude,"airCraftHeading":panorama.airCraftHeading]
+                       let panoramaDict:[String:Any] = ["timeStamp":panorama.timeStamp,"rows":Int(panorama.rows),"columns":Int(panorama.columns),"airCraftLatitude":panorama.airCraftLatitude,"airCraftLongitude":panorama.airCraftLongitude,"skyRow":Int(panorama.skyRow),"yawType":(panorama.yawType ?? ""),"airCraftAltitude":panorama.airCraftAltitude,"airCraftHeading":panorama.airCraftHeading]
                     
                       panormas.append(PanoramaModel.init(panoramaDict as Dictionary<String, AnyObject>))
                         }

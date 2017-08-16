@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -783,7 +782,7 @@
                                     <constraint firstAttribute="height" constant="32" id="w7z-lu-Us9"/>
                                 </constraints>
                                 <connections>
-                                    <segue destination="pCG-DI-v51" kind="embed" id="7l9-Vy-qZe"/>
+                                    <segue destination="pCG-DI-v51" kind="embed" identifier="telemetryViewSegue" id="7l9-Vy-qZe"/>
                                 </connections>
                             </containerView>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6OE-zC-Daa" userLabel="Button navigation view">
@@ -1140,8 +1139,8 @@
         <image name="photo_button_pressed" width="75" height="75"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="JsW-mp-782"/>
         <segue reference="VOk-MN-cdM"/>
+        <segue reference="JsW-mp-782"/>
         <segue reference="7l9-Vy-qZe"/>
     </inferredMetricsTieBreakers>
 </document>

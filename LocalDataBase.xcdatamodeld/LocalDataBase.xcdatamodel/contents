@@ -5,7 +5,6 @@
         <attribute name="airCraftHeading" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="airCraftLatitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="airCraftLongitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="captureDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="columns" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="rows" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="skyRow" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
@@ -13,6 +12,6 @@
         <attribute name="yawType" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Panorama" positionX="-63" positionY="-18" width="128" height="195"/>
+        <element name="Panorama" positionX="-63" positionY="-18" width="128" height="180"/>
     </elements>
 </model>

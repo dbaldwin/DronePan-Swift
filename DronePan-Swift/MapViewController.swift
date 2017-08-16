@@ -52,6 +52,7 @@ class MapViewController: UIViewController {
     lazy var dateFormate:DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "E, d MMM yyyy HH:mm:ss"
+         formatter.timeZone = TimeZone.current
         return formatter
     }()
 
@@ -122,6 +123,9 @@ class MapViewController: UIViewController {
         }
         self.getAndShowSavedPanorama()
     }
+    
+    
+    
     
     override var prefersStatusBarHidden: Bool {
         return true
@@ -437,12 +441,13 @@ extension MapViewController: GMSMapViewDelegate {
                 {
                     if let firstObject = tappedPanorama.first
                     {
-                        let dict:[String:Any] = ["captureDate":"\(firstObject.captureDate as AnyObject)" ,"timeStamp":firstObject.timeStamp,"rows":firstObject.rows,"columns":firstObject.columns,"airCraftLatitude":firstObject.airCraftLatitude,"airCraftLongitude":firstObject.airCraftLongitude,"skyRow":firstObject.skyRow,"yawType":(firstObject.yawType ?? ""),"airCraftAltitude":firstObject.airCraftAltitude,"airCraftHeading":firstObject.airCraftHeading]
+                        let dict:[String:Any] = ["timeStamp":firstObject.timeStamp,"rows":firstObject.rows,"columns":firstObject.columns,"airCraftLatitude":firstObject.airCraftLatitude,"airCraftLongitude":firstObject.airCraftLongitude,"skyRow":firstObject.skyRow,"yawType":(firstObject.yawType ?? ""),"airCraftAltitude":firstObject.airCraftAltitude,"airCraftHeading":firstObject.airCraftHeading]
                         self.selectedPanorama = PanoramaModel.init(dict as Dictionary<String, AnyObject>)
                         self.selectedMarker = marker
                         mapView.bringSubview(toFront: self.panoramaDetailView)
                         self.panoramaLatLongLabel.text = "Lat: \(String(format: "%.5f", firstObject.airCraftLatitude)), Lon: \(String(format: "%.5f", firstObject.airCraftLongitude))"
-                        self.panoramaDateLabel.text = dateFormate.string(from: firstObject.captureDate! as Date)
+                         let date = Date(timeIntervalSince1970: firstObject.timeStamp)
+                        self.panoramaDateLabel.text = dateFormate.string(from: date as Date)
                         self.panoramaAltitudeLabel.text = "Altitude: \(firstObject.airCraftAltitude) m"
                         self.panoramaHeadingLabel.text = "Heading: \(firstObject.airCraftHeading)°"
                         self.panoramaRowsColsLabel.text = "Rows: \(firstObject.rows), Columns: \(firstObject.columns)"

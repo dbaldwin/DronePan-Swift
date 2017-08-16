@@ -12,6 +12,9 @@ import VideoPreviewer
 
 class CameraViewController: UIViewController {
     
+    //======================================
+    //MARK: =========== Properties ========
+    //======================================
     @IBOutlet weak var cameraView: UIView!
     @IBOutlet weak var hamburgerButton: UIButton!
     @IBOutlet weak var buttonNavView: UIView!
@@ -25,7 +28,11 @@ class CameraViewController: UIViewController {
     var currentPhotoCount: Int = 0
     var gimbal: DJIGimbal?
     
-       
+   
+    
+    //======================================
+    //MARK: =========== View's life cycle ========
+    //======================================
     // Following this approach from the DJI SDK example
     override func viewWillAppear(_ animated: Bool) {
         
@@ -45,9 +52,7 @@ class CameraViewController: UIViewController {
                     if newValue!.boolValue {
                         
                         DispatchQueue.main.async {
-                            
                             self.productConnected()
-
                         }
                         
                     }
@@ -128,6 +133,9 @@ class CameraViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
+    //======================================
+    //MARK: =========== Button Action ========
+    //======================================
     @IBAction func startPano(_ sender: Any) {
         
         let alertView = UIAlertController(title: "Confirm", message: "Are you ready to start the panorama sequence?", preferredStyle: .alert)
@@ -171,7 +179,6 @@ class CameraViewController: UIViewController {
             //save skyRow if not set
             defaults.set(skyRow, forKey: "skyRow")
         }
-        
         let yawType = defaults.integer(forKey: "yawType") 
         print(yawType)
         
@@ -180,13 +187,29 @@ class CameraViewController: UIViewController {
 
         
         // Save pano to database(add timeStamp for uniqueness with firebase)
-        let panoramaDict:[String:Any] = ["captureDate":Date(),"timeStamp":Date().timeIntervalSince1970,"rows":rows,"columns":cols,"airCraftLatitude":self.aircraftLocation.latitude,"airCraftLongitude":self.aircraftLocation.longitude,"skyRow":skyRow,"yawType":"\(yawType)","airCraftAltitude":aircraftAltitude,"airCraftHeading":self.aircraftHeading]
+        let panoramaDict:[String:Any] = [SerializationKeys.timeStamp:Date().timeIntervalSince1970,
+                                          SerializationKeys.rows:rows,
+                                          SerializationKeys.columns:cols,
+                                         SerializationKeys.airCraftLatitude:self.aircraftLocation.latitude,
+                                         SerializationKeys.airCraftLongitude:self.aircraftLocation.longitude,
+                                         SerializationKeys.skyRow:skyRow,
+                                         SerializationKeys.yawType:"\(yawType)",
+                                         SerializationKeys.airCraftAltitude:aircraftAltitude,
+                                         SerializationKeys.airCraftHeading:self.aircraftHeading]
         
+    
+       /* let panoramaDict:[String:Any] = [SerializationKeys.timeStamp:Date().timeIntervalSince1970,
+                                         SerializationKeys.rows:rows,
+                                         SerializationKeys.columns:cols,
+                                         SerializationKeys.airCraftLatitude:64.25686,
+                                         SerializationKeys.airCraftLongitude:-120.26,
+                                         SerializationKeys.skyRow:skyRow,
+                                         SerializationKeys.yawType:"\(yawType)",
+            SerializationKeys.airCraftAltitude:50.0,
+            SerializationKeys.airCraftHeading:-135.0]*/
+
         
-          //let panoramaDict:[String:Any] = ["captureDate":Date(),"timeStamp":Date().timeIntervalSince1970,"rows":rows,"columns":cols,"airCraftLatitude":32.25686,"airCraftLongitude":-120.26,"skyRow":skyRow,"yawType":"\(yawType)","airCraftAltitude": 100.0,"airCraftHeading":self.aircraftHeading]
-        
-       // let panoramaDict:[String:Any] = ["captureDate":Date(),"timeStamp":Date().timeIntervalSince1970,"rows":rows,"columns":cols,"airCraftLatitude":40.78,"airCraftLongitude":100.2485,"skyRow":skyRow,"yawType":"\(yawType)","airCraftAltitude":10.0,"airCraftHeading":90.0]
-//        debugPrint(panoramaDict)
+        debugPrint(panoramaDict)
         
         
         //save to fireBase if user exist
@@ -199,7 +222,7 @@ class CameraViewController: UIViewController {
         {
              _ = DataBaseHelper.sharedInstance.insertRecordInTable(tableName: "Panorama", attributes: panoramaDict)
         }
-        
+ 
         totalPhotoCount = rows * cols + 1
         //set PhotoCount
         AppDelegate.totalPhotoCount = totalPhotoCount
@@ -233,6 +256,9 @@ class CameraViewController: UIViewController {
         
     }
     
+    //======================================
+    //MARK: =========== Navigation ========
+    //======================================
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         buttonNavView.isHidden = true
@@ -248,6 +274,9 @@ class CameraViewController: UIViewController {
         
     }
     
+    //======================================
+    //MARK: =========== Other function ========
+    //======================================
     func productConnected() {
         
         guard let newProduct = DJISDKManager.product() else {
@@ -323,6 +352,9 @@ class CameraViewController: UIViewController {
 
 }
 
+//======================================
+//MARK: =========== DJIVideoFeedListener ========
+//======================================
 // Get the video feed update
 extension CameraViewController: DJIVideoFeedListener {
     
@@ -339,6 +371,9 @@ extension CameraViewController: DJIVideoFeedListener {
     
 }
 
+//======================================
+//MARK: =========== DJIFlightControllerDelegate ========
+//======================================
 // Keep track of the current aircraft location
 extension CameraViewController: DJIFlightControllerDelegate {
     
@@ -363,6 +398,9 @@ extension CameraViewController: DJIFlightControllerDelegate {
     
 }
 
+//======================================
+//MARK: =========== DJIGimbalDelegate ========
+//======================================
 extension CameraViewController: DJIGimbalDelegate {
     
 }

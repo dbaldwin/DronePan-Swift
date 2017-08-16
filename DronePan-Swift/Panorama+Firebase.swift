@@ -19,7 +19,6 @@ extension UIViewController
     {
                 let panoRef = ref.child("users").child("\(userID!)").child("panoramas").childByAutoId()
                 panoRef.child(SerializationKeys.airCraftHeading).setValue(panorama.airCraftHeading)
-                panoRef.child(SerializationKeys.captureDate).setValue(panorama.captureDate)
                 panoRef.child(SerializationKeys.airCraftAltitude).setValue(panorama.airCraftAltitude)
                 panoRef.child(SerializationKeys.columns).setValue(panorama.columns)
                 panoRef.child(SerializationKeys.airCraftLatitude).setValue(panorama.airCraftLatitude)
