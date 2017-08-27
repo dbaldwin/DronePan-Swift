@@ -202,7 +202,7 @@ class CameraViewController: UIViewController {
         DJISDKManager.missionControl()?.unscheduleEverything()
         
         // Reset the gimbal
-        gimbal?.reset(completion: nil)
+        //gimbal?.reset(completion: nil)
         
         // Build the pano logic
         let pano = PanoramaController()
