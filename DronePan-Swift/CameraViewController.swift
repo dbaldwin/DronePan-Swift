@@ -103,10 +103,6 @@ class CameraViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        sdkVersionLabel.text = "SDK: \(DJISDKManager.sdkVersion())"
-        
-        
     }
     
     override var prefersStatusBarHidden: Bool {
@@ -241,11 +237,12 @@ class CameraViewController: UIViewController {
         
         guard let newProduct = DJISDKManager.product() else {
             print("Product is connected but DJISDKManager.product is nil -> something is wrong")
+            
             return;
         }
         
-        //Updates the product's model
-        print("Model: \((newProduct.model)!)")
+        // Display SDK and model
+        sdkVersionLabel.text = "SDK: \(DJISDKManager.sdkVersion()), Model: \(newProduct.model!)"
         
         //Updates the product's firmware version - COMING SOON
         newProduct.getFirmwarePackageVersion{ (version:String?, error:Error?) -> Void in
