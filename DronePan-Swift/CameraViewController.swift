@@ -38,29 +38,9 @@ class CameraViewController: UIViewController {
         
         super.viewWillAppear(animated)
         
-        // Setup the connection key
-        guard let connectedKey = DJIProductKey(param: DJIParamConnection) else {
-            return;
-        }
+        // Notification for updating drone model label
+        NotificationCenter.default.addObserver(self, selector: #selector(productConnected), name: NSNotification.Name(rawValue: "gotConnection"), object: nil)
         
-        // Delay and then call the connection function
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            
-            DJISDKManager.keyManager()?.startListeningForChanges(on: connectedKey, withListener: self, andUpdate: { (oldValue: DJIKeyedValue?, newValue : DJIKeyedValue?) in
-                
-                if newValue != nil {
-                    if newValue!.boolValue {
-                        
-                        DispatchQueue.main.async {
-                            
-                            self.productConnected()
-
-                        }
-                        
-                    }
-                }
-            })
-        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -257,7 +237,7 @@ class CameraViewController: UIViewController {
         
     }
     
-    func productConnected() {
+    func productConnected(notification: NSNotification) {
         
         guard let newProduct = DJISDKManager.product() else {
             print("Product is connected but DJISDKManager.product is nil -> something is wrong")

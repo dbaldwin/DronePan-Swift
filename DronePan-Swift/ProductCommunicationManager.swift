@@ -11,7 +11,7 @@ import DJISDK
 
 class ProductCommunicationManager: NSObject {
     
-    let enableBridgeMode = true
+    let enableBridgeMode = false
     var aircraftLocation : CLLocationCoordinate2D?
     let bridgeAppIP = "10.0.1.18"
     
@@ -98,7 +98,12 @@ extension ProductCommunicationManager : DJISDKManagerDelegate,DJIFlightControlle
     }
     
     func productConnected(_ product: DJIBaseProduct?) {
-
+        
+        let model: [String: String] = ["model": (product?.model)!]
+        
+        // Post to the VC and update with the model name
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "gotConnection"), object: nil, userInfo: model)
+        
     }
     
     func productDisconnected() {
