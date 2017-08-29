@@ -38,29 +38,12 @@ class CameraViewController: UIViewController {
         
         super.viewWillAppear(animated)
         
-        // Setup the connection key
-        guard let connectedKey = DJIProductKey(param: DJIParamConnection) else {
-            return;
-        }
+        // Notification for updating drone model label
+        NotificationCenter.default.addObserver(self, selector: #selector(productConnected), name: NSNotification.Name(rawValue: "gotConnection"), object: nil)
         
-        // Delay and then call the connection function
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            
-            DJISDKManager.keyManager()?.startListeningForChanges(on: connectedKey, withListener: self, andUpdate: { (oldValue: DJIKeyedValue?, newValue : DJIKeyedValue?) in
-                
-                if newValue != nil {
-                    if newValue!.boolValue {
-                        
-                        DispatchQueue.main.async {
-                            self.productConnected()
-                        }
-                        
-                    }
-                }
-            })
-        }
         //If timeline not running then setInitial photo Count
         self.setPhotoCount()
+
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -124,8 +107,6 @@ class CameraViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        sdkVersionLabel.text = "SDK: \(DJISDKManager.sdkVersion())"
-        
     }
     
     override var prefersStatusBarHidden: Bool {
@@ -287,7 +268,7 @@ class CameraViewController: UIViewController {
         DJISDKManager.missionControl()?.unscheduleEverything()
         
         // Reset the gimbal
-        gimbal?.reset(completion: nil)
+        //gimbal?.reset(completion: nil)
         
         // Build the pano logic
         let pano = PanoramaController()
@@ -325,18 +306,16 @@ class CameraViewController: UIViewController {
         
     }
     
-    //======================================
-    //MARK: =========== Other function ========
-    //======================================
-    func productConnected() {
+    func productConnected(notification: NSNotification) {
         
         guard let newProduct = DJISDKManager.product() else {
             print("Product is connected but DJISDKManager.product is nil -> something is wrong")
+            
             return;
         }
         
-        //Updates the product's model
-        print("Model: \((newProduct.model)!)")
+        // Display SDK and model
+        sdkVersionLabel.text = "SDK: \(DJISDKManager.sdkVersion()), Model: \(newProduct.model!)"
         
         //Updates the product's firmware version - COMING SOON
         newProduct.getFirmwarePackageVersion{ (version:String?, error:Error?) -> Void in

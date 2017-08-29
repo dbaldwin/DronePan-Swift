@@ -118,13 +118,18 @@ class PanoramaController {
         }
         
         // Let's add nadir shots (start with one and add more later)
-        let attitude = DJIGimbalAttitude(pitch: -90.0, roll: 0.0, yaw: 0.0)
-        let pitchAction: DJIGimbalAttitudeAction = DJIGimbalAttitudeAction(attitude: attitude)!
+        var attitude = DJIGimbalAttitude(pitch: -90.0, roll: 0.0, yaw: 0.0)
+        var pitchAction: DJIGimbalAttitudeAction = DJIGimbalAttitudeAction(attitude: attitude)!
         elements.append(pitchAction)
         
         // Take the nadir shot
         let photoAction: DJIShootPhotoAction = DJIShootPhotoAction(singleShootPhoto:())!
         elements.append(photoAction)
+        
+        // Reset the gimbal to starting position
+        attitude = DJIGimbalAttitude(pitch: 0.0, roll: 0.0, yaw: 0.0)
+        pitchAction = DJIGimbalAttitudeAction(attitude: attitude)!
+        elements.append(pitchAction)
         
         // Raise altitude by 1m to get around being stuck in joystick mode at the end of the mission
         // This will force the aircraft back into GPS mode

@@ -45,11 +45,11 @@
                                 <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SDK: -" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NCt-cj-8SP">
-                                <rect key="frame" x="913" y="737" width="91" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SDK: -, Model: -" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NCt-cj-8SP">
+                                <rect key="frame" x="779" y="737" width="225" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="FfN-rG-h1v"/>
-                                    <constraint firstAttribute="width" constant="91" id="GGs-S4-zm5"/>
+                                    <constraint firstAttribute="width" constant="225" id="GGs-S4-zm5"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1158,5 +1158,8 @@
         <segue reference="VOk-MN-cdM"/>
         <segue reference="JsW-mp-782"/>
         <segue reference="7l9-Vy-qZe"/>
+        <segue reference="vXR-6Q-bQh"/>
+        <segue reference="ubc-zp-mJn"/>
+        <segue reference="GwU-kH-7E7"/>
     </inferredMetricsTieBreakers>
 </document>
