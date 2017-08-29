@@ -46,10 +46,10 @@
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SDK: -, Model: -" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NCt-cj-8SP">
-                                <rect key="frame" x="834" y="737" width="170" height="21"/>
+                                <rect key="frame" x="779" y="737" width="225" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="FfN-rG-h1v"/>
-                                    <constraint firstAttribute="width" constant="170" id="GGs-S4-zm5"/>
+                                    <constraint firstAttribute="width" constant="225" id="GGs-S4-zm5"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
