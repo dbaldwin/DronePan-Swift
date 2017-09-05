@@ -37,8 +37,8 @@ class PanoramaController {
         return elements
     }
     
-    // Execute pano at the current location
-    func buildPanoAtCurrentLocation() -> [DJIMissionControlTimelineElement] {
+    //Execute pano at the current location
+    func buildPanoAtCurrentLocation(altitude: Double) -> [DJIMissionControlTimelineElement] {
         
         // Get the defaults from storage
         let defaults = UserDefaults.standard
@@ -56,13 +56,24 @@ class PanoramaController {
             
         } else {
             
-            return buildPanoWithAircraftYaw(rows: rows, cols: cols, skyRow: skyRow)
+            return buildPanoWithAircraftYaw(rows: rows, cols: cols, skyRow: skyRow, altitude: altitude)
         }
         
     }
     
-    // Aircraft yaw
-    func buildPanoWithAircraftYaw(rows: Int, cols: Int, skyRow: Bool) -> [DJIMissionControlTimelineElement] {
+    //Aircraft yaw
+    func buildPanoWithAircraftYaw(rows: Int, cols: Int, skyRow: Bool, altitude: Double) -> [DJIMissionControlTimelineElement] {
+        
+        // Get gimbal capabilities
+        // Not doing anything with this at the moment
+        /*if let gimbal = ProductCommunicationManager.shared.fetchGimbal()
+        {
+        let capability: DJIParamCapability = gimbal.capabilities[DJIGimbalParamAdjustPitch] as! DJIParamCapability
+        let minMax: DJIParamCapabilityMinMax = capability as! DJIParamCapabilityMinMax
+        print("Gimbal pitch max: \(minMax.max)")
+        print("Gimbal pitch min: \(minMax.min)")
+        }*/
+        
         
         // Initialize the timeline array
         var elements = [DJIMissionControlTimelineElement]()
@@ -107,13 +118,23 @@ class PanoramaController {
         }
         
         // Let's add nadir shots (start with one and add more later)
-        let attitude = DJIGimbalAttitude(pitch: -90.0, roll: 0.0, yaw: 0.0)
-        let pitchAction: DJIGimbalAttitudeAction = DJIGimbalAttitudeAction(attitude: attitude)!
+        var attitude = DJIGimbalAttitude(pitch: -90.0, roll: 0.0, yaw: 0.0)
+        var pitchAction: DJIGimbalAttitudeAction = DJIGimbalAttitudeAction(attitude: attitude)!
         elements.append(pitchAction)
         
         // Take the nadir shot
         let photoAction: DJIShootPhotoAction = DJIShootPhotoAction(singleShootPhoto:())!
         elements.append(photoAction)
+        
+        // Reset the gimbal to starting position
+        attitude = DJIGimbalAttitude(pitch: 0.0, roll: 0.0, yaw: 0.0)
+        pitchAction = DJIGimbalAttitudeAction(attitude: attitude)!
+        elements.append(pitchAction)
+        
+        // Raise altitude by 1m to get around being stuck in joystick mode at the end of the mission
+        // This will force the aircraft back into GPS mode
+        let gotoAction: DJIGoToAction = DJIGoToAction(altitude: altitude+1)!
+        elements.append(gotoAction)
         
         return elements
         
@@ -121,7 +142,7 @@ class PanoramaController {
     
     // Gimbal yaw requires absolute angles for each gimbal position
     // Inspire 1 and Inspire 2 users
-    func buildPanoWithGimbalYaw(rows: Int, cols: Int, skyRow: Bool)  -> [DJIMissionControlTimelineElement] {
+    func buildPanoWithGimbalYaw(rows: Int, cols: Int, skyRow: Bool) -> [DJIMissionControlTimelineElement] {
         
         let yawAngle = 360/cols
         
@@ -190,14 +211,9 @@ class PanoramaController {
     
     func buildPanoAtCurrentLocationWithWaypointMission(currentLocation: CLLocationCoordinate2D) -> DJIMutableWaypointMission {
     
-        var mission = DJIMutableWaypointMission()
-        
-        
-        
-        var waypoint = DJIWaypoint(coordinate: currentLocation)
-        
-        
-        var waypoint2 = DJIWaypoint(coordinate: currentLocation)
+        let mission = DJIMutableWaypointMission()
+        _ = DJIWaypoint(coordinate: currentLocation)
+        _ = DJIWaypoint(coordinate: currentLocation)
         
         return mission
     }

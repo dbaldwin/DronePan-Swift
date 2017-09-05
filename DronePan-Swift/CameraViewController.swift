@@ -19,6 +19,8 @@ class CameraViewController: UIViewController {
     @IBOutlet weak var buttonNavView: UIView!
     
     var aircraftLocation: CLLocationCoordinate2D = kCLLocationCoordinate2DInvalid
+    var aircraftAltitude:Double = 0
+    var aircraftHeading:Double = 0
     
     var telemetryViewController: TelemetryViewController!
     
@@ -30,53 +32,15 @@ class CameraViewController: UIViewController {
     
     var gimbal: DJIGimbal?
     
+       
     // Following this approach from the DJI SDK example
     override func viewWillAppear(_ animated: Bool) {
         
         super.viewWillAppear(animated)
         
-        // Setup the connection key
-        guard let connectedKey = DJIProductKey(param: DJIParamConnection) else {
-            return;
-        }
+        // Notification for updating drone model label
+        NotificationCenter.default.addObserver(self, selector: #selector(productConnected), name: NSNotification.Name(rawValue: "gotConnection"), object: nil)
         
-        // Delay and then call the connection function
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            
-            DJISDKManager.keyManager()?.startListeningForChanges(on: connectedKey, withListener: self, andUpdate: { (oldValue: DJIKeyedValue?, newValue : DJIKeyedValue?) in
-                
-                if newValue != nil {
-                    if newValue!.boolValue {
-                        
-                        DispatchQueue.main.async {
-                            
-                            self.productConnected()
-
-                        }
-                        
-                    }
-                }
-            })
-        }
-        
-        // Enable virtual stick mode so that timeline yaws will work. This bug has been acknowledged here:
-        
-        // https://github.com/dji-sdk/Mobile-SDK-iOS/issues/104
-        
-        /* Can't seem to get this working so we'll revisit. We set the virtual stick mode right after setting up the delegate
-        guard let virtualStickKey = DJIFlightControllerKey(param: DJIFlightControllerParamVirtualStickAdvancedControlModeEnabled) else {
-            return;
-        }
-        
-        DJISDKManager.keyManager()?.setValue(NSNumber(value: true), for: virtualStickKey, withCompletion: { (error: Error?) in
-            
-            if error != nil {
-                
-                print("Error setting virtual stick mode")
-                
-            }
-            
-        })*/
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -119,8 +83,6 @@ class CameraViewController: UIViewController {
             case .stopError:
                 print("Stop error")
             case .finished:
-                // For some reason this gets called more than once
-                //self.panoFinished()
                 print("Finished")
             default:
                 print("Defaut")
@@ -133,7 +95,6 @@ class CameraViewController: UIViewController {
         
         VideoPreviewer.instance().unSetView()
         DJISDKManager.videoFeeder()?.primaryVideoFeed.remove(self)
-        
         DJISDKManager.missionControl()?.removeListener(self)
         
         super.viewWillDisappear(animated)
@@ -142,9 +103,6 @@ class CameraViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        sdkVersionLabel.text = "SDK: \(DJISDKManager.sdkVersion())"
-        
     }
     
     override var prefersStatusBarHidden: Bool {
@@ -160,65 +118,91 @@ class CameraViewController: UIViewController {
     
     @IBAction func startPano(_ sender: Any) {
         
-        // Test to see if this works. For some reason it works when bridging but not with the actual device. Adding here to test.
-        // Setting up camera delegate
-        let camera: DJICamera? = fetchCamera()
+        let alertView = UIAlertController(title: "Confirm", message: "Are you ready to start the panorama sequence?", preferredStyle: .alert)
         
-        if camera != nil {
-            print("camera delegate is setup")
-            camera?.delegate = self
-        }
+        let cancel = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler:{ (action) in
+        })
         
-        // Putting this here to see if we can get around the cases where the aircraft doesn't want to yaw
-        let fc: DJIFlightController? = fetchFlightController()
+        let start = UIAlertAction(title: "Start", style: UIAlertActionStyle.default, handler:{(action) in
+            self.startPanoNow()
+        })
         
-        if fc != nil {
-            fc?.delegate = self
-        }
+        alertView.addAction(cancel)
+        alertView.addAction(start)
         
-        // Enable virtual stick mode so that the aircraft can yaw
-        fc?.setVirtualStickModeEnabled(true, withCompletion: nil)
+        present(alertView, animated: true, completion: nil)
+    }
+    
+    func startPanoNow()
+    {
         
         let defaults = UserDefaults.standard
         
         // We should figure out how to update these immediately after the settings are saved and get rid of all this code
-        var rows = defaults.integer(forKey: "rows")
+        var rows:Int = defaults.integer(forKey: "rows")
         
         if rows == 0 {
             rows = 4
+            //save row if not set
+            defaults.set(rows, forKey: "rows")
         }
         
-        var cols = defaults.integer(forKey: "columns")
+        var cols:Int = defaults.integer(forKey: "columns")
         
         if cols == 0 {
             cols = 7
+            //save colums if not set
+            defaults.set(cols, forKey: "columns")
         }
         
-        let skyRow = defaults.integer(forKey: "skyRow")
+        let skyRow:Int = defaults.integer(forKey: "skyRow")
         
         if skyRow == 1 {
             
             rows = rows + 1
             
+            //save skyRow if not set
+            defaults.set(skyRow, forKey: "skyRow")
         }
         
+        let yawType = defaults.integer(forKey: "yawType") 
+        print(yawType)
+        
         currentPhotoCount = 0
+        print("Total number of rows \(rows), \(cols),\(skyRow),\(String(describing: gimbal))")
+        // Generate unique id for a panorama
+        let arrayValue = DataBaseHelper.sharedInstance.allRecordsSortByAttribute(inTable: "Panorama")
         
-        print("Total number of rows \(rows), \(cols)")
+        
+        // Save pano to database
+        let panoramaDict:[String:Any] = ["captureDate":Date(),"rows":rows,"columns":cols,"droneCurrentLatitude":self.aircraftLocation.latitude,"droneCurrentLongitude":self.aircraftLocation.longitude,"skyRow":skyRow,"countId":(arrayValue.count + 1),"yawType":"\(yawType)","altitude":aircraftAltitude,"airCraftHeading":self.aircraftHeading]
+        
+        //  let panoramaDict:[String:Any] = ["captureDate":Date(),"rows":rows,"columns":cols,"droneCurrentLatitude":32.25686,"droneCurrentLongitude":-120.26,"skyRow":skyRow,"countId":(arrayValue.count + 1),"yawType":"\(yawType)","altitude": 100,"airCraftHeading":self.aircraftHeading]
+        
+        // let panoramaDict:[String:Any] = ["captureDate":Date(),"rows":rows,"columns":cols,"droneCurrentLatitude":22.78,"droneCurrentLongitude":74.2485,"skyRow":skyRow,"countId":(arrayValue.count + 1),"yawType":"\(yawType)","altitude":10,"airCraftHeading":-120]
+        debugPrint(panoramaDict)
+        
+        // Write to database
+        _ = DataBaseHelper.sharedInstance.insertRecordInTable(tableName: "Panorama", attributes: panoramaDict)
+        
         totalPhotoCount = rows * cols + 1
+        //set PhotoCount
+        AppDelegate.totalPhotoCount = totalPhotoCount
+        AppDelegate.currentPhotoCount = 0
         
-        telemetryViewController.photoCountLabel.text = "\(currentPhotoCount)/\(totalPhotoCount)"
+        // Initialize the photo counter
+        telemetryViewController.resetAndStartCounting(photoCount: totalPhotoCount)
         
         // Clear out previous missions
         DJISDKManager.missionControl()?.stopTimeline()
         DJISDKManager.missionControl()?.unscheduleEverything()
         
         // Reset the gimbal
-        gimbal?.reset(completion: nil)
+        //gimbal?.reset(completion: nil)
         
         // Build the pano logic
         let pano = PanoramaController()
-        let error = DJISDKManager.missionControl()?.scheduleElements(pano.buildPanoAtCurrentLocation())
+        let error = DJISDKManager.missionControl()?.scheduleElements(pano.buildPanoAtCurrentLocation(altitude: self.aircraftAltitude))
         
         if error != nil {
             showAlert(title: "Error", message: String(describing: error))
@@ -226,29 +210,6 @@ class CameraViewController: UIViewController {
         }
         
         DJISDKManager.missionControl()?.startTimeline()
-    }
-    
-    func panoFinished() {
-        
-        showAlert(title: "Success", message: "Your panorama was successfully captured!")
-        
-        // Reset the gimbal. For some reason with Inspire 1 this doesn't reset the pitch...only the yaw
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-         
-            self.gimbal?.reset(completion: nil)
-            
-        }
-        
-    }
-    
-    func showAlert(title: String, message: String) {
-        
-        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
-        let ok = UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil)
-        alert.addAction(ok)
-        
-        present(alert, animated: true, completion: nil)
-        
     }
     
     @IBAction func showButtonNav(_ sender: Any) {
@@ -272,15 +233,16 @@ class CameraViewController: UIViewController {
         
     }
     
-    func productConnected() {
+    func productConnected(notification: NSNotification) {
         
         guard let newProduct = DJISDKManager.product() else {
             print("Product is connected but DJISDKManager.product is nil -> something is wrong")
+            
             return;
         }
         
-        //Updates the product's model
-        print("Model: \((newProduct.model)!)")
+        // Display SDK and model
+        sdkVersionLabel.text = "SDK: \(DJISDKManager.sdkVersion()), Model: \(newProduct.model!)"
         
         //Updates the product's firmware version - COMING SOON
         newProduct.getFirmwarePackageVersion{ (version:String?, error:Error?) -> Void in
@@ -291,13 +253,14 @@ class CameraViewController: UIViewController {
         //Updates the product's connection status
         print("Product Connected")
         
+        // Trying to manage this in telemetry view controller
         // Setting up camera delegate
-        let camera: DJICamera? = fetchCamera()
+        /*let camera: DJICamera? = fetchCamera()
         
         if camera != nil {
             print("camera delegate is setup")
             camera?.delegate = self
-        }
+        }*/
         
         // Setting up gimbal delegate
         gimbal = fetchGimbal()
@@ -313,21 +276,6 @@ class CameraViewController: UIViewController {
             fc?.delegate = self
         }
 
-    }
-
-    func fetchCamera() -> DJICamera? {
-        
-        if DJISDKManager.product() == nil {
-            return nil
-        }
-        
-        if DJISDKManager.product() is DJIAircraft {
-            return (DJISDKManager.product() as! DJIAircraft).camera
-        } else if DJISDKManager.product() is DJIHandheld {
-            return (DJISDKManager.product() as! DJIHandheld).camera
-        }
-        
-        return nil
     }
     
     func fetchGimbal() -> DJIGimbal? {
@@ -377,30 +325,23 @@ extension CameraViewController: DJIVideoFeedListener {
     
 }
 
-extension CameraViewController: DJICameraDelegate {
-    
-    func camera(_ camera: DJICamera, didGenerateNewMediaFile newMedia: DJIMediaFile) {
-        
-        // Here we can increment the photo counter
-        currentPhotoCount = currentPhotoCount + 1
-        telemetryViewController.photoCountLabel.text = "\(currentPhotoCount)/\(totalPhotoCount)"
-        
-        if currentPhotoCount == totalPhotoCount {
-            self.panoFinished()
-        }
-        
-    }
-    
-
-}
-
 // Keep track of the current aircraft location
 extension CameraViewController: DJIFlightControllerDelegate {
     
     func flightController(_ fc: DJIFlightController, didUpdate state: DJIFlightControllerState) {
         
-        self.aircraftLocation = (state.aircraftLocation?.coordinate)!
+        if let cordinate = state.aircraftLocation?.coordinate
+        {
+            self.aircraftLocation = cordinate
+        }
 
+        self.aircraftAltitude = state.altitude
+
+        //Change aircraft heading
+        if let heading = fc.compass?.heading
+        {
+            self.aircraftHeading = heading
+        }
         // Send the location update to the map view
         //self.cameraVCDelegate?.updateAircraftLocation(location: self.aircraftLocation, heading: self.aircraftHeading)
         

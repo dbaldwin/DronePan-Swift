@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1382D2DA49D81C6B75E303BA /* Pods_DronePan_Swift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10204499BAFFF30D5D1C9209 /* Pods_DronePan_Swift.framework */; };
 		232009CC1ED3796500033559 /* PanoramaController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 232009CB1ED3796500033559 /* PanoramaController.swift */; };
 		237001AA1ECF95DB003EC4A0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 237001A91ECF95DB003EC4A0 /* AppDelegate.swift */; };
 		237001AC1ECF95DB003EC4A0 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 237001AB1ECF95DB003EC4A0 /* CameraViewController.swift */; };
@@ -21,7 +22,9 @@
 		23CD573B1ED0AC7200D62F06 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23CD573A1ED0AC7200D62F06 /* MapViewController.swift */; };
 		23DDA41C1ED0B54100378B75 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DDA41B1ED0B54100378B75 /* SettingsViewController.swift */; };
 		23F174721ED2809C00AC109B /* ExposureSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F174711ED2809C00AC109B /* ExposureSettingsViewController.swift */; };
-		F9D4D0A6C0565E4DD46993D9 /* libPods-DronePan-Swift.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 731CE9B33BEF3B431CA5F1E0 /* libPods-DronePan-Swift.a */; };
+		3F8EAC8E54DDF31D1255E219 /* Pods_DronePan_SwiftTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E10AA7461F982D980BCA3B1C /* Pods_DronePan_SwiftTests.framework */; };
+		6DD341301F0BD405009BAF2C /* LocalDataBase.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6DD3412E1F0BD405009BAF2C /* LocalDataBase.xcdatamodeld */; };
+		6DD341321F0BD6C3009BAF2C /* DataBaseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DD341311F0BD6C3009BAF2C /* DataBaseHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +66,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		10204499BAFFF30D5D1C9209 /* Pods_DronePan_Swift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DronePan_Swift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		232009CB1ED3796500033559 /* PanoramaController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PanoramaController.swift; sourceTree = "<group>"; };
 		237001A61ECF95DB003EC4A0 /* DronePan-Swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "DronePan-Swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		237001A91ECF95DB003EC4A0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -80,9 +84,13 @@
 		23CD573A1ED0AC7200D62F06 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		23DDA41B1ED0B54100378B75 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		23F174711ED2809C00AC109B /* ExposureSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExposureSettingsViewController.swift; sourceTree = "<group>"; };
-		731CE9B33BEF3B431CA5F1E0 /* libPods-DronePan-Swift.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DronePan-Swift.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5755B4561F80FA1F9C0407E1 /* Pods-DronePan-SwiftTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DronePan-SwiftTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-DronePan-SwiftTests/Pods-DronePan-SwiftTests.release.xcconfig"; sourceTree = "<group>"; };
+		6DD3412F1F0BD405009BAF2C /* LocalDataBase.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LocalDataBase.xcdatamodel; sourceTree = "<group>"; };
+		6DD341311F0BD6C3009BAF2C /* DataBaseHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataBaseHelper.swift; sourceTree = "<group>"; };
 		C0E4DE63C3EB7CE31AC87982 /* Pods-DronePan-Swift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DronePan-Swift.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DronePan-Swift/Pods-DronePan-Swift.debug.xcconfig"; sourceTree = "<group>"; };
 		DA2814FB54BCDA38011E9F19 /* Pods-DronePan-Swift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DronePan-Swift.release.xcconfig"; path = "Pods/Target Support Files/Pods-DronePan-Swift/Pods-DronePan-Swift.release.xcconfig"; sourceTree = "<group>"; };
+		E10AA7461F982D980BCA3B1C /* Pods_DronePan_SwiftTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DronePan_SwiftTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F3640C670AFFB184983DEF4C /* Pods-DronePan-SwiftTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DronePan-SwiftTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DronePan-SwiftTests/Pods-DronePan-SwiftTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,7 +99,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				237001D01ECFA12A003EC4A0 /* VideoPreviewer.framework in Frameworks */,
-				F9D4D0A6C0565E4DD46993D9 /* libPods-DronePan-Swift.a in Frameworks */,
+				1382D2DA49D81C6B75E303BA /* Pods_DronePan_Swift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -99,6 +107,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F8EAC8E54DDF31D1255E219 /* Pods_DronePan_SwiftTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -128,6 +137,7 @@
 		237001A81ECF95DB003EC4A0 /* DronePan-Swift */ = {
 			isa = PBXGroup;
 			children = (
+				6DD341311F0BD6C3009BAF2C /* DataBaseHelper.swift */,
 				237001A91ECF95DB003EC4A0 /* AppDelegate.swift */,
 				237001AB1ECF95DB003EC4A0 /* CameraViewController.swift */,
 				237001AD1ECF95DB003EC4A0 /* Main.storyboard */,
@@ -140,6 +150,7 @@
 				23F174711ED2809C00AC109B /* ExposureSettingsViewController.swift */,
 				232009CB1ED3796500033559 /* PanoramaController.swift */,
 				239377D51EE5AD130086BAF3 /* TelemetryViewController.swift */,
+				6DD3412E1F0BD405009BAF2C /* LocalDataBase.xcdatamodeld */,
 			);
 			path = "DronePan-Swift";
 			sourceTree = "<group>";
@@ -165,7 +176,8 @@
 			isa = PBXGroup;
 			children = (
 				237001CA1ECFA109003EC4A0 /* VideoPreviewer.xcodeproj */,
-				731CE9B33BEF3B431CA5F1E0 /* libPods-DronePan-Swift.a */,
+				10204499BAFFF30D5D1C9209 /* Pods_DronePan_Swift.framework */,
+				E10AA7461F982D980BCA3B1C /* Pods_DronePan_SwiftTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -175,6 +187,8 @@
 			children = (
 				C0E4DE63C3EB7CE31AC87982 /* Pods-DronePan-Swift.debug.xcconfig */,
 				DA2814FB54BCDA38011E9F19 /* Pods-DronePan-Swift.release.xcconfig */,
+				F3640C670AFFB184983DEF4C /* Pods-DronePan-SwiftTests.debug.xcconfig */,
+				5755B4561F80FA1F9C0407E1 /* Pods-DronePan-SwiftTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -208,9 +222,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 237001C61ECF95DB003EC4A0 /* Build configuration list for PBXNativeTarget "DronePan-SwiftTests" */;
 			buildPhases = (
+				B5A87D540D6D148B8FAAFD28 /* [CP] Check Pods Manifest.lock */,
 				237001B61ECF95DB003EC4A0 /* Sources */,
 				237001B71ECF95DB003EC4A0 /* Frameworks */,
 				237001B81ECF95DB003EC4A0 /* Resources */,
+				C704FBB62037D0EA8D2D2874 /* [CP] Embed Pods Frameworks */,
+				60216B0FC80FE155CDA99E05 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -234,7 +251,6 @@
 				TargetAttributes = {
 					237001A51ECF95DB003EC4A0 = {
 						CreatedOnToolsVersion = 8.2;
-						DevelopmentTeam = TP7ZU94CZV;
 						ProvisioningStyle = Automatic;
 					};
 					237001B91ECF95DB003EC4A0 = {
@@ -315,6 +331,21 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DronePan-Swift/Pods-DronePan-Swift-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		60216B0FC80FE155CDA99E05 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DronePan-SwiftTests/Pods-DronePan-SwiftTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		78011ECD0FB39518AFCA835A /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -342,7 +373,37 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		B5A87D540D6D148B8FAAFD28 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		C704FBB62037D0EA8D2D2874 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DronePan-SwiftTests/Pods-DronePan-SwiftTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -356,7 +417,9 @@
 				232009CC1ED3796500033559 /* PanoramaController.swift in Sources */,
 				239377D61EE5AD130086BAF3 /* TelemetryViewController.swift in Sources */,
 				23B1FADF1ECFC81D00EFC857 /* ProductCommunicationManager.swift in Sources */,
+				6DD341321F0BD6C3009BAF2C /* DataBaseHelper.swift in Sources */,
 				237001AC1ECF95DB003EC4A0 /* CameraViewController.swift in Sources */,
+				6DD341301F0BD405009BAF2C /* LocalDataBase.xcdatamodeld in Sources */,
 				237001AA1ECF95DB003EC4A0 /* AppDelegate.swift in Sources */,
 				23DDA41C1ED0B54100378B75 /* SettingsViewController.swift in Sources */,
 				23CD573B1ED0AC7200D62F06 /* MapViewController.swift in Sources */,
@@ -505,7 +568,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
-				DEVELOPMENT_TEAM = TP7ZU94CZV;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				HEADER_SEARCH_PATHS = (
 					"\"${PODS_ROOT}/Headers/Public\"",
@@ -525,7 +588,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
-				DEVELOPMENT_TEAM = TP7ZU94CZV;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				HEADER_SEARCH_PATHS = (
 					"\"${PODS_ROOT}/Headers/Public\"",
@@ -541,6 +604,7 @@
 		};
 		237001C71ECF95DB003EC4A0 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F3640C670AFFB184983DEF4C /* Pods-DronePan-SwiftTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -555,6 +619,7 @@
 		};
 		237001C81ECF95DB003EC4A0 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5755B4561F80FA1F9C0407E1 /* Pods-DronePan-SwiftTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -598,6 +663,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		6DD3412E1F0BD405009BAF2C /* LocalDataBase.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				6DD3412F1F0BD405009BAF2C /* LocalDataBase.xcdatamodel */,
+			);
+			currentVersion = 6DD3412F1F0BD405009BAF2C /* LocalDataBase.xcdatamodel */;
+			name = LocalDataBase.xcdatamodeld;
+			path = ../LocalDataBase.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 2370019E1ECF95DA003EC4A0 /* Project object */;
 }

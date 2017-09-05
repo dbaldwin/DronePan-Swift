@@ -7,13 +7,54 @@
 //
 
 import UIKit
+import DJISDK
 
 class TelemetryViewController: UIViewController {
     
     @IBOutlet weak var photoCountLabel: UILabel!
     
+    
     override func viewDidLoad() {
+        
+        print("Telemetry view controller view did load")
         super.viewDidLoad()
         
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        ProductCommunicationManager.shared.fetchCamera()?.delegate = self
+        updatePhotoCountLabel()
+    }
+    
+    func resetAndStartCounting(photoCount: Int) {
+        AppDelegate.isStartingNewTaskOfPano = true
+    }
+    
+    func updatePhotoCountLabel() {
+        
+        photoCountLabel.text = "\(AppDelegate.currentPhotoCount)/\(AppDelegate.totalPhotoCount)"
+        
+        
+    }
+    
+}
+
+extension TelemetryViewController: DJICameraDelegate {
+    
+    func camera(_ camera: DJICamera, didGenerateNewMediaFile newMedia: DJIMediaFile) {
+        
+        print("TelemetryViewController didGenerateNewMediaFile")
+        if(AppDelegate.isStartingNewTaskOfPano)
+        {
+            AppDelegate.currentPhotoCount += 1
+        }
+        if AppDelegate.currentPhotoCount == AppDelegate.totalPhotoCount {
+            AppDelegate.currentPhotoCount = 0
+            AppDelegate.totalPhotoCount = 0
+            AppDelegate.isStartingNewTaskOfPano = false
+            self.showAlert(title: "Panorama complete!", message: "You can now take manual control of your aircraft. If you have any problems taking manual control please toggle your flight mode switch away from GPS mode and back. Then you should have control again.")
+        }
+        self.updatePhotoCountLabel()
+    }
+    
 }
