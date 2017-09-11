@@ -268,6 +268,7 @@
                         <outlet property="buttonNavView" destination="737-Ks-zjo" id="Jvf-OC-wPt"/>
                         <outlet property="cameraView" destination="lbf-Gc-gqu" id="LFK-FS-f6f"/>
                         <outlet property="hamburgerButton" destination="BYt-TT-eoJ" id="2DT-A9-JQz"/>
+                        <outlet property="panoButton" destination="yZv-EF-lgt" id="6td-Gb-biE"/>
                         <outlet property="sdkVersionLabel" destination="NCt-cj-8SP" id="0SF-CU-foU"/>
                     </connections>
                 </viewController>
@@ -1148,6 +1149,10 @@
         <scene sceneID="c2z-ej-okW">
             <objects>
                 <viewController id="sia-fb-pje" customClass="DULCameraSettingsController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="h6I-Mq-Kfi"/>
+                        <viewControllerLayoutGuide type="bottom" id="smO-5o-zDQ"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="AGf-S5-n7s">
                         <rect key="frame" x="0.0" y="0.0" width="984" height="688"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

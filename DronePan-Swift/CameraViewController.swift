@@ -13,10 +13,10 @@ import VideoPreviewer
 class CameraViewController: UIViewController {
     
     @IBOutlet weak var cameraView: UIView!
-    
     @IBOutlet weak var hamburgerButton: UIButton!
-    
     @IBOutlet weak var buttonNavView: UIView!
+    @IBOutlet weak var panoButton: UIButton!
+    @IBOutlet weak var sdkVersionLabel: UILabel!
     
     var aircraftLocation: CLLocationCoordinate2D = kCLLocationCoordinate2DInvalid
     var aircraftAltitude:Double = 0
@@ -27,8 +27,8 @@ class CameraViewController: UIViewController {
     var totalPhotoCount: Int = 7 // This is the default 4 rows and 7 columns with 1 nadir
     var currentPhotoCount: Int = 0
     
-    
-    @IBOutlet weak var sdkVersionLabel: UILabel!
+    // Handles the pano status
+    var panoInProgress: Bool = false
     
     var gimbal: DJIGimbal?
     
@@ -79,7 +79,7 @@ class CameraViewController: UIViewController {
             case .resumeError:
                 print("Resume error")
             case .stopped:
-                print("Stopped")
+                print("Mission stopped successfully")
             case .stopError:
                 print("Stop error")
             case .finished:
@@ -118,23 +118,63 @@ class CameraViewController: UIViewController {
     
     @IBAction func startPano(_ sender: Any) {
         
-        let alertView = UIAlertController(title: "Confirm", message: "Are you ready to start the panorama sequence?", preferredStyle: .alert)
+        // Give the user the start pano option
+        if !panoInProgress {
+            
+            let alertView = UIAlertController(title: "Confirm", message: "Are you ready to start the panorama sequence?", preferredStyle: .alert)
+            
+            let cancel = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler:{ (action) in
+            })
+            
+            let start = UIAlertAction(title: "Start", style: UIAlertActionStyle.default, handler:{(action) in
+                
+                // Start the pano
+                self.startPanoNow()
+                
+            })
+            
+            alertView.addAction(cancel)
+            alertView.addAction(start)
+            
+            present(alertView, animated: true, completion: nil)
         
-        let cancel = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler:{ (action) in
-        })
-        
-        let start = UIAlertAction(title: "Start", style: UIAlertActionStyle.default, handler:{(action) in
-            self.startPanoNow()
-        })
-        
-        alertView.addAction(cancel)
-        alertView.addAction(start)
-        
-        present(alertView, animated: true, completion: nil)
+        // Give the user the stop pano option
+        } else {
+         
+            let alertView = UIAlertController(title: "Confirm", message: "Are you sure you want to stop the panorama sequence?", preferredStyle: .alert)
+            
+            let cancel = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler:{ (action) in
+            })
+            
+            let stop = UIAlertAction(title: "Stop", style: UIAlertActionStyle.default, handler:{(action) in
+                
+                // Stop the mission
+                DJISDKManager.missionControl()?.stopTimeline()
+                
+                // Reset the pano progress
+                self.resetPanoProgress()
+                
+            })
+            
+            alertView.addAction(cancel)
+            alertView.addAction(stop)
+            
+            present(alertView, animated: true, completion: nil)
+            
+        }
+    
+    
+    
     }
     
-    func startPanoNow()
-    {
+    func startPanoNow() {
+        
+        // Change the start button to a stop button
+        self.panoButton.setImage(UIImage(named: "stop_photo_button"), for: UIControlState.normal)
+        self.panoButton.setImage(UIImage(named: "stop_photo_button_pressed"), for: UIControlState.highlighted)
+        
+        // Set the pano status
+        panoInProgress = true
         
         let defaults = UserDefaults.standard
         
@@ -206,12 +246,22 @@ class CameraViewController: UIViewController {
         
         if error != nil {
             showAlert(title: "Error", message: String(describing: error))
+            resetPanoProgress()
             return;
         }
         
         DJISDKManager.missionControl()?.startTimeline()
+        
     }
     
+    // Reset the pano progress if an error occurs
+    func resetPanoProgress() {
+        panoInProgress = false
+        self.panoButton.setImage(UIImage(named: "photo_button"), for: UIControlState.normal)
+        self.panoButton.setImage(UIImage(named: "photo_button_pressed"), for: UIControlState.highlighted)
+    }
+    
+    // Navigation menu
     @IBAction func showButtonNav(_ sender: Any) {
         
         buttonNavView.isHidden = !buttonNavView.isHidden
