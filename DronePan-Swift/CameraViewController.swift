@@ -46,6 +46,8 @@ class CameraViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+        sdkVersionLabel.text = "SDK: \(DJISDKManager.sdkVersion())"
+        
         // Setup video feed
         VideoPreviewer.instance().setView(cameraView)
         DJISDKManager.videoFeeder()?.primaryVideoFeed.add(self, with: nil)
@@ -233,8 +235,14 @@ class CameraViewController: UIViewController {
         // Initialize the photo counter
         telemetryViewController.resetAndStartCounting(photoCount: totalPhotoCount)
         
-        // Clear out previous missions
-        DJISDKManager.missionControl()?.stopTimeline()
+        // Check to see if timeline is running before we try to stop
+        if let isRunning = DJISDKManager.missionControl()?.isTimelineRunning, isRunning == true {
+            
+            DJISDKManager.missionControl()?.stopTimeline()
+            
+        }
+        
+        // Remove timeline elements
         DJISDKManager.missionControl()?.unscheduleEverything()
         
         // Reset the gimbal
