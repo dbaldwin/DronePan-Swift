@@ -58,7 +58,7 @@ class CameraViewController: UIViewController {
             
             if error != nil {
                 
-                self.showAlert(title: "Error", message: String(describing: error!))
+                self.showAlert(title: "Error", message: "\(String(describing: error!)) \(event.rawValue)")
                 
             }
             
@@ -79,7 +79,7 @@ class CameraViewController: UIViewController {
             case .resumeError:
                 print("Resume error")
             case .stopped:
-                print("Mission stopped successfully")
+                print("Timeline stopped successfully")
             case .stopError:
                 print("Stop error")
             case .finished:
@@ -154,6 +154,8 @@ class CameraViewController: UIViewController {
                 // Reset the pano progress
                 self.resetPanoProgress()
                 
+                // Display a message to the user telling them to toggle their flight switch to regain control - does not apply to I1 users
+                
             })
             
             alertView.addAction(cancel)
@@ -226,7 +228,6 @@ class CameraViewController: UIViewController {
         _ = DataBaseHelper.sharedInstance.insertRecordInTable(tableName: "Panorama", attributes: panoramaDict)
         
         totalPhotoCount = rows * cols + 1
-        //set PhotoCount
         AppDelegate.totalPhotoCount = totalPhotoCount
         AppDelegate.currentPhotoCount = 0
         
@@ -245,7 +246,7 @@ class CameraViewController: UIViewController {
         let error = DJISDKManager.missionControl()?.scheduleElements(pano.buildPanoAtCurrentLocation(altitude: self.aircraftAltitude))
         
         if error != nil {
-            showAlert(title: "Error", message: String(describing: error))
+            showAlert(title: "Error Scheduling Mission", message: String(describing: error))
             resetPanoProgress()
             return;
         }
@@ -277,6 +278,7 @@ class CameraViewController: UIViewController {
             if let vc = segue.destination as? TelemetryViewController {
                 
                 telemetryViewController = vc
+                vc.delegate = self
                 
             }
         }
@@ -400,5 +402,16 @@ extension CameraViewController: DJIFlightControllerDelegate {
 }
 
 extension CameraViewController: DJIGimbalDelegate {
+    
+}
+
+extension CameraViewController: TelemetryViewControllerDelegate {
+    
+    // The pano is complete so we need to reset some vars
+    func panoComplete() {
+        
+        self.resetPanoProgress()
+        
+    }
     
 }

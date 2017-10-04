@@ -168,7 +168,7 @@ class MapViewController: UIViewController {
     
     @IBAction func deletePanoButtonClicked(_ sender: UIButton) {
         
-        let alert = UIAlertController(title: "Message", message: "Do you want to delete panorama", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Confirm", message: "Are you sure you want to delete this panorama?", preferredStyle: .alert)
         let yesAction = UIAlertAction(title: "Accept", style: .default) { (action) in
             
             if let coundID = self.selectedPanorama?.countId {
@@ -413,7 +413,7 @@ extension MapViewController: GMSMapViewDelegate {
 
 
 //MARK:- Find Bearing
-extension MapViewController{
+extension MapViewController {
     
     func degreesToRadians(degrees: Double) -> Double { return degrees * .pi / 180.0 }
     func radiansToDegrees(radians: Double) -> Double { return radians * 180.0 / .pi }
@@ -435,7 +435,6 @@ extension MapViewController{
         return radiansToDegrees(radians: radiansBearing)
     }
 }
-
 
 //MARK:- Dji Gimble Delegate
 /*extension MapViewController : DJIFlightControllerDelegate {

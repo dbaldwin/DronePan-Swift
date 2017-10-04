@@ -131,10 +131,11 @@ class PanoramaController {
         pitchAction = DJIGimbalAttitudeAction(attitude: attitude)!
         elements.append(pitchAction)
         
+        // For some reason this sends causes some drones to rapidly descend. Removing for now.
         // Raise altitude by 1m to get around being stuck in joystick mode at the end of the mission
         // This will force the aircraft back into GPS mode
-        let gotoAction: DJIGoToAction = DJIGoToAction(altitude: altitude+1)!
-        elements.append(gotoAction)
+        /*let gotoAction: DJIGoToAction = DJIGoToAction(altitude: altitude+1)!
+        elements.append(gotoAction)*/
         
         return elements
         
@@ -200,7 +201,12 @@ class PanoramaController {
         let photoAction: DJIShootPhotoAction = DJIShootPhotoAction(singleShootPhoto:())!
         elements.append(photoAction)
         
-        // Let's send the gimbal back to the starting position
+        // Let's send the gimbal back to +90 otherwise it will try to continue to rotate counter clockwise
+        attitude = DJIGimbalAttitude(pitch: 0, roll: 0.0, yaw: 90)
+        pitchAction = DJIGimbalAttitudeAction(attitude: attitude)!
+        elements.append(pitchAction)
+        
+        // Now send it back to 0
         attitude = DJIGimbalAttitude(pitch: 0, roll: 0.0, yaw: 0)
         pitchAction = DJIGimbalAttitudeAction(attitude: attitude)!
         elements.append(pitchAction)
