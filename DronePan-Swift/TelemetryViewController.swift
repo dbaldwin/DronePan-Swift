@@ -9,10 +9,14 @@
 import UIKit
 import DJISDK
 
+protocol TelemetryViewControllerDelegate {
+    func panoComplete()
+}
+
 class TelemetryViewController: UIViewController {
     
     @IBOutlet weak var photoCountLabel: UILabel!
-    
+    var delegate: TelemetryViewControllerDelegate?
     
     override func viewDidLoad() {
         
@@ -22,12 +26,12 @@ class TelemetryViewController: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        ProductCommunicationManager.shared.fetchCamera()?.delegate = self
-        updatePhotoCountLabel()
     }
     
     func resetAndStartCounting(photoCount: Int) {
         AppDelegate.isStartingNewTaskOfPano = true
+        ProductCommunicationManager.shared.fetchCamera()?.delegate = self
+        updatePhotoCountLabel()
     }
     
     func updatePhotoCountLabel() {
@@ -53,6 +57,9 @@ extension TelemetryViewController: DJICameraDelegate {
             AppDelegate.totalPhotoCount = 0
             AppDelegate.isStartingNewTaskOfPano = false
             self.showAlert(title: "Panorama complete!", message: "You can now take manual control of your aircraft. If you have any problems taking manual control please toggle your flight mode switch away from GPS mode and back. Then you should have control again.")
+            
+            // Tell the parent
+            self.delegate?.panoComplete()
         }
         self.updatePhotoCountLabel()
     }

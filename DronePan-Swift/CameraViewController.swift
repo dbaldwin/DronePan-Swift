@@ -298,6 +298,7 @@ class CameraViewController: UIViewController {
             if let vc = segue.destination as? TelemetryViewController {
                 
                 telemetryViewController = vc
+                vc.delegate = self
                 
             }
         }
@@ -420,5 +421,14 @@ extension CameraViewController: DJIFlightControllerDelegate {
 }
 
 extension CameraViewController: DJIGimbalDelegate {
+    
+}
+
+extension CameraViewController: TelemetryViewControllerDelegate {
+    
+    // Pano is complete so reset some vars
+    func panoComplete() {
+        self.resetPanoProgress()
+    }
     
 }
