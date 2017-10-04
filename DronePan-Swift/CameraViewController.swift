@@ -46,8 +46,6 @@ class CameraViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        sdkVersionLabel.text = "SDK: \(DJISDKManager.sdkVersion())"
-        
         // Setup video feed
         VideoPreviewer.instance().setView(cameraView)
         DJISDKManager.videoFeeder()?.primaryVideoFeed.add(self, with: nil)
@@ -60,7 +58,8 @@ class CameraViewController: UIViewController {
             
             if error != nil {
                 
-                self.showAlert(title: "Error", message: String(describing: error!))
+                self.showAlert(title: "Timeline Error", message: String(describing: error!))
+                self.resetPanoProgress()
                 
             }
             
@@ -105,6 +104,9 @@ class CameraViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Put this here so it only loads once and prevent it from loading again when a user switches to another screen and back
+        sdkVersionLabel.text = "SDK: \(DJISDKManager.sdkVersion())"
     }
     
     override var prefersStatusBarHidden: Bool {
@@ -235,6 +237,17 @@ class CameraViewController: UIViewController {
         // Initialize the photo counter
         telemetryViewController.resetAndStartCounting(photoCount: totalPhotoCount)
         
+        // Force virtual stick mode
+        guard let virtualStickKey = DJIFlightControllerKey(param: DJIFlightControllerParamVirtualStickAdvancedControlModeEnabled) else {
+            return;
+        }
+        
+        DJISDKManager.keyManager()?.setValue(NSNumber(value: true), for: virtualStickKey, withCompletion: { (error: Error?) in
+            if error != nil {
+                self.showAlert(title: "Virtual Stick Error", message: "Error setting virtual stick mode.")
+            }
+        })
+        
         // Check to see if timeline is running before we try to stop
         if let isRunning = DJISDKManager.missionControl()?.isTimelineRunning, isRunning == true {
             
@@ -253,7 +266,7 @@ class CameraViewController: UIViewController {
         let error = DJISDKManager.missionControl()?.scheduleElements(pano.buildPanoAtCurrentLocation(altitude: self.aircraftAltitude))
         
         if error != nil {
-            showAlert(title: "Error", message: String(describing: error))
+            showAlert(title: "Error Building Pano", message: String(describing: error))
             resetPanoProgress()
             return;
         }
@@ -295,7 +308,6 @@ class CameraViewController: UIViewController {
         
         guard let newProduct = DJISDKManager.product() else {
             print("Product is connected but DJISDKManager.product is nil -> something is wrong")
-            
             return;
         }
         
