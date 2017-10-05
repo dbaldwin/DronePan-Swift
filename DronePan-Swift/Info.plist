@@ -19,7 +19,7 @@
 	<key>CFBundleShortVersionString</key>
 	<string>2.0.2</string>
 	<key>CFBundleVersion</key>
-	<string>29</string>
+	<string>31</string>
 	<key>DJISDKAppKey</key>
 	<string>d6b78c9337f72fadd85d88e2</string>
 	<key>LSRequiresIPhoneOS</key>
@@ -29,12 +29,16 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>Not used</string>
 	<key>NSBluetoothPeripheralUsageDescription</key>
 	<string>Connect to DJI Bluetooth Products</string>
 	<key>NSCameraUsageDescription</key>
 	<string>Connect to DJI Cameras</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>DronePan uses your location only when tapping the compass icon in Google Maps</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Not used</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
