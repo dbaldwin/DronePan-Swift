@@ -133,8 +133,8 @@ class PanoramaController {
         
         // Raise altitude by 1m to get around being stuck in joystick mode at the end of the mission
         // This will force the aircraft back into GPS mode
-        let gotoAction: DJIGoToAction = DJIGoToAction(altitude: altitude+1)!
-        elements.append(gotoAction)
+        //let gotoAction: DJIGoToAction = DJIGoToAction(altitude: altitude+1)!
+        //elements.append(gotoAction)
         
         return elements
         
