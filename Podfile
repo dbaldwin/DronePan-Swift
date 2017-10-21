@@ -8,7 +8,7 @@ target 'DronePan-Swift' do
   # Pods for DronePan-Swift
  pod 'GoogleMaps'
  pod ‘DJI-UILibrary-iOS’, ‘~> 4.3’
- pod 'DJI-SDK-iOS', ‘~> 4.3.1’
+ pod 'DJI-SDK-iOS', ‘~> 4.3.2’
 
   target 'DronePan-SwiftTests' do
     inherit! :search_paths
