@@ -17,6 +17,7 @@ class CameraViewController: UIViewController {
     @IBOutlet weak var buttonNavView: UIView!
     @IBOutlet weak var panoButton: UIButton!
     @IBOutlet weak var sdkVersionLabel: UILabel!
+    @IBOutlet weak var gimbalYawLabel: UILabel!
     
     var aircraftLocation: CLLocationCoordinate2D = kCLLocationCoordinate2DInvalid
     var aircraftAltitude:Double = 0
@@ -237,8 +238,19 @@ class CameraViewController: UIViewController {
         // Initialize the photo counter
         telemetryViewController.resetAndStartCounting(photoCount: totalPhotoCount)
         
+        // Trying to set virtual stick mode the old fashioned way
+        let fc = fetchFlightController()
+        
+        fc?.setVirtualStickModeEnabled(true, withCompletion: { (error: Error?) in
+            
+            if error != nil {
+                self.showAlert(title: "Virtual Stick Error", message: "Error setting virtual stick mode.")
+            }
+            
+        })
+        
         // Force virtual stick mode
-        guard let virtualStickKey = DJIFlightControllerKey(param: DJIFlightControllerParamVirtualStickAdvancedControlModeEnabled) else {
+        /*guard let virtualStickKey = DJIFlightControllerKey(param: DJIFlightControllerParamVirtualStickAdvancedControlModeEnabled) else {
             return;
         }
         
@@ -246,7 +258,7 @@ class CameraViewController: UIViewController {
             if error != nil {
                 self.showAlert(title: "Virtual Stick Error", message: "Error setting virtual stick mode.")
             }
-        })
+        })*/
         
         // Check to see if timeline is running before we try to stop
         if let isRunning = DJISDKManager.missionControl()?.isTimelineRunning, isRunning == true {
@@ -421,6 +433,12 @@ extension CameraViewController: DJIFlightControllerDelegate {
 }
 
 extension CameraViewController: DJIGimbalDelegate {
+    
+    func gimbal(_ gimbal: DJIGimbal, didUpdate state: DJIGimbalState) {
+        
+        let atti = state.attitudeInDegrees
+        self.gimbalYawLabel.text = "Gimbal yaw: \(atti.yaw)"
+    }
     
 }
 
