@@ -17,6 +17,7 @@ class CameraViewController: UIViewController {
     @IBOutlet weak var buttonNavView: UIView!
     @IBOutlet weak var panoButton: UIButton!
     @IBOutlet weak var sdkVersionLabel: UILabel!
+    @IBOutlet weak var gimbalYawLabel: UILabel!
     
     var aircraftLocation: CLLocationCoordinate2D = kCLLocationCoordinate2DInvalid
     var aircraftAltitude:Double = 0
@@ -432,6 +433,12 @@ extension CameraViewController: DJIFlightControllerDelegate {
 }
 
 extension CameraViewController: DJIGimbalDelegate {
+    
+    func gimbal(_ gimbal: DJIGimbal, didUpdate state: DJIGimbalState) {
+        
+        let atti = state.attitudeInDegrees
+        self.gimbalYawLabel.text = "Gimbal yaw: \(atti.yaw)"
+    }
     
 }
 
