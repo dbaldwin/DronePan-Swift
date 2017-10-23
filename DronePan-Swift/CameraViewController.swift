@@ -17,11 +17,13 @@ class CameraViewController: UIViewController {
     @IBOutlet weak var buttonNavView: UIView!
     @IBOutlet weak var panoButton: UIButton!
     @IBOutlet weak var sdkVersionLabel: UILabel!
+    @IBOutlet weak var aircraftYawLabel: UILabel!
     @IBOutlet weak var gimbalYawLabel: UILabel!
     
     var aircraftLocation: CLLocationCoordinate2D = kCLLocationCoordinate2DInvalid
     var aircraftAltitude:Double = 0
     var aircraftHeading:Double = 0
+    var aircraftModel: String = ""
     
     var telemetryViewController: TelemetryViewController!
     
@@ -239,15 +241,19 @@ class CameraViewController: UIViewController {
         telemetryViewController.resetAndStartCounting(photoCount: totalPhotoCount)
         
         // Trying to set virtual stick mode the old fashioned way
-        let fc = fetchFlightController()
+        // Only if yaw type if aircraft
+        if yawType == 0 {
+            let fc = fetchFlightController()
         
-        fc?.setVirtualStickModeEnabled(true, withCompletion: { (error: Error?) in
+            fc?.setVirtualStickModeEnabled(true, withCompletion: { (error: Error?) in
             
-            if error != nil {
-                self.showAlert(title: "Virtual Stick Error", message: "Error setting virtual stick mode.")
-            }
+                if error != nil {
+                    self.showAlert(title: "Virtual Stick Error", message: "Error setting virtual stick mode.")
+                }
             
-        })
+            })
+            
+        }
         
         // Force virtual stick mode
         /*guard let virtualStickKey = DJIFlightControllerKey(param: DJIFlightControllerParamVirtualStickAdvancedControlModeEnabled) else {
@@ -275,7 +281,8 @@ class CameraViewController: UIViewController {
         
         // Build the pano logic
         let pano = PanoramaController()
-        let error = DJISDKManager.missionControl()?.scheduleElements(pano.buildPanoAtCurrentLocation(altitude: self.aircraftAltitude))
+
+        let error = DJISDKManager.missionControl()?.scheduleElements(pano.buildPanoAtCurrentLocation(startingYaw: -45.0))
         
         if error != nil {
             showAlert(title: "Error Building Pano", message: String(describing: error))
@@ -324,8 +331,14 @@ class CameraViewController: UIViewController {
             return;
         }
         
-        // Display SDK and model
-        sdkVersionLabel.text = "SDK: \(DJISDKManager.sdkVersion()), Model: \(newProduct.model!)"
+        if let model = newProduct.model {
+            
+            // Display SDK and model
+            sdkVersionLabel.text = "SDK: \(DJISDKManager.sdkVersion()), Model: \(model)"
+        
+            // Set the aircraft model
+            aircraftModel = model
+        }
         
         //Updates the product's firmware version - COMING SOON
         newProduct.getFirmwarePackageVersion{ (version:String?, error:Error?) -> Void in
@@ -413,17 +426,16 @@ extension CameraViewController: DJIFlightControllerDelegate {
     
     func flightController(_ fc: DJIFlightController, didUpdate state: DJIFlightControllerState) {
         
-        if let cordinate = state.aircraftLocation?.coordinate
-        {
+        if let cordinate = state.aircraftLocation?.coordinate {
             self.aircraftLocation = cordinate
         }
 
         self.aircraftAltitude = state.altitude
 
         //Change aircraft heading
-        if let heading = fc.compass?.heading
-        {
+        if let heading = fc.compass?.heading {
             self.aircraftHeading = heading
+            self.aircraftYawLabel.text = "Aircraft yaw: \(heading)"
         }
         // Send the location update to the map view
         //self.cameraVCDelegate?.updateAircraftLocation(location: self.aircraftLocation, heading: self.aircraftHeading)

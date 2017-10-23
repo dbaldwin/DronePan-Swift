@@ -38,7 +38,7 @@ class PanoramaController {
     }
     
     //Execute pano at the current location
-    func buildPanoAtCurrentLocation(altitude: Double) -> [DJIMissionControlTimelineElement] {
+    func buildPanoAtCurrentLocation(startingYaw: Float) -> [DJIMissionControlTimelineElement] {
         
         // Get the defaults from storage
         let defaults = UserDefaults.standard
@@ -48,21 +48,21 @@ class PanoramaController {
         let yawType = defaults.integer(forKey: "yawType") // 0 is aircraft and 1 is gimbal
         let skyRow = defaults.bool(forKey: "skyRow") // 0 is disabled and 1 is enabled
         
-        print("Shooting pano with \(rows) rows and \(cols) cols, yaw type: \(yawType), sky row: \(skyRow)")
+        print("Shooting pano with \(rows) rows and \(cols) cols, yaw type: \(yawType), sky row: \(skyRow), starting yaw: \(startingYaw)")
         
         if yawType == 1 {
             
-            return buildPanoWithGimbalYaw(rows: rows, cols: cols, skyRow: skyRow)
+            return buildPanoWithGimbalYaw(rows: rows, cols: cols, skyRow: skyRow, startingYaw: startingYaw)
             
         } else {
             
-            return buildPanoWithAircraftYaw(rows: rows, cols: cols, skyRow: skyRow, altitude: altitude)
+            return buildPanoWithAircraftYaw(rows: rows, cols: cols, skyRow: skyRow)
         }
         
     }
     
     //Aircraft yaw
-    func buildPanoWithAircraftYaw(rows: Int, cols: Int, skyRow: Bool, altitude: Double) -> [DJIMissionControlTimelineElement] {
+    func buildPanoWithAircraftYaw(rows: Int, cols: Int, skyRow: Bool) -> [DJIMissionControlTimelineElement] {
         
         // Get gimbal capabilities
         // Not doing anything with this at the moment
@@ -143,7 +143,7 @@ class PanoramaController {
     
     // Gimbal yaw requires absolute angles for each gimbal position
     // Inspire 1 and Inspire 2 users
-    func buildPanoWithGimbalYaw(rows: Int, cols: Int, skyRow: Bool) -> [DJIMissionControlTimelineElement] {
+    func buildPanoWithGimbalYaw(rows: Int, cols: Int, skyRow: Bool, startingYaw: Float) -> [DJIMissionControlTimelineElement] {
         
         let yawAngle = 360/cols
         
@@ -154,6 +154,10 @@ class PanoramaController {
         for column in 0..<cols {
             
             var yaw = yawAngle * column
+            
+            // Now account for the gimbal yaw offset since I1/I2 uses an absolute reference
+            // Uncomment this once we figure out how the different aircraft handle the initial yaw
+            //yaw = yaw + Int(startingYaw)
             
             if yaw > 180 {
                 

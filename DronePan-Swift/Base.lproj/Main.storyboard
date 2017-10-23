@@ -50,6 +50,16 @@
                                 <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Aircraft yaw: -" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HwO-uU-nRG">
+                                <rect key="frame" x="779" y="675" width="225" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="225" id="K6S-dd-jUx"/>
+                                    <constraint firstAttribute="height" constant="21" id="c9P-zU-587"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gimbal yaw: -" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SPR-Op-mcM">
                                 <rect key="frame" x="779" y="708" width="225" height="21"/>
                                 <constraints>
@@ -260,11 +270,13 @@
                             <constraint firstAttribute="trailingMargin" secondItem="bVg-BA-NYK" secondAttribute="trailing" constant="30" id="0gm-Hc-Sic"/>
                             <constraint firstItem="lbf-Gc-gqu" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="2jo-B6-lIQ"/>
                             <constraint firstItem="bVg-BA-NYK" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="30" id="3k3-J0-94c"/>
+                            <constraint firstItem="HwO-uU-nRG" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="40F-cH-BWc"/>
                             <constraint firstItem="bVg-BA-NYK" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="12" id="A4l-KR-gov"/>
                             <constraint firstAttribute="trailing" secondItem="lbf-Gc-gqu" secondAttribute="trailing" id="Cne-oM-8GP"/>
                             <constraint firstItem="NCt-cj-8SP" firstAttribute="top" secondItem="SPR-Op-mcM" secondAttribute="bottom" constant="8" id="FDo-ra-8D1"/>
                             <constraint firstItem="737-Ks-zjo" firstAttribute="top" secondItem="BYt-TT-eoJ" secondAttribute="bottom" constant="10" id="MNc-9H-WDe"/>
                             <constraint firstItem="SPR-Op-mcM" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="NAT-gT-erd"/>
+                            <constraint firstItem="SPR-Op-mcM" firstAttribute="top" secondItem="HwO-uU-nRG" secondAttribute="bottom" constant="8" id="QPv-3M-Xup"/>
                             <constraint firstItem="xj3-Aw-ufv" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="Qdg-fD-jEf"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="lbf-Gc-gqu" secondAttribute="bottom" id="aDT-sK-exj"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="yZv-EF-lgt" secondAttribute="bottom" constant="75" id="bXD-ix-AsE"/>
@@ -282,6 +294,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="aircraftYawLabel" destination="HwO-uU-nRG" id="9cu-ks-56u"/>
                         <outlet property="buttonNavView" destination="737-Ks-zjo" id="Jvf-OC-wPt"/>
                         <outlet property="cameraView" destination="lbf-Gc-gqu" id="LFK-FS-f6f"/>
                         <outlet property="gimbalYawLabel" destination="SPR-Op-mcM" id="Aug-hV-LqJ"/>

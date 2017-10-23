@@ -250,10 +250,11 @@ class MapViewController: UIViewController {
                     let pano = PanoramaController()
                     var elements : [DJIMissionControlTimelineElement] = []
                     
+                    // Gimbal yaw
                     if  selectedPanorama.yawType == "1" {
-                        elements = pano.buildPanoWithGimbalYaw(rows: Int(selectedPanorama.rows), cols: Int(selectedPanorama.columns), skyRow: selectedPanorama.skyRow == 1 ? true : false)
+                        elements = pano.buildPanoWithGimbalYaw(rows: Int(selectedPanorama.rows), cols: Int(selectedPanorama.columns), skyRow: selectedPanorama.skyRow == 1 ? true : false, startingYaw: 0.0)
                     }else{
-                        elements = pano.buildPanoWithAircraftYaw(rows: Int(selectedPanorama.rows), cols: Int(selectedPanorama.columns), skyRow: selectedPanorama.skyRow == 1 ? true : false, altitude: selectedPanorama.altitude)
+                        elements = pano.buildPanoWithAircraftYaw(rows: Int(selectedPanorama.rows), cols: Int(selectedPanorama.columns), skyRow: selectedPanorama.skyRow == 1 ? true : false)
                     }
                     //add newcode for photoCount
                     let totalPhotoCount = Int(selectedPanorama.rows) * Int(selectedPanorama.columns) + 1
