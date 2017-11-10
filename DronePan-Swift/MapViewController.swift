@@ -51,6 +51,10 @@ class MapViewController: UIViewController {
         formatter.dateFormat = "E, d MMM yyyy HH:mm:ss"
         return formatter
     }()
+    
+    // FAA sectionals
+    var isSectionalEnabled = false
+    var layer: GMSURLTileLayer!
 
     //MARK:- UIView Life cycle
     override func viewDidLoad() {
@@ -355,8 +359,29 @@ class MapViewController: UIViewController {
         
     }
     
-    
-    
+    // Display the sectional maps
+    func initCustomLayer() {
+        let urls: GMSTileURLConstructor = {(x, y, zoom) in
+            
+            if zoom > 11 {
+                return nil
+            }
+            
+            // Flip the y coordinate for google maps format
+            // https://gist.github.com/tmcw/4954720
+            let ynew = Int(pow(2.0, Double(zoom)) - Double(y) - 1);
+            let url = "https://s3.amazonaws.com/faa-sectionals/\(zoom)/\(x)/\(ynew).png"
+            return URL(string: url)
+        }
+        
+        // Create the GMSTileLayer
+        layer = GMSURLTileLayer(urlConstructor: urls)
+        layer.tileSize = 512
+        
+        // Display on the map at a specific zIndex
+        layer.zIndex = 100
+        layer.map = googleMapView
+    }
 }
 
 //MARK:- Map View Delegate
@@ -408,6 +433,23 @@ extension MapViewController: GMSMapViewDelegate {
             mapView.sendSubview(toBack: self.panoramaDetailView)
         }
       return true
+    }
+    
+    // Long press for FAA sectionals
+    func mapView(_ mapView: GMSMapView, didLongPressAt coordinate: CLLocationCoordinate2D) {
+        
+        if isSectionalEnabled {
+            layer.map = nil
+            mapView.mapType = GMSMapViewType.hybrid
+            mapView.setMinZoom(1, maxZoom: 22)
+            isSectionalEnabled = false
+        } else {
+            isSectionalEnabled = true
+            mapView.mapType = GMSMapViewType.satellite
+            mapView.setMinZoom(1, maxZoom: 10)
+            initCustomLayer()
+        }
+        
     }
 
 }
