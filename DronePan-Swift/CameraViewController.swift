@@ -290,7 +290,12 @@ class CameraViewController: UIViewController {
             return;
         }
         
-        DJISDKManager.missionControl()?.startTimeline()
+        // Let's add a delay because we're seeing a lot of -5024 errors when trying to start the mission immediately after scheduling the elements
+        let when = DispatchTime.now() + 3
+        DispatchQueue.main.asyncAfter(deadline: when) {
+            self.showAlert(title: "Test", message: "Starting")
+            DJISDKManager.missionControl()?.startTimeline()
+        }
         
     }
     
