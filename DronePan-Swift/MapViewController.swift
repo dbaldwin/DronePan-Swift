@@ -256,9 +256,9 @@ class MapViewController: UIViewController {
                     
                     // Gimbal yaw
                     if  selectedPanorama.yawType == "1" {
-                        elements = pano.buildPanoWithGimbalYaw(rows: Int(selectedPanorama.rows), cols: Int(selectedPanorama.columns), skyRow: selectedPanorama.skyRow == 1 ? true : false, startingYaw: 0.0)
+                        elements = pano.buildPanoWithGimbalYaw(rows: Int(selectedPanorama.rows), cols: Int(selectedPanorama.columns), skyRow: selectedPanorama.skyRow == 1 ? true : false)
                     }else{
-                        elements = pano.buildPanoWithAircraftYaw(rows: Int(selectedPanorama.rows), cols: Int(selectedPanorama.columns), skyRow: selectedPanorama.skyRow == 1 ? true : false)
+                        elements = pano.buildPanoWithAircraftYaw(rows: Int(selectedPanorama.rows), cols: Int(selectedPanorama.columns), skyRow: selectedPanorama.skyRow == 1 ? true : false, aircraftModel: "") // TODO: Fill this model in later
                     }
                     //add newcode for photoCount
                     let totalPhotoCount = Int(selectedPanorama.rows) * Int(selectedPanorama.columns) + 1

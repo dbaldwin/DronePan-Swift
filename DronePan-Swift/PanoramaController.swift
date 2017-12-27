@@ -39,7 +39,7 @@ class PanoramaController {
     }
     
     //Execute pano at the current location
-    func buildPanoAtCurrentLocation(startingYaw: Float) -> [DJIMissionControlTimelineElement] {
+    func buildPanoAtCurrentLocation(aircraftModel: String) -> [DJIMissionControlTimelineElement] {
         
         // Get the defaults from storage
         let defaults = UserDefaults.standard
@@ -49,21 +49,21 @@ class PanoramaController {
         let yawType = defaults.integer(forKey: "yawType") // 0 is aircraft and 1 is gimbal
         let skyRow = defaults.bool(forKey: "skyRow") // 0 is disabled and 1 is enabled
         
-        print("Shooting pano with \(rows) rows and \(cols) cols, yaw type: \(yawType), sky row: \(skyRow), starting yaw: \(startingYaw)")
+        print("Shooting pano with \(rows) rows and \(cols) cols, yaw type: \(yawType), sky row: \(skyRow)")
         
         if yawType == 1 {
             
-            return buildPanoWithGimbalYaw(rows: rows, cols: cols, skyRow: skyRow, startingYaw: startingYaw)
+            return buildPanoWithGimbalYaw(rows: rows, cols: cols, skyRow: skyRow)
             
         } else {
             
-            return buildPanoWithAircraftYaw(rows: rows, cols: cols, skyRow: skyRow)
+            return buildPanoWithAircraftYaw(rows: rows, cols: cols, skyRow: skyRow, aircraftModel: aircraftModel)
         }
         
     }
     
     //Aircraft yaw
-    func buildPanoWithAircraftYaw(rows: Int, cols: Int, skyRow: Bool) -> [DJIMissionControlTimelineElement] {
+    func buildPanoWithAircraftYaw(rows: Int, cols: Int, skyRow: Bool, aircraftModel: String) -> [DJIMissionControlTimelineElement] {
         
         // Get gimbal capabilities
         // Not doing anything with this at the moment
@@ -90,9 +90,19 @@ class PanoramaController {
                 // With sky row the total vertical range is from +30 to -90 which is 120 degrees
                 if skyRow {
                     
-                    gimbalPitch = 30 - Float(120/rows) * Float(row)
+                    // For mavic pro let's limit to +20 due to gimbal errors
+                    // TODO: We may need to range vertical range for MP to 110 (+20 to -90)
+                    if aircraftModel.lowercased().contains("mavic") {
+                        
+                        gimbalPitch = 20 - Float(120/rows) * Float(row)
+                        
+                    } else {
+                        
+                        gimbalPitch = 30 - Float(120/rows) * Float(row)
+                        
+                    }
                     
-                    // Non sky row case
+                // Non sky row case
                 } else {
                     
                     gimbalPitch = 0 - Float(90/rows) * Float(row)
@@ -160,7 +170,7 @@ class PanoramaController {
     
     // Gimbal yaw requires absolute angles for each gimbal position
     // Inspire 1 and Inspire 2 users
-    func buildPanoWithGimbalYaw(rows: Int, cols: Int, skyRow: Bool, startingYaw: Float) -> [DJIMissionControlTimelineElement] {
+    func buildPanoWithGimbalYaw(rows: Int, cols: Int, skyRow: Bool) -> [DJIMissionControlTimelineElement] {
         
         let yawAngle = 360/cols
         
@@ -170,7 +180,7 @@ class PanoramaController {
         // +30° pitch is nonsens with gimbal yaw, let's take the first row with drone yaw
         if skyRow {
             
-            var gimbalPitch: Float = 30
+            let gimbalPitch: Float = 30
             print("Pitching gimbal to \(gimbalPitch) degrees")
             
             let attitude = DJIGimbalAttitude(pitch: gimbalPitch, roll: 0.0, yaw: 0.0)

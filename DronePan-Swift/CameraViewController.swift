@@ -282,7 +282,7 @@ class CameraViewController: UIViewController {
         // Build the pano logic
         let pano = PanoramaController()
 
-        let error = DJISDKManager.missionControl()?.scheduleElements(pano.buildPanoAtCurrentLocation(startingYaw: -45.0))
+        let error = DJISDKManager.missionControl()?.scheduleElements(pano.buildPanoAtCurrentLocation(aircraftModel: self.aircraftModel))
         
         if error != nil {
             showAlert(title: "Error Building Pano", message: String(describing: error))
